@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkp5hp2psqg4n"]
+
+[ext_resource type="Texture2D" uid="uid://bk78gg23iwrso" path="res://icon.svg" id="1_qtvgj"]
+[ext_resource type="PackedScene" uid="uid://d4irnbv2vkfg0" path="res://lc_80.tscn" id="2_vwof4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b3qdn"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynjnp"]
+albedo_texture = ExtResource("1_qtvgj")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh0f2"]
+lightmap_size_hint = Vector2i(1003, 515)
+material = SubResource("StandardMaterial3D_ynjnp")
+uv2_padding = 1.32
+size = Vector3(100, 1, 100)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6k3rm"]
+sky_top_color = Color(0.580392, 0.823529, 0.913725, 1)
+
+[sub_resource type="Sky" id="Sky_80agj"]
+sky_material = SubResource("ProceduralSkyMaterial_6k3rm")
+
+[sub_resource type="Environment" id="Environment_3fu6k"]
+background_mode = 2
+sky = SubResource("Sky_80agj")
+ambient_light_source = 3
+ambient_light_color = Color(0.745098, 0.745098, 0.741176, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_ukvf8"]
+_data = {
+"points": PackedVector3Array(-0.192169, 0, 13.945, 0.192169, 0, -13.945, -1.61987, 0, -40.365, 0, 0, 0, 0, 0, 0, -0.272305, 0, -83.1506, 0, 0, 0, 0, 0, 0, -0.660946, 0, -119.225, -6.09015, 0, 11.5258, 6.09015, 0, -11.5258, 7.13526, 0, -160.185, -6.6856, 0, 3.52055, 6.6856, 0, -3.52055, 31.959, 0, -181.836, -8.1791, 0, -1.0255, 8.1791, 0, 1.0255, 53.878, 0, -184.509, -7.66414, 0, -5.85083, 7.66414, 0, 5.85083, 74.1931, 0, -175.421, -2.19706, 0, -11.4943, 2.19706, 0, 11.4943, 92.3698, 0, -150.829, 0.401367, 0, -6.4217, -0.401367, 0, 6.4217, 93.0945, 0, -127.112, 0, 0, 0, 0, 0, 0, 90.0174, 0, -105.84, 2.97794, 0, -8.84987, -2.97794, 0, 8.84987, 82.176, 0, -74.8959, -0.518143, 0, -14.9515, 0.518143, 0, 14.9515, 76.8662, 0, -47.6493, -0.521362, 0, -5.34609, 0.521362, 0, 5.34609, 80.0738, 0, -20.3842, -0.168289, 0, -6.15037, 0.168289, 0, 6.15037, 81.143, 0, 4.74242, -0.898117, 0, -4.44387, 0.898117, 0, 4.44387, 85.42, 0, 27.7306, -0.770203, 0, -7.54224, 0.770203, 0, 7.54224, 91.3006, 0, 49.115, 0.0610809, 0, -8.3565, -0.0610809, 0, 8.3565, 90.766, 0, 68.8955, 1.53433, 0, -8.78288, -1.53433, 0, 8.78288, 89.1622, 0, 94.0221, 3.68591, 0, -7.44388, -3.68591, 0, 7.44388, 81.6776, 0, 114.872, 7.01085, 0, -8.04262, -7.01085, 0, 8.04262, 61.8971, 0, 141.068, 9.89251, 0, -1.20468, -9.89251, 0, 1.20468, 34.6321, 0, 161.917, 7.75808, 0, 2.0667, -7.75808, 0, -2.0667, 3.62473, 0, 159.244, 4.79557, 0, 4.97719, -4.79557, 0, -4.97719, -9.74051, 0, 150.691, 2.06081, 0, 6.09669, -2.06081, 0, -6.09669, -20.9673, 0, 129.306, -0.069912, 0, 13.8843, 0.069912, 0, -13.8843, -22.0365, 0, 105.249, -7.65872, 0, 13.3923, 7.65872, 0, -13.3923, -14.552, 0, 81.1915, -4.0043, 0, 16.7453, 4.0043, 0, -16.7453, -5.432, 0, 59.6305, 0, 0, 0, 0, 0, 0, -1.97374, 0, 28.1421, 0.182022, 0, 9.4647, -0.182022, 0, -9.4647, -1.06367, 0, -22.4576, 0, 0, 0, 0, 0, 0, -1.61987, 0, -40.365),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 30
+
+[node name="world" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_b3qdn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_dh0f2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3fu6k")
+
+[node name="lc80" parent="." instance=ExtResource("2_vwof4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73517, 0.614549, 3.53779)
+
+[node name="track" type="Node3D" parent="."]
+
+[node name="Path3D" type="Path3D" parent="track"]
+curve = SubResource("Curve3D_ukvf8")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="track/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124432, 0, 0)
+use_collision = true
+polygon = PackedVector2Array(-10.2937, 0.0575977, -10.313, 1.26497, -9.96303, 1.27626, -9.79858, 0.330119, 6.82575, 0.339156, 6.9951, 1.2311, 7.34511, 1.24239, 7.35639, 0.000444844)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
