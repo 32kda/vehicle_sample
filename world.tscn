@@ -57,10 +57,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73517, 0.614549, 3.53779)
 [node name="Path3D" type="Path3D" parent="track"]
 curve = SubResource("Curve3D_ukvf8")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="track/Path3D"]
+[node name="road" type="CSGPolygon3D" parent="track/Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124432, 0, 0)
 use_collision = true
-polygon = PackedVector2Array(-10.2937, 0.0575977, -10.313, 1.26497, -9.96303, 1.27626, -9.79858, 0.330119, 6.82575, 0.339156, 6.9951, 1.2311, 7.34511, 1.24239, 7.35639, 0.000444844)
+polygon = PackedVector2Array(-10.2937, 0.0575977, -9.79858, 0.330119, 6.82575, 0.339156, 7.35639, 0.000444844)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
@@ -70,4 +70,33 @@ path_rotation = 2
 path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
+path_joined = true
+
+[node name="r_barrier" type="CSGPolygon3D" parent="track/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88249, 0, 0)
+snap = 1e-06
+polygon = PackedVector2Array(0, 0, 0, 1, 0.41151, 1.3068, 0.51679, 0.00584483)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+
+[node name="l_barrier" type="CSGPolygon3D" parent="track/Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3702, 0, 0)
+polygon = PackedVector2Array(0, 0, 0, 1, 0.41151, 1.3068, 0.51679, 0.00584483)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 0.95
 path_joined = true
