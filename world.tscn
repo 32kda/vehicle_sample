@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=12 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://bk78gg23iwrso" path="res://icon.svg" id="1_qtvgj"]
 [ext_resource type="PackedScene" uid="uid://d4irnbv2vkfg0" path="res://lc_80.tscn" id="2_vwof4"]
+[ext_resource type="Texture2D" uid="uid://0a0f2er48fth" path="res://road/Road-Texture.png" id="3_ddkfd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b3qdn"]
 size = Vector3(100, 1, 100)
@@ -35,6 +36,11 @@ _data = {
 }
 point_count = 30
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4pen"]
+albedo_texture = ExtResource("3_ddkfd")
+uv1_scale = Vector3(0.005, 7.955, 0.23)
+uv1_offset = Vector3(-0.335, -1.01, 0)
+
 [node name="world" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -60,7 +66,7 @@ curve = SubResource("Curve3D_ukvf8")
 [node name="road" type="CSGPolygon3D" parent="track/Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124432, 0, 0)
 use_collision = true
-polygon = PackedVector2Array(-10.2937, 0.0575977, -9.79858, 0.330119, 6.82575, 0.339156, 7.35639, 0.000444844)
+polygon = PackedVector2Array(-10, 0, -10, 0.35, 10, 0.35, 10, 0)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
@@ -71,11 +77,13 @@ path_local = false
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = true
+material = SubResource("StandardMaterial3D_j4pen")
 
 [node name="r_barrier" type="CSGPolygon3D" parent="track/Path3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88249, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.201963, 0.0173376, -0.0177402)
 snap = 1e-06
-polygon = PackedVector2Array(0, 0, 0, 1, 0.41151, 1.3068, 0.51679, 0.00584483)
+use_collision = true
+polygon = PackedVector2Array(9.48093, 0.304792, 9.75861, 1.77827, 10.1729, 1.77022, 10.4307, 0.307235)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
@@ -88,8 +96,9 @@ path_u_distance = 1.0
 path_joined = true
 
 [node name="l_barrier" type="CSGPolygon3D" parent="track/Path3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3702, 0, 0)
-polygon = PackedVector2Array(0, 0, 0, 1, 0.41151, 1.3068, 0.51679, 0.00584483)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.248802, 0, 0)
+use_collision = true
+polygon = PackedVector2Array(-9.7672, 0.0486102, -9.66998, 1.96625, -9.31415, 1.96457, -8.94188, 0.0591812)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
