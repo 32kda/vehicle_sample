@@ -38,7 +38,7 @@ point_count = 30
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4pen"]
 albedo_texture = ExtResource("3_ddkfd")
-uv1_scale = Vector3(0.005, 7.955, 0.23)
+uv1_scale = Vector3(0.025, 8.015, 0.232)
 uv1_offset = Vector3(-0.335, -1.01, 0)
 
 [node name="world" type="Node3D"]
