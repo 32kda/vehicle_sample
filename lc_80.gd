@@ -1,13 +1,13 @@
 extends VehicleBody3D
 
-var horse_power = 700
+var horse_power = 200
 var accel_speed = 100
 
 var steer_angle = deg_to_rad(30)
-var steer_speed = 3
+var steer_speed = 2.5
 
-var brake_power = 40
-var brake_speed = 40
+var brake_power = 60
+var brake_speed = 60
 
 var current_speed_mps = 0
 
