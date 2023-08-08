@@ -1,5 +1,7 @@
 extends VehicleBody3D
 
+const LOW_SPEED = 10
+
 var horse_power = 200
 var accel_speed = 100
 
@@ -15,9 +17,11 @@ var current_speed_mps = 0
 
 
 func _physics_process(delta):
-	current_speed_mps = (position - last_pos).length() / delta
+	current_speed_mps = linear_velocity.length()
 	
 	var throt_input = - Input.get_action_strength("W") + Input.get_action_strength("S")	
+	if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:
+		throt_input = throt_input * LOW_SPEED / current_speed_mps
 	engine_force = lerp(engine_force, throt_input * horse_power, accel_speed * delta)	
 	
 	var steer_input = Input.get_action_strength("A") - Input.get_action_strength("D")
