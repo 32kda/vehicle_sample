@@ -32,6 +32,8 @@ func _physics_process(delta):
 	
 	last_pos = position
 	
+	
+	
 func _process(delta):
 	
 	var kmh = current_speed_mps * 3.6
