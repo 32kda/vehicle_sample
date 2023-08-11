@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdocl6lydmk02"
+path="res://.godot/imported/palm_trio.obj-99e7b4f3df457dca693c158459e10468.mesh"
+
+[deps]
+
+files=["res://.godot/imported/palm_trio.obj-99e7b4f3df457dca693c158459e10468.mesh"]
+
+source_file="res://items/palm_trio.obj"
+dest_files=["res://.godot/imported/palm_trio.obj-99e7b4f3df457dca693c158459e10468.mesh", "res://.godot/imported/palm_trio.obj-99e7b4f3df457dca693c158459e10468.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

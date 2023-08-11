@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bcmdf5r6277jy"
+path="res://.godot/imported/palm_bend.obj-42f33c6e41797f66e6da13602b5a8493.mesh"
+
+[deps]
+
+files=["res://.godot/imported/palm_bend.obj-42f33c6e41797f66e6da13602b5a8493.mesh"]
+
+source_file="res://items/palm_bend.obj"
+dest_files=["res://.godot/imported/palm_bend.obj-42f33c6e41797f66e6da13602b5a8493.mesh", "res://.godot/imported/palm_bend.obj-42f33c6e41797f66e6da13602b5a8493.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

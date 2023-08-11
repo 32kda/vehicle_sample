@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Events="*res://Events.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
+
 [input]
 
 W={
