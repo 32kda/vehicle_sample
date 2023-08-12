@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgx1dmii2p06v"
-path.s3tc="res://.godot/imported/specular.tga-f8449bbacd7827c6aeaf8ce24e2e4695.s3tc.ctex"
+uid="uid://wy4wxx17058f"
+path.s3tc="res://.godot/imported/warehouse-d4f3e4b1706e83670f855b3371da65d5_rendered.png-4b8ff0ab1e7fc83ce4f1f0d02af90621.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://items/specular.tga"
-dest_files=["res://.godot/imported/specular.tga-f8449bbacd7827c6aeaf8ce24e2e4695.s3tc.ctex"]
+source_file="res://items/warehouse-d4f3e4b1706e83670f855b3371da65d5_rendered.png"
+dest_files=["res://.godot/imported/warehouse-d4f3e4b1706e83670f855b3371da65d5_rendered.png-4b8ff0ab1e7fc83ce4f1f0d02af90621.s3tc.ctex"]
 
 [params]
 
