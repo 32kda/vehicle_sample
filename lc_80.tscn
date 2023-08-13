@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://d4irnbv2vkfg0"]
+[gd_scene load_steps=27 format=3 uid="uid://d4irnbv2vkfg0"]
 
 [ext_resource type="Script" path="res://lc_80.gd" id="1_3wvjy"]
-[ext_resource type="Script" path="res://SpringArm3D.gd" id="2_xpcjy"]
+[ext_resource type="Script" uid="uid://bcuoyugsh3q4e" path="res://SpringArm3D.gd" id="2_xpcjy"]
+[ext_resource type="AudioStream" uid="uid://cf185t85fkuua" path="res://sound/enginesound_slow.mp3" id="3_3rhbd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_obcvd"]
 size = Vector3(1.83737, 0.959752, 4.62157)
@@ -740,3 +741,10 @@ spring_length = 7.0
 script = ExtResource("2_xpcjy")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+
+[node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_3rhbd")
+volume_db = 15.845
+max_db = 3.24
+autoplay = true
+max_distance = 8.85

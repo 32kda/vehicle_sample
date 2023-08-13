@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=28 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="PackedScene" uid="uid://d4irnbv2vkfg0" path="res://lc_80.tscn" id="2_vwof4"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bkvp4r2yps0nx" path="res://data/kisspng-texture-mapping-lawn-clip-art-real-grass-5b110b02163531.165397461527843586091.png" id="14_of00f"]
 [ext_resource type="PackedScene" uid="uid://bcojg1ny8qh82" path="res://palm_dual.tscn" id="16_2g8mn"]
 [ext_resource type="PackedScene" uid="uid://ch2tl0plrdhub" path="res://palm_bend.tscn" id="17_umyj8"]
+[ext_resource type="PackedScene" uid="uid://ba51icvm8bx67" path="res://house_final.glb" id="18_f42dv"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f2krl"]
 panorama = ExtResource("1_bksr2")
@@ -173,3 +174,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1795, 3.64116, -26.9653)
 
 [node name="palm_bend" parent="." instance=ExtResource("17_umyj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.716, 2.93401, -27.7985)
+
+[node name="house_final" parent="." instance=ExtResource("18_f42dv")]
+transform = Transform3D(-0.0576512, 0, 0.998337, 0, 1, 0, -0.998337, 0, -0.0576512, -25.7211, 0.00751686, 32.2863)

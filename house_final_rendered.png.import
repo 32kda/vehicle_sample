@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wy4wxx17058f"
-path.s3tc="res://.godot/imported/warehouse-d4f3e4b1706e83670f855b3371da65d5_rendered.png-4b8ff0ab1e7fc83ce4f1f0d02af90621.s3tc.ctex"
+uid="uid://cnanfmsd0e8md"
+path.s3tc="res://.godot/imported/house_final_rendered.png-098e7ba638946c3c1a48f71b408c690d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://items/warehouse-d4f3e4b1706e83670f855b3371da65d5_rendered.png"
-dest_files=["res://.godot/imported/warehouse-d4f3e4b1706e83670f855b3371da65d5_rendered.png-4b8ff0ab1e7fc83ce4f1f0d02af90621.s3tc.ctex"]
+source_file="res://house_final_rendered.png"
+dest_files=["res://.godot/imported/house_final_rendered.png-098e7ba638946c3c1a48f71b408c690d.s3tc.ctex"]
 
 [params]
 
