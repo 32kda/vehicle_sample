@@ -18,10 +18,10 @@ func _input(event):
 	# Receives mouse motion
 	if event is InputEventMouseMotion:
 		_mouse_position = event.relative
-	if event is InputEventMouseButton:
-		match event.button_index:
-			MOUSE_BUTTON_RIGHT: # Only allows rotation if right click down
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if event.pressed else Input.MOUSE_MODE_VISIBLE)
+	#if event is InputEventMouseButton:
+	#	match event.button_index:
+	#		MOUSE_BUTTON_RIGHT: # Only allows rotation if right click down
+	#			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if event.pressed else Input.MOUSE_MODE_VISIBLE)
 	
 	# Receives mouse button input
 	

@@ -37,6 +37,6 @@ func _physics_process(delta):
 func _process(delta):
 	
 	var kmh = current_speed_mps * 3.6
-	$EngineSound.pitch_scale = 1 + kmh / 20
+	$SpringArm3D/EngineSound.pitch_scale = 1 + kmh / 20
 	Events.emit_signal("player_speed", kmh)
 

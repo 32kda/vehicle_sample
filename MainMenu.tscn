@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://bid1bc51vj1pu"]
+
+[ext_resource type="Script" path="res://MainMenu.gd" id="1_csk6w"]
+
+[node name="MainMenu" type="CanvasLayer"]
+script = ExtResource("1_csk6w")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 60
+
+[node name="ControlContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Label" type="Label" parent="Menu/ControlContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Crazy Ride"
+
+[node name="StartBtn" type="Button" parent="Menu/ControlContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Start game"
+flat = true
+alignment = 0
+
+[node name="ResumeBtn" type="Button" parent="Menu/ControlContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Resume game"
+flat = true
+alignment = 0
+
+[node name="RestartBtn" type="Button" parent="Menu/ControlContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Restart game"
+flat = true
+alignment = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/ControlContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuitBtn" type="Button" parent="Menu/ControlContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "Quit
+"
+flat = true
+alignment = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Menu/ControlContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="Menu/ControlContainer/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="pressed" from="Menu/ControlContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
+[connection signal="pressed" from="Menu/ControlContainer/RestartBtn" to="." method="_on_restart_btn_pressed"]
+[connection signal="pressed" from="Menu/ControlContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]
