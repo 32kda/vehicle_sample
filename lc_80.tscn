@@ -749,3 +749,10 @@ volume_db = 15.845
 max_db = 3.24
 autoplay = true
 max_distance = 8.85
+
+[node name="RayCast3D" type="RayCast3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01264, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="WeaponOrigin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.379601, 2.13796, 1.20189)

@@ -63,23 +63,25 @@ script = ExtResource("8_bvg6p")
 mode = 0
 textures = [[ExtResource("9_rc8am"), ExtResource("10_posmc")], [ExtResource("10_ydew1"), ExtResource("12_y87r7")]]
 
-[node name="world" type="Node3D"]
+[node name="game" type="Node3D"]
 process_mode = 1
 script = ExtResource("1_xvsrg")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="world" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="world"]
 environment = SubResource("Environment_3fu6k")
 
-[node name="lc80" parent="." instance=ExtResource("2_vwof4")]
+[node name="lc80" parent="world" instance=ExtResource("2_vwof4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73517, 0.614549, 3.53779)
 
-[node name="track" type="Node3D" parent="."]
+[node name="track" type="Node3D" parent="world"]
 
-[node name="Path3D" type="Path3D" parent="track"]
+[node name="Path3D" type="Path3D" parent="world/track"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0411516, 0, 0)
 curve = SubResource("Curve3D_ukvf8")
 
-[node name="road" type="CSGPolygon3D" parent="track/Path3D"]
+[node name="road" type="CSGPolygon3D" parent="world/track/Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.124432, 0, 0)
 use_collision = true
 polygon = PackedVector2Array(-10, 0, -10, 0.35, 10, 0.35, 10, 0)
@@ -95,7 +97,7 @@ path_u_distance = 1.0
 path_joined = true
 material = SubResource("StandardMaterial3D_j4pen")
 
-[node name="r_barrier" type="CSGPolygon3D" parent="track/Path3D"]
+[node name="r_barrier" type="CSGPolygon3D" parent="world/track/Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0901476, 0.0173376, -0.0177402)
 snap = 1e-06
 use_collision = true
@@ -112,7 +114,7 @@ path_u_distance = 1.0
 path_joined = true
 material = SubResource("StandardMaterial3D_bscpj")
 
-[node name="l_barrier" type="CSGPolygon3D" parent="track/Path3D"]
+[node name="l_barrier" type="CSGPolygon3D" parent="world/track/Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.047685, 0, 0)
 material_override = SubResource("StandardMaterial3D_fgeik")
 use_collision = true
@@ -129,9 +131,13 @@ path_u_distance = 0.95
 path_joined = true
 material = SubResource("StandardMaterial3D_iaf3y")
 
-[node name="HUD" parent="." instance=ExtResource("4_rqv1y")]
+[node name="house_final" parent="world" instance=ExtResource("18_f42dv")]
+transform = Transform3D(-0.0576512, 0, 0.998337, 0, 1, 0, -0.998337, 0, -0.0576512, -25.7211, 0.00751686, 32.2863)
 
-[node name="HTerrain" type="Node3D" parent="."]
+[node name="RootNode2" parent="world" instance=ExtResource("16_2g8mn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1795, 3.64116, -26.9653)
+
+[node name="HTerrain" type="Node3D" parent="world"]
 script = ExtResource("6_s0oyg")
 centered = true
 _terrain_data = ExtResource("7_3frxd")
@@ -150,7 +156,7 @@ shader_params/u_depth_blending = true
 shader_params/u_triplanar = null
 shader_params/u_tile_reduction = null
 
-[node name="HTerrainDetailLayer" type="Node3D" parent="HTerrain"]
+[node name="HTerrainDetailLayer" type="Node3D" parent="world/HTerrain"]
 script = ExtResource("11_pt6ro")
 texture = ExtResource("14_of00f")
 shader_params/u_globalmap_tint_bottom = null
@@ -160,7 +166,7 @@ shader_params/u_instance_scale = null
 shader_params/u_roughness = null
 metadata/_editor_icon = ExtResource("12_jk8vs")
 
-[node name="@Node3D@25878" type="Node3D" parent="HTerrain"]
+[node name="@Node3D@25878" type="Node3D" parent="world/HTerrain"]
 script = ExtResource("11_pt6ro")
 layer_index = 1
 shader_params/u_globalmap_tint_bottom = null
@@ -170,19 +176,15 @@ shader_params/u_instance_scale = null
 shader_params/u_roughness = null
 metadata/_editor_icon = ExtResource("12_jk8vs")
 
-[node name="RootNode" parent="." instance=ExtResource("16_2g8mn")]
+[node name="RootNode" parent="world" instance=ExtResource("16_2g8mn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.67, 0.000257969, -24.0761)
 
-[node name="RootNode2" parent="." instance=ExtResource("16_2g8mn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1795, 3.64116, -26.9653)
-
-[node name="palm_bend" parent="." instance=ExtResource("17_umyj8")]
+[node name="palm_bend" parent="world" instance=ExtResource("17_umyj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.716, 2.93401, -27.7985)
-
-[node name="house_final" parent="." instance=ExtResource("18_f42dv")]
-transform = Transform3D(-0.0576512, 0, 0.998337, 0, 1, 0, -0.998337, 0, -0.0576512, -25.7211, 0.00751686, 32.2863)
 
 [node name="MainMenu" parent="." instance=ExtResource("19_b1tgq")]
 process_mode = 3
 
 [node name="State" type="Node" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("4_rqv1y")]

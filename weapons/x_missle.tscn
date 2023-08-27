@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctjox7ag7w7to"]
+
+[ext_resource type="Script" path="res://weapons/x_missle.gd" id="1_0ba5c"]
+[ext_resource type="PackedScene" uid="uid://dsi4rbcddxkje" path="res://weapons/x_missle.glb" id="1_be6ad"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rsuiv"]
+height = 1.59
+radius = 0.1
+
+[node name="x_missle" type="RigidBody3D"]
+script = ExtResource("1_0ba5c")
+
+[node name="x_missle" parent="." instance=ExtResource("1_be6ad")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_rsuiv")

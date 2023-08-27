@@ -13,6 +13,8 @@ var brake_speed = 60
 
 var current_speed_mps = 0
 
+var secondary_weapon = preload("res://weapons/x_missle.tscn")
+
 @onready var last_pos = position
 
 
@@ -31,6 +33,7 @@ func _physics_process(delta):
 	brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
 	
 	last_pos = position
+			
 	
 	
 	
@@ -40,3 +43,11 @@ func _process(delta):
 	$SpringArm3D/EngineSound.pitch_scale = 1 + kmh / 20
 	Events.emit_signal("player_speed", kmh)
 
+func _input(event):
+	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT and event.is_released():
+		var missle = secondary_weapon.instantiate() as RigidBody3D
+		missle.transform.origin = $WeaponOrigin.position
+		missle.transform.rotated()
+		
+		
+		

@@ -1,12 +1,13 @@
 extends Node3D
 
 var gameState = GameState.READY
+var started = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$HUD.visible = false
 	$MainMenu.visible = true
-	get_tree().paused = true
+	$world.get_tree().paused = true
 	Events.set_game_state.connect(self.set_state)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
