@@ -46,8 +46,9 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT and event.is_released():
 		var missle = secondary_weapon.instantiate() as RigidBody3D
-		missle.transform.origin = $WeaponOrigin.position
-		missle.transform.rotated()
+		var missle_transform = Transform3D(global_transform.basis, $WeaponOrigin.position)
+		get_tree().get_root().get_node("/root/game/world").add_child(missle)
+		missle.start(missle_transform)
 		
 		
 		
