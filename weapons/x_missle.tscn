@@ -8,6 +8,10 @@ height = 1.59
 radius = 0.1
 
 [node name="x_missle" type="RigidBody3D"]
+mass = 7.0
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("1_0ba5c")
 
 [node name="x_missle" parent="." instance=ExtResource("1_be6ad")]
@@ -15,3 +19,10 @@ script = ExtResource("1_0ba5c")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_rsuiv")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_Missle_body_entered"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

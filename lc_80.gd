@@ -37,18 +37,20 @@ func _physics_process(delta):
 	
 	
 	
-func _process(delta):
-	
+func _process(delta):	
 	var kmh = current_speed_mps * 3.6
 	$SpringArm3D/EngineSound.pitch_scale = 1 + kmh / 20
 	Events.emit_signal("player_speed", kmh)
+	var target = $SpringArm3D/RayCast3D.get_collision_point()
+	Events.emit_signal("missle_target", target)
 
 func _input(event):
 	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT and event.is_released():
 		var missle = secondary_weapon.instantiate() as RigidBody3D
-		var missle_transform = Transform3D(global_transform.basis, $WeaponOrigin.position)
+		var missle_transform = Transform3D(global_transform.basis, $WeaponOrigin.global_position)
 		get_tree().get_root().get_node("/root/game/world").add_child(missle)
-		missle.start(missle_transform)
+		var missle_vector = -global_transform.basis.z
+		missle.start(missle_transform, missle_vector)
 		
 		
 		
