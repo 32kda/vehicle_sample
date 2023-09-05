@@ -20,6 +20,7 @@ func _physics_process(delta):
 	apply_central_force(acceleration * speed)
 	linear_velocity.limit_length(speed)
 	acceleration = lerp(acceleration, new_vec, 10 * delta)
+	look_at(linear_velocity + global_position, Vector3.UP, true)
 	#global_transform = global_transform.looking_at(acceleration)
 	#velocity += (acceleration * delta) as Vector3
 	#velocity = velocity.limit_length(speed)
