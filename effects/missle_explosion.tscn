@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://eq33d2c1or61"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvekt"]
+
+[node name="missle_explosion" type="Node3D"]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wvekt")
