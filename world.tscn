@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=31 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
+[ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
 [ext_resource type="Script" path="res://world.gd" id="1_xvsrg"]
 [ext_resource type="PackedScene" uid="uid://d4irnbv2vkfg0" path="res://lc_80.tscn" id="2_vwof4"]
 [ext_resource type="Texture2D" uid="uid://0a0f2er48fth" path="res://road/Road-Texture.png" id="3_ddkfd"]
@@ -65,9 +66,10 @@ textures = [[ExtResource("9_rc8am"), ExtResource("10_posmc")], [ExtResource("10_
 
 [node name="game" type="Node3D"]
 process_mode = 1
-script = ExtResource("1_xvsrg")
+script = ExtResource("1_hdbne")
 
 [node name="world" type="Node3D" parent="."]
+script = ExtResource("1_xvsrg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="world"]
 environment = SubResource("Environment_3fu6k")
