@@ -24,5 +24,8 @@ shape = SubResource("CylinderShape3D_rsuiv")
 wait_time = 15.0
 autostart = true
 
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)
+
 [connection signal="body_entered" from="." to="." method="_on_Missle_body_entered"]
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

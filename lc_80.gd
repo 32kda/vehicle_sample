@@ -49,8 +49,8 @@ func _input(event):
 		var missle = secondary_weapon.instantiate() as RigidBody3D
 		var missle_transform = Transform3D(global_transform.basis, $WeaponOrigin.global_position)
 		get_tree().get_root().get_node("/root/game/world").add_child(missle)
-		var missle_vector = -global_transform.basis.z
-		missle.start(missle_transform, missle_vector)
+		var forward_vector = -global_transform.basis.z		
+		missle.start(missle_transform, forward_vector, linear_velocity)
 		
 		
 		

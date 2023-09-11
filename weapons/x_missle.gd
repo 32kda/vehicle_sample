@@ -6,10 +6,13 @@ extends RigidBody3D
 #var velocity = Vector3.ZERO
 var acceleration = Vector3.ZERO
 var new_vec:Vector3 = Vector3.ZERO
+const MANEURABILITY = 10;
+const MANEUR_MIN_SPEED = 10;
 
-func start(_transform, _acceleration):
+func start(_transform, _acceleration: Vector3, _linear_velocity: Vector3):
 	global_transform = _transform
-	acceleration = _acceleration
+	linear_velocity = _linear_velocity
+	acceleration = _acceleration.normalized();
 	Events.missle_target.connect(self.retarget)	
 	#velocity = _acceleration * speed
 
@@ -19,8 +22,8 @@ func retarget(target:Vector3)->void:
 func _physics_process(delta):
 	apply_central_force(acceleration * speed)
 	linear_velocity.limit_length(speed)
-	acceleration = lerp(acceleration, new_vec, 10 * delta)
-	if linear_velocity.length() > 5:
+	if linear_velocity.length() > MANEUR_MIN_SPEED:
+		acceleration = lerp(acceleration, new_vec, MANEURABILITY * delta)	
 		look_at(linear_velocity + global_position, Vector3.UP, true)
 	#global_transform = global_transform.looking_at(acceleration)
 	#velocity += (acceleration * delta) as Vector3
