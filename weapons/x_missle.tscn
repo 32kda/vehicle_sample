@@ -24,7 +24,20 @@ shape = SubResource("CylinderShape3D_rsuiv")
 wait_time = 15.0
 autostart = true
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="Ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.993723, 0.111868, 0, -0.111868, 0.993723, 0, 0.11075, -0.323697)
+target_position = Vector3(0, 0, -1)
+
+[node name="Ray" type="RayCast3D" parent="Ray"]
+transform = Transform3D(0.0525414, -0.992424, -0.111056, 0.992997, 0.0637046, -0.0994858, 0.105807, -0.105051, 0.988822, -0.115049, -0.0938794, 0.00320452)
+target_position = Vector3(0, 0, -1)
+
+[node name="Ray2" type="RayCast3D" parent="Ray"]
+transform = Transform3D(0.0525414, -0.990227, 0.129187, 0.992997, 0.0380999, -0.111822, 0.105807, 0.134158, 0.985296, 0.115049, -0.105635, -0.000733197)
+target_position = Vector3(0, 0, -1)
+
+[node name="Ray2" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.991683, -0.128709, 0, 0.128709, 0.991683, 0, -0.119668, -0.326215)
 target_position = Vector3(0, 0, -1)
 
 [connection signal="body_entered" from="." to="." method="_on_Missle_body_entered"]

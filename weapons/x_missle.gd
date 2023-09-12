@@ -25,6 +25,8 @@ func _physics_process(delta):
 	if linear_velocity.length() > MANEUR_MIN_SPEED:
 		acceleration = lerp(acceleration, new_vec, MANEURABILITY * delta)	
 		look_at(linear_velocity + global_position, Vector3.UP, true)
+	
+		
 	#global_transform = global_transform.looking_at(acceleration)
 	#velocity += (acceleration * delta) as Vector3
 	#velocity = velocity.limit_length(speed)
@@ -36,7 +38,12 @@ func _on_Lifetime_timeout():
 	queue_free()
 
 func _on_Missle_body_entered(body):	
-	var pos = global_position
-	queue_free()
-	Events.explosion.emit(pos)
+	if ($Ray.is_colliding()):
+		var collision_point = $Ray.get_collision_point();
+		var collider = $Ray.get_collider()
+		var normal = $Ray.get_collision_normal()
+		queue_free()
+		Events.explosion.emit(collision_point)
+	
+	
 	
