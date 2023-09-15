@@ -4,7 +4,7 @@ signal player_speed(kmh)
 
 signal set_game_state(state:GameState)
 
-signal explosion(position:Vector3)
+signal explosion(position:Vector3, target: Node3D)
 
 #Should we also have player id here in future?
 signal missle_target(target:Vector3)

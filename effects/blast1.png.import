@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caf3phumn7p4d"
-path.s3tc="res://.godot/imported/Blast1.jpg-8d109acb73c493b687e478f39e7d403a.s3tc.ctex"
+uid="uid://ccs8la51mtidm"
+path.s3tc="res://.godot/imported/blast1.png-5f30b5f681283bc34d71f7863cdb0f75.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://effects/Blast1.jpg"
-dest_files=["res://.godot/imported/Blast1.jpg-8d109acb73c493b687e478f39e7d403a.s3tc.ctex"]
+source_file="res://effects/blast1.png"
+dest_files=["res://.godot/imported/blast1.png-5f30b5f681283bc34d71f7863cdb0f75.s3tc.ctex"]
 
 [params]
 

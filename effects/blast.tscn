@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://s04cx7dgsgkx"]
 
 [ext_resource type="Script" path="res://effects/blast.gd" id="1_mvhpo"]
-[ext_resource type="Texture2D" uid="uid://caf3phumn7p4d" path="res://effects/Blast1.jpg" id="2_xd0v8"]
+[ext_resource type="Texture2D" uid="uid://ccs8la51mtidm" path="res://effects/blast1.png" id="2_2xrq2"]
 
 [node name="blast" type="Node3D"]
 script = ExtResource("1_mvhpo")
 
 [node name="Decal" type="Decal" parent="."]
-texture_albedo = ExtResource("2_xd0v8")
+size = Vector3(5, 0.01, 5)
+texture_albedo = ExtResource("2_2xrq2")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 120.0

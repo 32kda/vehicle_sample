@@ -14,7 +14,7 @@ billboard = 1
 sprite_frames = ExtResource("1_qwl4p")
 frame = 21
 frame_progress = 0.284874
-speed_scale = 4.0
+speed_scale = 2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_grd0h")

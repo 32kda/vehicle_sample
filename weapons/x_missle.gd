@@ -17,6 +17,14 @@ func start(_transform, _acceleration: Vector3, _linear_velocity: Vector3):
 	Events.missle_target.connect(self.retarget)	
 	rays.append_array([$Ray1, $Ray2, $Ray3, $Ray4])
 	#velocity = _acceleration * speed
+	
+func _integrate_forces(state):
+	for i in state.get_contact_count():
+		var cpos = state.get_contact_collider_position(i)
+		var target = state.get_contact_collider_object(i)
+		var normal = state.get_contact_local_normal(i)
+		queue_free()
+		Events.explosion.emit(cpos, target)
 
 func retarget(target:Vector3)->void:
 	new_vec = (target - global_position).normalized() 	
@@ -39,14 +47,4 @@ func _physics_process(delta):
 func _on_Lifetime_timeout():
 	queue_free()
 
-func _on_Missle_body_entered(body):	
-	for ray in rays:
-		if (ray.is_colliding()):
-			var collision_point = ray.get_collision_point();
-			var collider = ray.get_collider()
-			var normal = ray.get_collision_normal()
-			queue_free()
-			Events.explosion.emit(collision_point)
-	
-	
-	
+
