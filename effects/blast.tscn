@@ -7,8 +7,9 @@
 script = ExtResource("1_mvhpo")
 
 [node name="Decal" type="Decal" parent="."]
-size = Vector3(5, 0.01, 5)
+size = Vector3(5, 5, 5)
 texture_albedo = ExtResource("2_2xrq2")
+cull_mask = 1047553
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 120.0
