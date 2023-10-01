@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctjox7ag7w7to"]
+[gd_scene load_steps=7 format=3 uid="uid://ctjox7ag7w7to"]
 
 [ext_resource type="Script" path="res://weapons/x_missle.gd" id="1_0ba5c"]
 [ext_resource type="PackedScene" uid="uid://dsi4rbcddxkje" path="res://weapons/x_missle.glb" id="1_be6ad"]
+[ext_resource type="Texture2D" uid="uid://bmdyc2yusj412" path="res://effects/smoke/whitePuff00.png" id="3_jkhxc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rsuiv"]
 height = 1.59
 radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4u3j"]
+transparency = 1
+albedo_texture = ExtResource("3_jkhxc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rwfs7"]
+material = SubResource("StandardMaterial3D_k4u3j")
+flip_faces = true
 
 [node name="x_missle" type="RigidBody3D"]
 mass = 7.0
@@ -24,7 +33,15 @@ shape = SubResource("CylinderShape3D_rsuiv")
 wait_time = 15.0
 autostart = true
 
-[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+[node name="SmokeParticles" type="CPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.824656)
+amount = 26
+mesh = SubResource("QuadMesh_rwfs7")
+direction = Vector3(0, 1, 0)
+spread = 90.0
+gravity = Vector3(0, -2, 0)
+radial_accel_min = -1.05
+radial_accel_max = 1.0
+angle_max = 9.5
 
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
