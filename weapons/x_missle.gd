@@ -19,7 +19,7 @@ func _integrate_forces(state):
 		var cpos = state.get_contact_collider_position(i)
 		var target = state.get_contact_collider_object(i)
 		var normal = state.get_contact_local_normal(i)
-		queue_free()
+		destroy()
 		Events.explosion.emit(cpos, target)
 
 func retarget(target:Vector3)->void:
@@ -33,6 +33,13 @@ func _physics_process(delta):
 		look_at(linear_velocity + global_position, Vector3.UP, true)
 
 func _on_Lifetime_timeout():
-	queue_free()
+	destroy()
 
+func destroy():
+	var particles = $SmokeParticles
+	remove_child(particles)
+	get_parent().add_child(particles)
+	particles.stop_emitting()
+	queue_free()
+	
 

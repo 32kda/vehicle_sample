@@ -32,8 +32,9 @@ sky_material = SubResource("PanoramaSkyMaterial_f2krl")
 background_mode = 2
 sky = SubResource("Sky_80agj")
 ambient_light_source = 3
-ambient_light_color = Color(0.745098, 0.745098, 0.741176, 1)
+ambient_light_color = Color(0.886275, 0.886275, 0.886275, 1)
 fog_enabled = true
+fog_sky_affect = 0.15
 
 [sub_resource type="Curve3D" id="Curve3D_ukvf8"]
 _data = {

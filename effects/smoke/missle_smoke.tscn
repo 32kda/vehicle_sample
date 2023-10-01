@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ip7mkcx6846"]
+
+[ext_resource type="Texture2D" uid="uid://bmdyc2yusj412" path="res://effects/smoke/whitePuff00.png" id="1_gk1fo"]
+[ext_resource type="Script" path="res://effects/smoke/missle_smoke.gd" id="2_8sqby"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4u3j"]
+transparency = 2
+alpha_scissor_threshold = 0.278
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_gk1fo")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rwfs7"]
+material = SubResource("StandardMaterial3D_k4u3j")
+flip_faces = true
+
+[node name="SmokeParticles" type="CPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.824656)
+amount = 20
+lifetime = 2.0
+randomness = 0.09
+mesh = SubResource("QuadMesh_rwfs7")
+direction = Vector3(0, 1, 0)
+spread = 90.0
+gravity = Vector3(0, -2, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.6
+radial_accel_min = -1.05
+radial_accel_max = 1.0
+angle_max = 9.5
+script = ExtResource("2_8sqby")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 120.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
