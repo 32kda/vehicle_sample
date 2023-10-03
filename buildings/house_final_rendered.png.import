@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnanfmsd0e8md"
-path.s3tc="res://.godot/imported/house_final_rendered.png-098e7ba638946c3c1a48f71b408c690d.s3tc.ctex"
+path.s3tc="res://.godot/imported/house_final_rendered.png-5a202f572c48c503fb709a9834fefa07.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://house_final_rendered.png"
-dest_files=["res://.godot/imported/house_final_rendered.png-098e7ba638946c3c1a48f71b408c690d.s3tc.ctex"]
+source_file="res://buildings/house_final_rendered.png"
+dest_files=["res://.godot/imported/house_final_rendered.png-5a202f572c48c503fb709a9834fefa07.s3tc.ctex"]
 
 [params]
 
