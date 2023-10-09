@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=32 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://ch2tl0plrdhub" path="res://palm_bend.tscn" id="17_umyj8"]
 [ext_resource type="PackedScene" uid="uid://bid1bc51vj1pu" path="res://MainMenu.tscn" id="19_b1tgq"]
 [ext_resource type="PackedScene" uid="uid://b5bc46f5vnm87" path="res://buildings/red_house01.tscn" id="21_g4u3t"]
+[ext_resource type="PackedScene" uid="uid://b8rwu454i6gok" path="res://items/MetalCrates/Metal_Crate_1/metal_crate_1.tscn" id="22_a2pk4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f2krl"]
 panorama = ExtResource("1_bksr2")
@@ -191,3 +192,6 @@ process_mode = 3
 
 [node name="house_final" parent="." instance=ExtResource("21_g4u3t")]
 transform = Transform3D(0.213411, -4.25552e-08, 0.973548, 4.25551e-08, 0.996664, 3.42371e-08, -0.973548, 3.42371e-08, 0.213411, -38.8864, 0, 46.1729)
+
+[node name="metal_crate_1" parent="." instance=ExtResource("22_a2pk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.7763, 0.668324, 28.3254)
