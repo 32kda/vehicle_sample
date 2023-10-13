@@ -17,3 +17,7 @@ func _process(delta):
 func _on_audio_stream_player_finished():
 	queue_free()
 	
+
+
+func _on_animated_sprite_3d_animation_finished():
+	$AnimatedSprite3D.visible = false

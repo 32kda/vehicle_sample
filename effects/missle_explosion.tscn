@@ -20,4 +20,5 @@ speed_scale = 2.0
 stream = ExtResource("2_grd0h")
 autoplay = true
 
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

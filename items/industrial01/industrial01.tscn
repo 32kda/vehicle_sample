@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c55i31tt0arxo"]
+
+[ext_resource type="PackedScene" uid="uid://glaocyjd2ty4" path="res://items/industrial01/D0902A58.fbx" id="1_buhea"]
+
+[node name="industrial01" type="Node3D"]
+
+[node name="D0902A58" parent="." instance=ExtResource("1_buhea")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.350107, -0.390646, -0.937437)

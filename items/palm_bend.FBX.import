@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b2u27ysisc4vr"
-path="res://.godot/imported/palm_bend.fbx-252cf68a30d8648488da59ee39a5574b.scn"
+path="res://.godot/imported/palm_bend.FBX-6e28fd7805f820811b14eb24004f8025.scn"
 
 [deps]
 
-source_file="res://items/palm_bend.fbx"
-dest_files=["res://.godot/imported/palm_bend.fbx-252cf68a30d8648488da59ee39a5574b.scn"]
+source_file="res://items/palm_bend.FBX"
+dest_files=["res://.godot/imported/palm_bend.FBX-6e28fd7805f820811b14eb24004f8025.scn"]
 
 [params]
 
