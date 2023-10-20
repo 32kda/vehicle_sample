@@ -326,7 +326,6 @@ skeleton = NodePath("")
 
 [node name="Lamp" type="DirectionalLight3D" parent="."]
 transform = Transform3D(49.3318, -54.8091, -67.5451, -5.51891, -79.4672, 60.4525, -86.8096, -26.0945, -42.2275, -4.07625, 5.90386, 1.00545)
-light_color = Color(1, 1, 1, 1)
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(68.5881, 31.737, 65.4862, 1.08168, 89.5343, -44.5245, -72.7634, 31.2469, 61.0666, -7.48113, 5.34367, -6.50764)

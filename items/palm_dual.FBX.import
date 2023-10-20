@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dhhdbgpgtn78e"
-path="res://.godot/imported/palm_dual.fbx-e64f06cbe37dd1c0d64b5ecf1e9f8635.scn"
+path="res://.godot/imported/palm_dual.FBX-3d6892ab1068f678dc10edda7bdc87a1.scn"
 
 [deps]
 
-source_file="res://items/palm_dual.fbx"
-dest_files=["res://.godot/imported/palm_dual.fbx-e64f06cbe37dd1c0d64b5ecf1e9f8635.scn"]
+source_file="res://items/palm_dual.FBX"
+dest_files=["res://.godot/imported/palm_dual.FBX-3d6892ab1068f678dc10edda7bdc87a1.scn"]
 
 [params]
 

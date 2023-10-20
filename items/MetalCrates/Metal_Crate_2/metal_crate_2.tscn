@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://lno438e04c0c"]
+
+[ext_resource type="PackedScene" uid="uid://b7l71bcejcglm" path="res://items/MetalCrates/Metal_Crate_2/metal_crate_2.fbx" id="1_hlhrp"]
+
+[node name="RootNode2" type="Node3D"]
+
+[node name="metal_crate_2" parent="." instance=ExtResource("1_hlhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00168127, 0, 0.000707626)
