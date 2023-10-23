@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dp67cre3b5qil"
-path="res://.godot/imported/palm_dual_bend.fbx-6aeaeccb1c3645ff521b85db56216b78.scn"
+uid="uid://bgkolvwybh4qm"
+path="res://.godot/imported/metal_crate_2.glb-5d68519d08b6ac8d6f607d35db133a13.scn"
 
 [deps]
 
-source_file="res://items/palm_dual_bend.fbx"
-dest_files=["res://.godot/imported/palm_dual_bend.fbx-6aeaeccb1c3645ff521b85db56216b78.scn"]
+source_file="res://items/MetalCrates/Metal_Crate_2/metal_crate_2.glb"
+dest_files=["res://.godot/imported/metal_crate_2.glb-5d68519d08b6ac8d6f607d35db133a13.scn"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=35 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://b8rwu454i6gok" path="res://items/MetalCrates/Metal_Crate_1/metal_crate_1.tscn" id="22_a2pk4"]
 [ext_resource type="PackedScene" uid="uid://biui5bn74fke" path="res://buildings/tank_1.fbx" id="23_0rsku"]
 [ext_resource type="PackedScene" uid="uid://lno438e04c0c" path="res://items/MetalCrates/Metal_Crate_2/metal_crate_2.tscn" id="24_303pn"]
+[ext_resource type="PackedScene" uid="uid://kgoqxtcpc3gb" path="res://items/WoodenCrates/Wooden_Crate_4/wooden_crate_4.tscn" id="25_lht8d"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f2krl"]
 panorama = ExtResource("1_bksr2")
@@ -185,6 +186,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.67, 0.000257969, -24.0761)
 [node name="palm_bend" parent="world" instance=ExtResource("17_umyj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.716, 2.93401, -27.7985)
 
+[node name="house_final" parent="world" instance=ExtResource("21_g4u3t")]
+transform = Transform3D(0.213411, -4.25552e-08, 0.973548, 4.25551e-08, 0.996664, 3.42371e-08, -0.973548, 3.42371e-08, 0.213411, -38.8864, 0, 46.1729)
+
+[node name="metal_crate_1" parent="world" instance=ExtResource("22_a2pk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.7763, 0.668324, 28.3254)
+
+[node name="tank_1" parent="world" instance=ExtResource("23_0rsku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.185, 0, 21.4279)
+
+[node name="tank_2" parent="world" instance=ExtResource("23_0rsku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1816, 0, 24.2698)
+
 [node name="MainMenu" parent="." instance=ExtResource("19_b1tgq")]
 process_mode = 3
 
@@ -192,17 +205,23 @@ process_mode = 3
 
 [node name="HUD" parent="." instance=ExtResource("4_rqv1y")]
 
-[node name="house_final" parent="." instance=ExtResource("21_g4u3t")]
-transform = Transform3D(0.213411, -4.25552e-08, 0.973548, 4.25551e-08, 0.996664, 3.42371e-08, -0.973548, 3.42371e-08, 0.213411, -38.8864, 0, 46.1729)
+[node name="MetalCrate2" parent="." instance=ExtResource("24_303pn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9313, 2.55266, 2.64678)
 
-[node name="metal_crate_1" parent="." instance=ExtResource("22_a2pk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.7763, 0.668324, 28.3254)
+[node name="wooden_crate_4" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.83754, 0.352434, -7.93914)
 
-[node name="tank_1" parent="." instance=ExtResource("23_0rsku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.185, 0, 21.4279)
+[node name="wooden_crate_5" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4508, -2.38419e-07, 27.2906)
 
-[node name="tank_2" parent="." instance=ExtResource("23_0rsku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1816, 0, 24.2698)
+[node name="wooden_crate_6" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5756, 0, 28.6081)
 
-[node name="RootNode2" parent="." instance=ExtResource("24_303pn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.97495, 0.362783, -28.8225)
+[node name="wooden_crate_7" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0934, 0, 32.8075)
+
+[node name="wooden_crate_8" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0028, 0, 34.2085)
+
+[node name="wooden_crate_9" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0157, 1.28082, 33.4045)

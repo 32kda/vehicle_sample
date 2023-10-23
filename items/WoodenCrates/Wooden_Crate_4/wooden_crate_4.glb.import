@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dp67cre3b5qil"
-path="res://.godot/imported/palm_dual_bend.fbx-6aeaeccb1c3645ff521b85db56216b78.scn"
+uid="uid://66ih3dykigy"
+path="res://.godot/imported/wooden_crate_4.glb-15a377038fe2013ecc7a419e9dcec107.scn"
 
 [deps]
 
-source_file="res://items/palm_dual_bend.fbx"
-dest_files=["res://.godot/imported/palm_dual_bend.fbx-6aeaeccb1c3645ff521b85db56216b78.scn"]
+source_file="res://items/WoodenCrates/Wooden_Crate_4/wooden_crate_4.glb"
+dest_files=["res://.godot/imported/wooden_crate_4.glb-15a377038fe2013ecc7a419e9dcec107.scn"]
 
 [params]
 
