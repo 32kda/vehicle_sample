@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=36 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://bkvp4r2yps0nx" path="res://data/kisspng-texture-mapping-lawn-clip-art-real-grass-5b110b02163531.165397461527843586091.png" id="14_of00f"]
 [ext_resource type="PackedScene" uid="uid://bcojg1ny8qh82" path="res://palm_dual.tscn" id="16_2g8mn"]
 [ext_resource type="PackedScene" uid="uid://ch2tl0plrdhub" path="res://palm_bend.tscn" id="17_umyj8"]
+[ext_resource type="Texture2D" uid="uid://cvjp0bq0hi66c" path="res://data/sgrass5-1.png" id="18_rok7u"]
 [ext_resource type="PackedScene" uid="uid://bid1bc51vj1pu" path="res://MainMenu.tscn" id="19_b1tgq"]
 [ext_resource type="PackedScene" uid="uid://b5bc46f5vnm87" path="res://buildings/red_house01.tscn" id="21_g4u3t"]
 [ext_resource type="PackedScene" uid="uid://b8rwu454i6gok" path="res://items/MetalCrates/Metal_Crate_1/metal_crate_1.tscn" id="22_a2pk4"]
@@ -145,7 +146,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1795, 3.64116, -26.9653)
 script = ExtResource("6_s0oyg")
 centered = true
 _terrain_data = ExtResource("7_3frxd")
-chunk_size = 32
+chunk_size = 64
 collision_enabled = true
 collision_layer = 1
 collision_mask = 1
@@ -173,6 +174,8 @@ metadata/_editor_icon = ExtResource("12_jk8vs")
 [node name="@Node3D@25878" type="Node3D" parent="world/HTerrain"]
 script = ExtResource("11_pt6ro")
 layer_index = 1
+texture = ExtResource("18_rok7u")
+view_distance = 500.0
 shader_params/u_globalmap_tint_bottom = null
 shader_params/u_globalmap_tint_top = null
 shader_params/u_bottom_ao = null
