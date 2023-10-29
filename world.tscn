@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
 [ext_resource type="Script" path="res://world.gd" id="1_xvsrg"]
-[ext_resource type="PackedScene" uid="uid://d4irnbv2vkfg0" path="res://lc_80.tscn" id="2_vwof4"]
 [ext_resource type="Texture2D" uid="uid://0a0f2er48fth" path="res://road/Road-Texture.png" id="3_ddkfd"]
 [ext_resource type="Texture2D" uid="uid://caje1cn2ppp87" path="res://road/ernest-karchmit-ZcDjyPNLQ8w-unsplash.jpg" id="4_gnkfn"]
 [ext_resource type="PackedScene" uid="uid://bn1egxa8bk0mx" path="res://HUD.tscn" id="4_rqv1y"]
@@ -26,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://biui5bn74fke" path="res://buildings/tank_1.fbx" id="23_0rsku"]
 [ext_resource type="PackedScene" uid="uid://lno438e04c0c" path="res://items/MetalCrates/Metal_Crate_2/metal_crate_2.tscn" id="24_303pn"]
 [ext_resource type="PackedScene" uid="uid://kgoqxtcpc3gb" path="res://items/WoodenCrates/Wooden_Crate_4/wooden_crate_4.tscn" id="25_lht8d"]
+[ext_resource type="PackedScene" uid="uid://kp734ul5q55b" path="res://vehicles/cruiser.tscn" id="26_0t4tm"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f2krl"]
 panorama = ExtResource("1_bksr2")
@@ -79,9 +79,6 @@ script = ExtResource("1_xvsrg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="world"]
 environment = SubResource("Environment_3fu6k")
-
-[node name="lc80" parent="world" instance=ExtResource("2_vwof4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73517, 0.614549, 3.53779)
 
 [node name="track" type="Node3D" parent="world"]
 
@@ -172,6 +169,7 @@ shader_params/u_roughness = null
 metadata/_editor_icon = ExtResource("12_jk8vs")
 
 [node name="@Node3D@25878" type="Node3D" parent="world/HTerrain"]
+transform = Transform3D(0.00807006, 0, 0, 0, 0.00807006, 0, 0, 0, 0.00807006, 0, 0, 0)
 script = ExtResource("11_pt6ro")
 layer_index = 1
 texture = ExtResource("18_rok7u")
@@ -228,3 +226,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0028, 0, 34.2085)
 
 [node name="wooden_crate_9" parent="." instance=ExtResource("25_lht8d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0157, 1.28082, 33.4045)
+
+[node name="lc80_export" parent="." instance=ExtResource("26_0t4tm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01852, 0.339188, 3.57805)
