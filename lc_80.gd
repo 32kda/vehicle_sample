@@ -43,8 +43,10 @@ func _process(delta):
 	Events.emit_signal("player_speed", kmh)
 	var target = $SpringArm3D/RayCast3D.get_collision_point()
 	Events.emit_signal("missle_target", target)
-	$turret.global_position.direction_to(target)
-	$turret.rotation.y = lerp_angle($turret.rotation.y, $SpringArm3D.rotation.y, 0.05)
+	var local_target = $turret.to_local(target)
+	local_target.y = 0
+	var global_y_target = $turret.global_transform * local_target
+	$turret.look_at(global_y_target)
 
 func _input(event):
 	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT and event.is_released():
