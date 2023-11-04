@@ -21,7 +21,7 @@ Events="*res://Events.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gd-blender-3d-shortcuts/plugin.cfg", "res://addons/godot_rl_agents/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_rl_agents/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
 
 [input]
 

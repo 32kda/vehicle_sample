@@ -15,6 +15,9 @@ var current_speed_mps = 0
 
 var secondary_weapon = preload("res://weapons/x_missle.tscn")
 
+const TARGET_YAW_SPEED = 10;
+const TARGET_PITCH_SPEED = 200;
+
 @onready var last_pos = position
 
 
@@ -45,8 +48,8 @@ func _process(delta):
 	Events.emit_signal("missle_target", target)
 	var local_target = $turret.to_local(target)
 	local_target.y = 0
-	var global_y_target = $turret.global_transform * local_target
-	$turret.look_at(global_y_target)
+	var angle = Vector3.FORWARD.signed_angle_to(local_target, Vector3.UP)
+	$turret.rotation.y += angle * delta * TARGET_YAW_SPEED
 
 func _input(event):
 	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT and event.is_released():
