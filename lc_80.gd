@@ -49,6 +49,7 @@ func _process(delta):
 		target = $SpringArm3D/RayCast3D.get_collision_point()	
 	else: 
 		target = -$SpringArm3D/RayCast3D.global_transform.basis.z * 3000
+	$machinegun.set_target(target)
 	Events.emit_signal("missle_target", target)
 	var local_target = $turret.to_local(target)
 	local_target.y = 0
