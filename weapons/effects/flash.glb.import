@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bhymuaj2muuwf"
-path="res://.godot/imported/flash.glb-a9d25bb8f1a8f8ff4de677a7b27267dd.scn"
+path="res://.godot/imported/flash.glb-7b1269afe0506f7f555fb165a0f64055.scn"
 
 [deps]
 
-source_file="res://effects/flash.glb"
-dest_files=["res://.godot/imported/flash.glb-a9d25bb8f1a8f8ff4de677a7b27267dd.scn"]
+source_file="res://weapons/effects/flash.glb"
+dest_files=["res://.godot/imported/flash.glb-7b1269afe0506f7f555fb165a0f64055.scn"]
 
 [params]
 

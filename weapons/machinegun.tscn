@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d12augy08ck24"]
+[gd_scene load_steps=9 format=3 uid="uid://d12augy08ck24"]
 
 [ext_resource type="Script" path="res://weapons/machinegun.gd" id="1_tfy0w"]
+[ext_resource type="PackedScene" uid="uid://b20gybtqowaee" path="res://weapons/effects/flash.tscn" id="2_bikbb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mcf2"]
 resource_name = "BLACK BLACK"
@@ -80,18 +81,25 @@ data = PackedVector3Array(0.0938848, -0.0461713, 0.166738, -0.0938848, 0.0461713
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00112104, 0, 0.0507941)
 script = ExtResource("1_tfy0w")
 
-[node name="turrent" type="MeshInstance3D" parent="."]
+[node name="turret" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0455488, 0)
 mesh = SubResource("ArrayMesh_7q11v")
 skeleton = NodePath("")
 
-[node name="gun" type="MeshInstance3D" parent="turrent"]
+[node name="gun" type="MeshInstance3D" parent="turret"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.48608e-05, 0.193382, 0.0040029)
 mesh = SubResource("ArrayMesh_prn05")
 skeleton = NodePath("")
+
+[node name="flash" parent="turret/gun" instance=ExtResource("2_bikbb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00549996, 0.0203665, -0.915735)
+visible = false
 
 [node name="@StaticBody3D@43429" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0455488, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="@StaticBody3D@43429"]
 shape = SubResource("ConcavePolygonShape3D_excvd")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
