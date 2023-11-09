@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://d12augy08ck24"]
+[gd_scene load_steps=10 format=3 uid="uid://d12augy08ck24"]
 
 [ext_resource type="Script" path="res://weapons/machinegun.gd" id="1_tfy0w"]
 [ext_resource type="PackedScene" uid="uid://b20gybtqowaee" path="res://weapons/effects/flash.tscn" id="2_bikbb"]
+[ext_resource type="AudioStream" uid="uid://c0gdu1xpta0gx" path="res://weapons/sound/cg1.wav" id="3_5vp7t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mcf2"]
 resource_name = "BLACK BLACK"
@@ -95,11 +96,25 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00549996, 0.0203665, -0.915735)
 visible = false
 
+[node name="BulletRay" type="RayCast3D" parent="turret/gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0215764, -0.985792)
+enabled = false
+target_position = Vector3(0, 0, -1)
+
 [node name="@StaticBody3D@43429" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0455488, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="@StaticBody3D@43429"]
 shape = SubResource("ConcavePolygonShape3D_excvd")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ROF_Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Flash_Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ShootSoundPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_5vp7t")
+
+[connection signal="timeout" from="ROF_Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Flash_Timer" to="." method="hide_flash"]

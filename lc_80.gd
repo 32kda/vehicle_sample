@@ -19,6 +19,7 @@ const TARGET_YAW_SPEED = 10;
 const TARGET_PITCH_SPEED = 200;
 
 @onready var last_pos = position
+@onready var machinegun = $machinegun
 
 
 func _physics_process(delta):
@@ -35,6 +36,9 @@ func _physics_process(delta):
 	var brake_input = Input.get_action_strength("SPACE")
 	brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
 	
+	if Input.is_action_pressed("FIRE"):
+		machinegun.hold_trigger()
+	
 	last_pos = position
 			
 	
@@ -49,7 +53,7 @@ func _process(delta):
 		target = $SpringArm3D/RayCast3D.get_collision_point()	
 	else: 
 		target = -$SpringArm3D/RayCast3D.global_transform.basis.z * 3000
-	$machinegun.set_target(target)
+	machinegun.set_target(target)
 	Events.emit_signal("missle_target", target)
 	var local_target = $turret.to_local(target)
 	local_target.y = 0
@@ -67,6 +71,7 @@ func _input(event):
 		get_tree().get_root().get_node("/root/game/world").add_child(missle)
 		var forward_vector = -global_transform.basis.z		
 		missle.start(missle_transform, forward_vector, linear_velocity)
+		
 		
 		
 		
