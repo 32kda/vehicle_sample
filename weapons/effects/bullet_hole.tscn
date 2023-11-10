@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyeq462n8ycg6"]
+
+[ext_resource type="Script" path="res://weapons/effects/bullet_hole.gd" id="1_ef3c1"]
+[ext_resource type="Texture2D" uid="uid://bnwg01sg65elt" path="res://weapons/effects/bullet_hole.png" id="2_7bbmw"]
+
+[sub_resource type="Animation" id="Animation_c67xq"]
+resource_name = "fade_away"
+length = 60.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r5kur"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gi8fm"]
+_data = {
+"RESET": SubResource("Animation_r5kur"),
+"fade_away": SubResource("Animation_c67xq")
+}
+
+[node name="bullet_hole" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_ef3c1")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+size = Vector3(0.15, 0.15, 0.15)
+texture_albedo = ExtResource("2_7bbmw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Decal")
+libraries = {
+"": SubResource("AnimationLibrary_gi8fm")
+}
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

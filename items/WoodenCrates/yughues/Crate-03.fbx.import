@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://don5ruexfalnx"
-path="res://.godot/imported/palm_trio.FBX-cd1a30331fdcdfe82a3640f3bb850ed3.scn"
+uid="uid://dvx7gbxfi7q8w"
+path="res://.godot/imported/Crate-03.fbx-f2511aecd83de1606e75871070542811.scn"
 
 [deps]
 
-source_file="res://items/palm_trio.FBX"
-dest_files=["res://.godot/imported/palm_trio.FBX-cd1a30331fdcdfe82a3640f3bb850ed3.scn"]
+source_file="res://items/WoodenCrates/yughues/Crate-03.fbx"
+dest_files=["res://.godot/imported/Crate-03.fbx-f2511aecd83de1606e75871070542811.scn"]
 
 [params]
 

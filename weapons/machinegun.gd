@@ -15,6 +15,7 @@ const FLASH_TIME = 0.05
 @onready var flash: Node3D = $turret/gun/flash
 @onready var sound = $ShootSoundPlayer
 @onready var bullet_ray = $turret/gun/BulletRay
+@onready var hole_decal = preload("res://weapons/effects/bullet_hole.tscn")
 
 var target: Vector3
 
@@ -66,6 +67,16 @@ func hit_scan():
 	var bullet_collision = get_world_3d().direct_space_state.intersect_ray(intersection)
 	
 	if bullet_collision:
+		var collider:Node3D = bullet_collision["collider"]
+		var collision_point:Vector3 = bullet_collision["position"]
+		var collision_normal:Vector3 = bullet_collision["normal"]
+		var hole:Node3D = hole_decal.instantiate()
+		collider.add_child(hole)
+		hole.global_transform.origin = collision_point
+		if Vector3.DOWN.is_equal_approx(collision_normal):
+			hole.rotation_degrees.x = 90
+		elif !Vector3.UP.is_equal_approx(collision_normal):
+			hole.look_at(collision_point - collision_normal, Vector3(0,1,0))			
 		print("Hit!")
 	else:
 		print("Miss!") 
