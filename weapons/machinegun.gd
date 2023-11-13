@@ -1,12 +1,14 @@
 extends Node3D
 
 const FLASH_TIME = 0.05
+const IMPULSE_MULTIPLIER = 5
 
 @export var gun_name:String = "HardRock"
 @export var target_yaw_speed:int = 10
 @export var target_pitch_speed:int = 10
 @export var rate_of_fire:int = 600
-@export var fire_range = 1000
+@export var fire_range:int = 1000
+@export var damage:int = 5
 
 @onready var turret:Node3D = $turret
 @onready var gun: Node3D = $turret/gun
@@ -78,5 +80,8 @@ func hit_scan():
 		elif !Vector3.UP.is_equal_approx(collision_normal):
 			hole.look_at(collision_point - collision_normal, Vector3(0,1,0))			
 		print("Hit!")
+		if collider is RigidBody3D:
+			var body = collider as RigidBody3D
+			body.apply_impulse(bullet_direction * damage * IMPULSE_MULTIPLIER, collision_point)
 	else:
 		print("Miss!") 
