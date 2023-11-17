@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://d4irnbv2vkfg0"]
 
-[ext_resource type="Script" path="res://lc_80.gd" id="1_3wvjy"]
+[ext_resource type="Script" path="res://vehicles/lc80.gd" id="1_oxgl3"]
 [ext_resource type="Script" path="res://SpringArm3D.gd" id="2_xpcjy"]
 [ext_resource type="AudioStream" uid="uid://cf185t85fkuua" path="res://sound/enginesound_slow.mp3" id="3_3rhbd"]
 
@@ -657,7 +657,7 @@ shadow_mesh = SubResource("ArrayMesh_bp5ch")
 mass = 300.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.33, 0)
-script = ExtResource("1_3wvjy")
+script = ExtResource("1_oxgl3")
 
 [node name="body" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.863113, 0.192737)

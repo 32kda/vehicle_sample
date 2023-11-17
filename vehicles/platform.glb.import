@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/platform.glb-ffbe6fd7c4ec1e9117fe1de6b759a2e8
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type="RigidBody3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0

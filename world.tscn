@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=39 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://lno438e04c0c" path="res://items/MetalCrates/Metal_Crate_2/metal_crate_2.tscn" id="24_303pn"]
 [ext_resource type="PackedScene" uid="uid://kgoqxtcpc3gb" path="res://items/WoodenCrates/Wooden_Crate_4/wooden_crate_4.tscn" id="25_lht8d"]
 [ext_resource type="PackedScene" uid="uid://kp734ul5q55b" path="res://vehicles/cruiser.tscn" id="26_0t4tm"]
+[ext_resource type="PackedScene" uid="uid://dmljxpxis0rpq" path="res://items/targets/popper.tscn" id="27_7dwts"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f2krl"]
 panorama = ExtResource("1_bksr2")
@@ -235,9 +236,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0157, 1.28082, 33.4045)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01852, 0.339188, 3.57805)
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.4592, 5.19737, -8.60999)
+transform = Transform3D(0.0662042, 0, -0.997806, 0, 1, 0, 0.997806, 0, 0.0662042, 3.76086, 2.21015, -8.60999)
 node_a = NodePath("StaticBody3D")
 node_b = NodePath("RigidBody3D")
+angular_limit/enable = true
+angular_limit/upper = 0.00698132
 
 [node name="StaticBody3D" type="StaticBody3D" parent="HingeJoint3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.186687, -0.857974, 0)
@@ -249,10 +252,34 @@ mesh = SubResource("BoxMesh_107k1")
 shape = SubResource("BoxShape3D_k8783")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="HingeJoint3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732252, 0.343332)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.732252, -0.0370836)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="HingeJoint3D/RigidBody3D"]
 mesh = SubResource("BoxMesh_107k1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HingeJoint3D/RigidBody3D"]
 shape = SubResource("BoxShape3D_k8783")
+
+[node name="popper" parent="." instance=ExtResource("27_7dwts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38303, 0.348234, -7.10269)
+
+[node name="popper2" parent="." instance=ExtResource("27_7dwts")]
+transform = Transform3D(0.0210297, 0, 0.999779, 0, 1, 0, -0.999779, 0, 0.0210297, -16.5929, 2.43776, 6.46893)
+
+[node name="popper3" parent="." instance=ExtResource("27_7dwts")]
+transform = Transform3D(0.0210297, 0, 0.999779, 0, 1, 0, -0.999779, 0, 0.0210297, -16.5929, 2.43776, 7.25333)
+
+[node name="popper4" parent="." instance=ExtResource("27_7dwts")]
+transform = Transform3D(0.0210297, 0, 0.999779, 0, 1, 0, -0.999779, 0, 0.0210297, -16.5929, 2.43776, 8.03215)
+
+[node name="popper5" parent="." instance=ExtResource("27_7dwts")]
+transform = Transform3D(0.0210297, 0, 0.999779, 0, 1, 0, -0.999779, 0, 0.0210297, -16.5929, 2.43776, 8.78499)
+
+[node name="popper6" parent="." instance=ExtResource("27_7dwts")]
+transform = Transform3D(0.0210297, 0, 0.999779, 0, 1, 0, -0.999779, 0, 0.0210297, -16.5929, 2.43776, 9.58645)
+
+[node name="wooden_crate_10" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3206, 3.69746, 4.56193)
+
+[node name="wooden_crate_11" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.33, 2.43532, 4.61707)
