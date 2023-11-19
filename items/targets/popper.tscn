@@ -1,6 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmljxpxis0rpq"]
+[gd_scene load_steps=14 format=3 uid="uid://dmljxpxis0rpq"]
+
+[ext_resource type="Texture2D" uid="uid://d0pail64nb1xe" path="res://items/targets/Head_diffuse.png" id="1_o0rh2"]
+[ext_resource type="Texture2D" uid="uid://jpjsd8q3h1qa" path="res://items/targets/Frame_diffuse.png" id="2_bsvbm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k2ldo"]
+albedo_texture = ExtResource("1_o0rh2")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdnx7"]
+albedo_texture = ExtResource("1_o0rh2")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yhoyd"]
 _surfaces = [{
@@ -41,7 +48,11 @@ points = PackedVector3Array(-3.38703e-05, 0.23901, 0.0133358, 0.0337423, 0.23565
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tbxqy"]
 points = PackedVector3Array(0.189439, 0.19896, 0.189439, 0.189439, -0.0772931, 0.189439, 0.189439, 0.19896, 0.152628, -0.189439, 0.19896, 0.189439, -0.189439, -0.0772931, 0.189439, 0.189439, -0.0772931, -0.855161, 0.189439, 0.0772748, -0.855161, -0.189439, 0.19896, 0.152628, -0.189439, -0.0772931, -0.855161, -0.189439, 0.0772748, -0.855161)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41b4p"]
+albedo_texture = ExtResource("2_bsvbm")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5sed6"]
+albedo_texture = ExtResource("2_bsvbm")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_xkm48"]
 _surfaces = [{
@@ -74,35 +85,38 @@ shadow_mesh = SubResource("ArrayMesh_xkm48")
 [node name="popper" type="Node3D"]
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.0434859, 0.130052, -0.0575177)
-node_a = NodePath("frame")
-node_b = NodePath("Head")
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.13, -0.058)
+node_a = NodePath("../frame")
+node_b = NodePath("../Head")
 angular_limit/enable = true
 angular_limit/upper = 0.0
-angular_limit/softness = 16.0
+angular_limit/softness = 6.08
 
-[node name="Head" type="RigidBody3D" parent="HingeJoint3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.00159376, -0.130052, 0.0347849)
+[node name="Head" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035, 0, -0.058)
+mass = 40.0
 
-[node name="Geometry" type="MeshInstance3D" parent="HingeJoint3D/Head"]
+[node name="Geometry" type="MeshInstance3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753116, 0)
+material_override = SubResource("StandardMaterial3D_k2ldo")
 mesh = SubResource("ArrayMesh_ipitu")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HingeJoint3D/Head"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753116, 0)
 shape = SubResource("ConvexPolygonShape3D_jri0p")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="HingeJoint3D/Head"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.753116, 0)
 shape = SubResource("ConvexPolygonShape3D_h1hsm")
 
-[node name="frame" type="StaticBody3D" parent="HingeJoint3D"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.133551, -0.0906742, 0.0347849)
+[node name="frame" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0347849, 0.0393258, -0.191551)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HingeJoint3D/frame"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="frame"]
 shape = SubResource("ConvexPolygonShape3D_tbxqy")
 
-[node name="Frame" type="MeshInstance3D" parent="HingeJoint3D/frame"]
+[node name="Frame" type="MeshInstance3D" parent="frame"]
+material_override = SubResource("StandardMaterial3D_41b4p")
 mesh = SubResource("ArrayMesh_d0ksh")
 skeleton = NodePath("")

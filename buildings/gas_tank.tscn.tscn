@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://buwqpbwcptkec"]
+
+[node name="gas_tank_tscn" type="Node3D"]
