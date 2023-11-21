@@ -1,27 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgirjiwl802c7"]
+[gd_scene load_steps=5 format=3 uid="uid://cgirjiwl802c7"]
 
-[ext_resource type="Script" path="res://name_tag.gd" id="1_cwsj8"]
+[ext_resource type="Script" path="res://tags/root_name_tag.gd" id="1_2lhu4"]
+[ext_resource type="Script" path="res://tags/name_tag.gd" id="1_25jvv"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gknoo"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="LabelSettings" id="LabelSettings_aqfyh"]
-font_size = 17
+font_size = 22
+font_color = Color(0.835294, 0.627451, 0.105882, 1)
+outline_size = 2
+outline_color = Color(1, 0.0666667, 0.0666667, 1)
 
 [node name="name_tag" type="Sprite3D"]
 billboard = 1
 texture = SubResource("ViewportTexture_gknoo")
+script = ExtResource("1_2lhu4")
+text = "Rock1"
+color = Color(0.988235, 0, 0.152941, 1)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-script = ExtResource("1_cwsj8")
+size = Vector2i(71, 34)
+script = ExtResource("1_25jvv")
 
 [node name="Label" type="Label" parent="SubViewport"]
 offset_top = 6.0
 offset_right = 71.0
 offset_bottom = 33.0
 size_flags_horizontal = 4
-text = "MEDVED"
+text = "Rock1"
 label_settings = SubResource("LabelSettings_aqfyh")
 horizontal_alignment = 1
 vertical_alignment = 1
