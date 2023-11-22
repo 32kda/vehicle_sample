@@ -1,11 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://kp734ul5q55b"]
+[gd_scene load_steps=34 format=3 uid="uid://kp734ul5q55b"]
 
 [ext_resource type="Script" path="res://vehicles/lc80.gd" id="1_d8eyv"]
 [ext_resource type="Script" path="res://SpringArm3D.gd" id="2_d8lk2"]
 [ext_resource type="AudioStream" uid="uid://cf185t85fkuua" path="res://sound/enginesound_slow.mp3" id="3_wmdd1"]
-[ext_resource type="PackedScene" uid="uid://cgirjiwl802c7" path="res://tags/name_tag.tscn" id="5_5fv6p"]
 [ext_resource type="PackedScene" uid="uid://d12augy08ck24" path="res://weapons/machinegun.tscn" id="5_j3fkd"]
-[ext_resource type="PackedScene" uid="uid://dhun5o5espnca" path="res://tags/flying_tag.tscn" id="6_uc1fq"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7nn1t"]
 points = PackedVector3Array(0.885022, 0.431122, 1.69222, 0.67832, 0.999501, 1.46045, -0.885022, 0.431122, 1.69222, 0.885022, 0.431122, -1.46501, -0.678494, 0.999501, 1.46045, 0.67832, 0.999501, -0.820085, -0.885022, 0.431122, -1.46501, 0.383429, 0.431122, -1.52452, 0.293852, 0.999446, -0.879602, -0.678494, 0.999501, -0.820085, -0.294025, 0.999446, -0.879602, -0.383602, 0.431122, -1.52452)
@@ -702,12 +700,6 @@ shadow_mesh = SubResource("ArrayMesh_h3aj1")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_plagw"]
 points = PackedVector3Array(0.552995, 0.0808847, 0.635139, 0.552995, -0.0809006, 0.635139, 0.552995, 0.0808847, -0.635139, -0.552995, 0.0808847, 0.635139, -0.552995, -0.0809006, 0.635139, 0.552995, -0.0809006, -0.635139, -0.552995, 0.0808847, -0.635139, -0.552995, -0.0809006, -0.635139)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5dwmr"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_mmvfn"]
-viewport_path = NodePath("SubViewport")
-
 [node name="lc80_export" type="VehicleBody3D"]
 mass = 300.0
 center_of_mass_mode = 1
@@ -837,15 +829,9 @@ shape = SubResource("ConvexPolygonShape3D_plagw")
 [node name="WeaponOrigin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260279, 2.3182, 0.760765)
 
-[node name="name_tag" parent="." instance=ExtResource("5_5fv6p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.042554, 2.95433, 0.340828)
-texture = SubResource("ViewportTexture_5dwmr")
-text = "XLADO3ABP"
-color = Color(0.835294, 0.627451, 0.105882, 1)
-
-[node name="flying_tag" parent="." instance=ExtResource("6_uc1fq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55214, 1.96141, 1.2473)
-texture = SubResource("ViewportTexture_mmvfn")
-speed = 100
-text = "ROCK"
-color = Color(0.94902, 0.196078, 0.254902, 1)
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0211957, 2.73248, 0.832613)
+billboard = 1
+modulate = Color(0.945098, 0.552941, 0.215686, 1)
+text = "PREVED"
+font_size = 40

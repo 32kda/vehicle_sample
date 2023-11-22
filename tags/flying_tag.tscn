@@ -1,34 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhun5o5espnca"]
+[gd_scene load_steps=2 format=3 uid="uid://dhun5o5espnca"]
 
 [ext_resource type="Script" path="res://tags/flying_tag.gd" id="1_jvxo2"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_3rnlo"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="LabelSettings" id="LabelSettings_3n3w7"]
-font_size = 22
-font_color = Color(0.94902, 0.196078, 0.254902, 1)
-
-[node name="flying_tag" type="Sprite3D"]
+[node name="flying_tag" type="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0461926, 0)
 billboard = 1
-texture = SubResource("ViewportTexture_3rnlo")
-script = ExtResource("1_jvxo2")
-text = "Rock11"
-
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-
-[node name="Label" type="Label" parent="SubViewport"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -25.5
-offset_top = -34.0
-offset_right = 25.5
-grow_horizontal = 2
-grow_vertical = 0
 text = "Rock"
-label_settings = SubResource("LabelSettings_3n3w7")
-vertical_alignment = 2
+script = ExtResource("1_jvxo2")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

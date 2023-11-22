@@ -5,7 +5,7 @@ extends RigidBody3D
 #var velocity = Vector3.ZERO
 var acceleration = Vector3.ZERO
 var new_vec:Vector3 = Vector3.ZERO
-const MANEURABILITY = 15;
+const MANEURABILITY = 30;
 const MANEUR_MIN_SPEED = 10;
 
 func start(_transform, _acceleration: Vector3, _linear_velocity: Vector3):
