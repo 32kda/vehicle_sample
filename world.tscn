@@ -268,3 +268,30 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 12.1388,
 
 [node name="tank01" parent="." instance=ExtResource("28_d6hbm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1425, 0, 18.4511)
+
+[node name="metal_crate_1" parent="." instance=ExtResource("22_a2pk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5297, 2.54737, -21.3597)
+
+[node name="MetalCrate" parent="." instance=ExtResource("24_303pn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.3251, 3.18521, -21.4129)
+
+[node name="wooden_crate_12" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.798, 2.45, -24.2835)
+
+[node name="wooden_crate_13" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(0.995673, 0, 0.0929267, 0, 1, 0, -0.0929267, 0, 0.995673, -22.2233, 2.49306, -24.6469)
+
+[node name="wooden_crate_14" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(0.914155, 0, -0.405365, 0, 1, 0, 0.405365, 0, 0.914155, -23.382, 3.73082, -24.5183)
+
+[node name="wooden_crate_15" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(0.969531, 0, 0.244969, 0, 1, 0, -0.244969, 0, 0.969531, -20.6155, 2.45, -25.3374)
+
+[node name="wooden_crate_16" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.6482, 3.77388, -24.636)
+
+[node name="wooden_crate_17" parent="." instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5677, 4.97725, -24.7802)
+
+[node name="MetalCrate3" parent="." instance=ExtResource("24_303pn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5378, 3.73082, -25.438)
