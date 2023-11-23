@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bt5thd8vf71bi"]
+
+[resource]
+albedo_color = Color(0, 0.372549, 0.737255, 1)
+metallic = 0.15
+roughness = 0.25
+normal_scale = 1.1
+rim_enabled = true

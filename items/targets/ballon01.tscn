@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://celllplk7ici1"]
+
+[ext_resource type="Script" path="res://items/targets/ballon01.gd" id="1_brpw8"]
+[ext_resource type="Material" uid="uid://bt5thd8vf71bi" path="res://items/targets/ballon01.tres" id="1_xeyqg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_41wb1"]
+material = ExtResource("1_xeyqg")
+radius = 2.0
+height = 10.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_j10vj"]
+material = ExtResource("1_xeyqg")
+size = Vector3(4, 3, 0.3)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mbqgd"]
+radius = 1.99971
+height = 9.88774
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fn4ed"]
+lifetime_randomness = 0.06
+emission_shape = 2
+emission_sphere_radius = 1.0
+particle_flag_rotate_y = true
+spread = 62.52
+flatness = 0.25
+angular_velocity_min = -152.92
+angular_velocity_max = 89.2
+radial_accel_max = 6.19
+tangential_accel_min = -22.12
+tangential_accel_max = 15.93
+angle_min = -95.6
+angle_max = 57.3
+scale_min = 0.7
+scale_max = 1.2
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vdvr"]
+albedo_color = Color(0.313726, 0.0862745, 0.0117647, 1)
+backlight_enabled = true
+backlight = Color(0.733333, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_eqha1"]
+material = SubResource("StandardMaterial3D_8vdvr")
+radial_segments = 32
+rings = 16
+
+[node name="ballon01" type="RigidBody3D"]
+mass = 150.0
+gravity_scale = 0.0
+script = ExtResource("1_brpw8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_41wb1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 4.37114e-08, 1, 1, 1.91069e-15, 4.37114e-08, 0, 1, -4.37114e-08, 0, 0, -5.68702)
+mesh = SubResource("PrismMesh_j10vj")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(3.55271e-15, 8.74228e-08, 1, -4.37114e-08, 1, -8.74228e-08, -1, -4.37114e-08, 2.68657e-16, -2.46701e-07, 4.76837e-07, -0.0431638)
+mesh = SubResource("PrismMesh_j10vj")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.00555, 0)
+billboard = 1
+modulate = Color(0.901961, 0.788235, 0.196078, 1)
+outline_modulate = Color(0.843137, 0, 0, 1)
+text = "PONTOREZ#01"
+font_size = 500
+outline_size = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.00822043, 0)
+shape = SubResource("CapsuleShape3D_mbqgd")
+
+[node name="particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.98083, 0)
+emitting = false
+amount = 15
+lifetime = 1.83
+one_shot = true
+explosiveness = 0.17
+randomness = 0.31
+visibility_aabb = AABB(-2.60641, -9.18159, -2.79089, 6.2702, 18.3632, 8)
+process_material = SubResource("ParticleProcessMaterial_fn4ed")
+draw_pass_1 = SubResource("SphereMesh_eqha1")

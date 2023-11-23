@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=41 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://kgoqxtcpc3gb" path="res://items/WoodenCrates/Wooden_Crate_4/wooden_crate_4.tscn" id="25_lht8d"]
 [ext_resource type="PackedScene" uid="uid://kp734ul5q55b" path="res://vehicles/cruiser.tscn" id="26_0t4tm"]
 [ext_resource type="PackedScene" uid="uid://cynd11vou4u23" path="res://buildings/tank01.glb" id="28_d6hbm"]
+[ext_resource type="PackedScene" uid="uid://celllplk7ici1" path="res://items/targets/ballon01.tscn" id="28_fxtk8"]
 [ext_resource type="PackedScene" uid="uid://6ycu5244t7j3" path="res://items/targets/popper_big.tscn" id="28_noo6l"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f2krl"]
@@ -295,3 +296,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5677, 4.97725, -24.7802)
 
 [node name="MetalCrate3" parent="." instance=ExtResource("24_303pn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5378, 3.73082, -25.438)
+
+[node name="ballon01" parent="." instance=ExtResource("28_fxtk8")]
+transform = Transform3D(0.0687176, 0.0305971, -0.997167, 0.006064, 0.999498, 0.0310865, 0.997618, -0.00818301, 0.0684976, 26.3124, 18.0253, -82.1497)
+linear_velocity = Vector3(0, 0, -8)
