@@ -1,7 +1,14 @@
 extends Node3D
 
+const GOLDEN_ANGLE = PI * (3 - sqrt(5))
+
 @export var physical_strength = 3000
 @export var damage = 150
+@export var base_damage_per_ray = 5
+@export var radius := 5.0
+@export var num_points := 250
+
+var rays := []
 
 var processed := Dictionary()
 
@@ -10,33 +17,99 @@ var first_run := true
 var damage_distance := 3.5
 
 func init(position:Vector3):
-	global_position = position
+    global_position = position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	$AnimatedSprite3D.play("default")
-	if $Area3D/CollisionShape3D.shape is SphereShape3D:
-		damage_distance = ($Area3D/CollisionShape3D.shape as SphereShape3D).radius
+    _create_rays()
+    $AnimatedSprite3D.play("default")
+    if $Area3D/CollisionShape3D.shape is SphereShape3D:
+        damage_distance = ($Area3D/CollisionShape3D.shape as SphereShape3D).radius
+        
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-				
+    pass
+                
 func _physics_process(_delta):
-	for body in $Area3D.get_overlapping_bodies():
-		if body is RigidBody3D:
-			var id = body.get_instance_id();
-			if not processed.has(id):
-				processed[id] = true
-				var distance:Vector3 = body.global_transform.origin - global_transform.origin
-				var impact = 1.0 * physical_strength / (distance.length() + 0.1) #Closer the explosion are - bigger the imapct. 0.1 added to avoid zero division problems
-				body.apply_central_impulse(distance.normalized() * impact)				
-				if body.has_method("hit"):
-					body.hit(damage)					
+    _explode()
+    for body in $Area3D.get_overlapping_bodies():
+        if body is RigidBody3D:
+            var id = body.get_instance_id();
+            if not processed.has(id):
+                processed[id] = true
+                var distance:Vector3 = body.global_transform.origin - global_transform.origin
+                var impact = 1.0 * physical_strength / (distance.length() + 0.1) #Closer the explosion are - bigger the imapct. 0.1 added to avoid zero division problems
+                body.apply_central_impulse(distance.normalized() * impact)				
+                if body.has_method("hit"):
+                    body.hit(damage)					
 
 func _on_audio_stream_player_finished():
-	queue_free()
-	
-
+    queue_free()
 
 func _on_animated_sprite_3d_animation_finished():
-	$AnimatedSprite3D.visible = false
+    $AnimatedSprite3D.visible = false
+    
+func _create_rays() -> void:
+    var points = _get_points()
+    for point in points:
+        var ray = RayCast3D.new()
+        add_child(ray)
+        ray.cast_to = point
+        ray.enabled = false
+        ray.exclude_parent = true
+        rays.append(ray)
+
+
+func _get_points() -> Array:
+    var points = []
+    
+    for point in num_points:
+        var y: float = 1.0 - (point / (num_points - 1.0)) * 2.0
+        var r: float = sqrt(1 - y*y)
+        
+        var angle_increment: float = GOLDEN_ANGLE * point
+        
+        var x: float = cos(angle_increment) * r
+        var z: float = sin(angle_increment) * r
+        
+        points.append(Vector3(x, y, z) * radius)
+    
+    return points
+
+
+func _get_explosion_ray_data() -> Array:
+    var colliding_rays = []
+    for ray in rays:
+        ray.enabled = true
+        ray.force_raycast_update()
+        
+        if ray.is_colliding():
+            colliding_rays.append(ray)
+    
+    return colliding_rays
+
+
+func _explode():
+    var explosion_rays = _get_explosion_ray_data()
+    for ray in explosion_rays:
+        var collider = ray.get_collider()
+        
+        if collider.has_method("take_damage"):
+            var damage = _calculate_damage(ray.get_collision_point())
+            collider.take_damage(damage)
+    
+        if collider is RigidBody3D:
+            var body := collider as RigidBody3D
+            var collision_point = ray.get_collision_point()
+            
+            
+#	var explosion = explosion_effect.instance()
+#	get_parent().add_child(explosion)
+#	explosion.global_transform.origin = global_transform.origin
+
+
+func _calculate_damage(collision_point: Vector3) -> float:
+    var distance = global_transform.origin.distance_to(collision_point)
+    var damage = base_damage_per_ray * (radius - distance)
+    
+    return damage if damage > 0 else 0

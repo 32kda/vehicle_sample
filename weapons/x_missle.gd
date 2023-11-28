@@ -5,7 +5,7 @@ extends RigidBody3D
 #var velocity = Vector3.ZERO
 var acceleration = Vector3.ZERO
 var new_vec:Vector3 = Vector3.ZERO
-const MANEURABILITY = 100;
+const MANEURABILITY = 160;
 const MANEUR_MIN_SPEED = 10;
 
 func start(_transform, _acceleration: Vector3, _linear_velocity: Vector3):
@@ -29,7 +29,7 @@ func _physics_process(delta):
 	apply_central_force(acceleration * speed)
 	linear_velocity.limit_length(speed)
 	if linear_velocity.length() > MANEUR_MIN_SPEED:
-		acceleration = lerp(acceleration, new_vec, MANEURABILITY * delta)	
+		acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))	
 		look_at(linear_velocity + global_position, Vector3.UP, true)
 
 func _on_Lifetime_timeout():

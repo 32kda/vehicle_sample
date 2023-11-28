@@ -299,4 +299,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5378, 3.73082, -25.438)
 
 [node name="ballon01" parent="." instance=ExtResource("28_fxtk8")]
 transform = Transform3D(0.0687176, 0.0305971, -0.997167, 0.006064, 0.999498, 0.0310865, 0.997618, -0.00818301, 0.0684976, 26.3124, 18.0253, -82.1497)
-linear_velocity = Vector3(0, 0, -8)
+visible = false
+linear_velocity = Vector3(-8, 0, 0)
