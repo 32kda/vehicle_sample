@@ -1,12 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://eq33d2c1or61"]
+[gd_scene load_steps=4 format=3 uid="uid://eq33d2c1or61"]
 
 [ext_resource type="Script" path="res://effects/missle_explosion.gd" id="1_m603i"]
 [ext_resource type="SpriteFrames" uid="uid://8mlvwlkelhjd" path="res://effects/particles_fireball_wind/fireball.tres" id="1_qwl4p"]
 [ext_resource type="AudioStream" uid="uid://75pq10oaqlkv" path="res://effects/explodemini.wav" id="2_grd0h"]
-[ext_resource type="Script" path="res://effects/ExplosionArea.gd" id="4_yd5yh"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_mfhpa"]
-radius = 3.50168
 
 [node name="missle_explosion" type="Node3D"]
 script = ExtResource("1_m603i")
@@ -23,12 +19,6 @@ speed_scale = 2.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_grd0h")
 autoplay = true
-
-[node name="Area3D" type="Area3D" parent="."]
-script = ExtResource("4_yd5yh")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("SphereShape3D_mfhpa")
 
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
