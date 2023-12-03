@@ -1,8 +1,11 @@
 extends Node3D
 
-const GOLDEN_ANGLE = PI * (3 - sqrt(5))
+enum Mode {SPHERE, RAYS}
 
-@export var physical_strength = 50
+const GOLDEN_ANGLE = PI * (3 - sqrt(5))
+const EXPLOSION_MODE := Mode.SPHERE
+
+@export var physical_strength = 1500
 @export var damage = 150
 @export var base_damage_per_ray = 5
 @export var radius := 5.0
@@ -23,29 +26,32 @@ func init(position:Vector3):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	_create_rays()
+	if EXPLOSION_MODE == Mode.SPHERE:
+		_create_rays()
+	else:
+		damage_distance = ($Area3D/CollisionShape3D.shape as SphereShape3D).radius 
 	$AnimatedSprite3D.play("default")
-	#if $Area3D/CollisionShape3D.shape is SphereShape3D:
-	#	damage_distance = ($Area3D/CollisionShape3D.shape as SphereShape3D).radius
-		
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
 	pass
 				
 func _physics_process(_delta):
-	if not exploded:
-		_explode()
-		exploded = true
-#	for body in $Area3D.get_overlapping_bodies():
-#		if body is RigidBody3D:
-#			var id = body.get_instance_id();
-#			if not processed.has(id):
-#				processed[id] = true
-#				var distance:Vector3 = body.global_transform.origin - global_transform.origin
-#				var impact = 1.0 * physical_strength / (distance.length() + 0.1) #Closer the explosion are - bigger the imapct. 0.1 added to avoid zero division problems
-#				body.apply_central_impulse(distance.normalized() * impact)				
-#				if body.has_method("hit"):
-#					body.hit(damage)					
+	if EXPLOSION_MODE == Mode.RAYS:
+		if not exploded:
+			_explode()
+			exploded = true
+			#todo damage calc
+	else: 
+		for body in $Area3D.get_overlapping_bodies():
+			if body is RigidBody3D:
+				var id = body.get_instance_id();
+				if not processed.has(id):
+					processed[id] = true
+					var distance:Vector3 = body.global_transform.origin - global_transform.origin
+					var impact = 1.0 * physical_strength / (distance.length() + 0.1) #Closer the explosion are - bigger the imapct. 0.1 added to avoid zero division problems
+					body.apply_central_impulse(distance.normalized() * impact)				
+			if body.has_method("hit"):
+				body.hit(damage)					
 
 func _on_audio_stream_player_finished():
 	queue_free()
