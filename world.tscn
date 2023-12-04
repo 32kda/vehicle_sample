@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=45 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cvjp0bq0hi66c" path="res://data/sgrass5-1.png" id="18_rok7u"]
 [ext_resource type="PackedScene" uid="uid://bid1bc51vj1pu" path="res://MainMenu.tscn" id="19_b1tgq"]
 [ext_resource type="PackedScene" uid="uid://b5bc46f5vnm87" path="res://buildings/red_house01.tscn" id="21_g4u3t"]
+[ext_resource type="Texture2D" uid="uid://fhc6kmeqduu5" path="res://textures/water0342normal.jpg" id="21_wk57o"]
 [ext_resource type="PackedScene" uid="uid://b8rwu454i6gok" path="res://items/MetalCrates/Metal_Crate_1/metal_crate_1.tscn" id="22_a2pk4"]
 [ext_resource type="PackedScene" uid="uid://lno438e04c0c" path="res://items/MetalCrates/Metal_Crate_2/metal_crate_2.tscn" id="24_303pn"]
 [ext_resource type="PackedScene" uid="uid://kgoqxtcpc3gb" path="res://items/WoodenCrates/Wooden_Crate_4/wooden_crate_4.tscn" id="25_lht8d"]
@@ -71,6 +72,79 @@ uv1_offset = Vector3(-0.08, 0.1, -0.065)
 script = ExtResource("8_bvg6p")
 mode = 0
 textures = [[ExtResource("9_rc8am"), ExtResource("10_posmc")], [ExtResource("10_ydew1"), ExtResource("12_y87r7")]]
+
+[sub_resource type="Shader" id="Shader_gq7nk"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.1.1.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float proximity_fade_distance;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform sampler2D depth_texture : hint_depth_texture, repeat_disable, filter_nearest;uniform sampler2D texture_normal : hint_roughness_normal,filter_linear_mipmap,repeat_enable;
+uniform float normal_scale : hint_range(-16,16);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+}
+
+
+
+
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+	NORMAL_MAP = texture(texture_normal,vec2(base_uv.x + TIME * 0.1, base_uv.y + TIME * 0.1)).rgb;
+	NORMAL_MAP_DEPTH = normal_scale;
+	ALPHA *= albedo.a * albedo_tex.a;
+	float depth_tex = textureLod(depth_texture,SCREEN_UV,0.0).r;
+	vec4 world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV*2.0-1.0,depth_tex,1.0);
+	world_pos.xyz/=world_pos.w;
+	ALPHA*=clamp(1.0-smoothstep(world_pos.z+proximity_fade_distance,world_pos.z,VERTEX.z),0.0,1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8se3d"]
+render_priority = 0
+shader = SubResource("Shader_gq7nk")
+shader_parameter/albedo = Color(0.0666667, 0.423529, 0.784314, 0.588235)
+shader_parameter/proximity_fade_distance = 0.2
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(100, 100, 100)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_normal = ExtResource("21_wk57o")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kaxuw"]
+material = SubResource("ShaderMaterial_8se3d")
+size = Vector2(600, 600)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cljfu"]
 albedo_texture = ExtResource("4_gnkfn")
@@ -202,102 +276,106 @@ transform = Transform3D(0.213411, -4.25552e-08, 0.973548, 4.25551e-08, 0.996664,
 [node name="metal_crate_1" parent="world" instance=ExtResource("22_a2pk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.7763, 0.668324, 28.3254)
 
+[node name="Water" type="MeshInstance3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1775, 0)
+mesh = SubResource("PlaneMesh_kaxuw")
+
+[node name="MetalCrate2" parent="world" instance=ExtResource("24_303pn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9313, 2.55266, 2.64678)
+
+[node name="wooden_crate_4" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.83754, 0.352434, -7.93914)
+
+[node name="wooden_crate_5" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4508, -2.38419e-07, 27.2906)
+
+[node name="wooden_crate_6" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5756, 0, 28.6081)
+
+[node name="wooden_crate_7" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0934, 0, 32.8075)
+
+[node name="wooden_crate_8" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0028, 0, 34.2085)
+
+[node name="wooden_crate_9" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0157, 1.28082, 33.4045)
+
+[node name="lc80_export" parent="world" instance=ExtResource("26_0t4tm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01852, 0.339188, 3.57805)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="world"]
+transform = Transform3D(0.132408, 0, -1.99561, 0, 2, 0, 1.99561, 0, 0.132408, 12.9082, 0.927783, -1.44202)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_cljfu")
+mesh = SubResource("BoxMesh_107k1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D"]
+shape = SubResource("BoxShape3D_k8783")
+
+[node name="wooden_crate_10" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3206, 3.69746, 4.56193)
+
+[node name="wooden_crate_11" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.33, 2.43532, 4.61707)
+
+[node name="popper_big" parent="world" instance=ExtResource("28_noo6l")]
+transform = Transform3D(0.541092, 0, 0.840963, 0, 1, 0, -0.840963, 0, 0.541092, -15.5197, 2.56426, 0.790939)
+
+[node name="popper_big2" parent="world" instance=ExtResource("28_noo6l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.7466, 2.45, 10.733)
+
+[node name="popper_big3" parent="world" instance=ExtResource("28_noo6l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.7466, 2.45, 9.58977)
+
+[node name="popper_big4" parent="world" instance=ExtResource("28_noo6l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.7466, 2.45, 8.36336)
+
+[node name="popper_big5" parent="world" instance=ExtResource("28_noo6l")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.7466, 2.45, 7.07337)
+
+[node name="popper_big6" parent="world" instance=ExtResource("28_noo6l")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 12.1388, 2.08682, -1.62341)
+
+[node name="tank01" parent="world" instance=ExtResource("28_d6hbm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1425, 0, 18.4511)
+
+[node name="metal_crate_2" parent="world" instance=ExtResource("22_a2pk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5297, 2.54737, -21.3597)
+
+[node name="MetalCrate" parent="world" instance=ExtResource("24_303pn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.3251, 3.18521, -21.4129)
+
+[node name="wooden_crate_12" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.798, 2.45, -24.2835)
+
+[node name="wooden_crate_13" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(0.995673, 0, 0.0929267, 0, 1, 0, -0.0929267, 0, 0.995673, -22.2233, 2.49306, -24.6469)
+
+[node name="wooden_crate_14" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(0.914155, 0, -0.405365, 0, 1, 0, 0.405365, 0, 0.914155, -23.382, 3.73082, -24.5183)
+
+[node name="wooden_crate_15" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(0.969531, 0, 0.244969, 0, 1, 0, -0.244969, 0, 0.969531, -20.6155, 2.45, -25.3374)
+
+[node name="wooden_crate_16" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.6482, 3.77388, -24.636)
+
+[node name="wooden_crate_17" parent="world" instance=ExtResource("25_lht8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5677, 4.97725, -24.7802)
+
+[node name="MetalCrate3" parent="world" instance=ExtResource("24_303pn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5378, 3.73082, -25.438)
+
+[node name="ballon01" parent="world" instance=ExtResource("28_fxtk8")]
+transform = Transform3D(0.0687176, 0.0305971, -0.997167, 0.006064, 0.999498, 0.0310865, 0.997618, -0.00818301, 0.0684976, 26.3124, 18.0253, -82.1497)
+visible = false
+linear_velocity = Vector3(-8, 0, 0)
+
 [node name="MainMenu" parent="." instance=ExtResource("19_b1tgq")]
 process_mode = 3
 
 [node name="State" type="Node" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("4_rqv1y")]
-
-[node name="MetalCrate2" parent="." instance=ExtResource("24_303pn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.9313, 2.55266, 2.64678)
-
-[node name="wooden_crate_4" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.83754, 0.352434, -7.93914)
-
-[node name="wooden_crate_5" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4508, -2.38419e-07, 27.2906)
-
-[node name="wooden_crate_6" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5756, 0, 28.6081)
-
-[node name="wooden_crate_7" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0934, 0, 32.8075)
-
-[node name="wooden_crate_8" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0028, 0, 34.2085)
-
-[node name="wooden_crate_9" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0157, 1.28082, 33.4045)
-
-[node name="lc80_export" parent="." instance=ExtResource("26_0t4tm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01852, 0.339188, 3.57805)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(0.132408, 0, -1.99561, 0, 2, 0, 1.99561, 0, 0.132408, 12.9082, 0.927783, -1.44202)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-material_override = SubResource("StandardMaterial3D_cljfu")
-mesh = SubResource("BoxMesh_107k1")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_k8783")
-
-[node name="wooden_crate_10" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3206, 3.69746, 4.56193)
-
-[node name="wooden_crate_11" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.33, 2.43532, 4.61707)
-
-[node name="popper_big" parent="." instance=ExtResource("28_noo6l")]
-transform = Transform3D(0.541092, 0, 0.840963, 0, 1, 0, -0.840963, 0, 0.541092, -15.5197, 2.56426, 0.790939)
-
-[node name="popper_big2" parent="." instance=ExtResource("28_noo6l")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.7466, 2.45, 10.733)
-
-[node name="popper_big3" parent="." instance=ExtResource("28_noo6l")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.7466, 2.45, 9.58977)
-
-[node name="popper_big4" parent="." instance=ExtResource("28_noo6l")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.7466, 2.45, 8.36336)
-
-[node name="popper_big5" parent="." instance=ExtResource("28_noo6l")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.7466, 2.45, 7.07337)
-
-[node name="popper_big6" parent="." instance=ExtResource("28_noo6l")]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 12.1388, 2.08682, -1.62341)
-
-[node name="tank01" parent="." instance=ExtResource("28_d6hbm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.1425, 0, 18.4511)
-
-[node name="metal_crate_1" parent="." instance=ExtResource("22_a2pk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5297, 2.54737, -21.3597)
-
-[node name="MetalCrate" parent="." instance=ExtResource("24_303pn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.3251, 3.18521, -21.4129)
-
-[node name="wooden_crate_12" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.798, 2.45, -24.2835)
-
-[node name="wooden_crate_13" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(0.995673, 0, 0.0929267, 0, 1, 0, -0.0929267, 0, 0.995673, -22.2233, 2.49306, -24.6469)
-
-[node name="wooden_crate_14" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(0.914155, 0, -0.405365, 0, 1, 0, 0.405365, 0, 0.914155, -23.382, 3.73082, -24.5183)
-
-[node name="wooden_crate_15" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(0.969531, 0, 0.244969, 0, 1, 0, -0.244969, 0, 0.969531, -20.6155, 2.45, -25.3374)
-
-[node name="wooden_crate_16" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.6482, 3.77388, -24.636)
-
-[node name="wooden_crate_17" parent="." instance=ExtResource("25_lht8d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5677, 4.97725, -24.7802)
-
-[node name="MetalCrate3" parent="." instance=ExtResource("24_303pn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5378, 3.73082, -25.438)
-
-[node name="ballon01" parent="." instance=ExtResource("28_fxtk8")]
-transform = Transform3D(0.0687176, 0.0305971, -0.997167, 0.006064, 0.999498, 0.0310865, 0.997618, -0.00818301, 0.0684976, 26.3124, 18.0253, -82.1497)
-visible = false
-linear_velocity = Vector3(-8, 0, 0)
