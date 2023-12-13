@@ -13,3 +13,4 @@ func _process(delta):
 
 func set_speed(kmh):
 	$Info.text=str(round(kmh)).pad_zeros(3) + "km/h"
+	$FPS.set_text("FPS %d" % Engine.get_frames_per_second())

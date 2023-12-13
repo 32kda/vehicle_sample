@@ -28,3 +28,9 @@ grow_vertical = 2
 [node name="Crosshair046" type="Sprite2D" parent="MarginContainer"]
 position = Vector2(21, 21)
 texture = ExtResource("2_k6tgo")
+
+[node name="FPS" type="Label" parent="."]
+offset_left = 966.0
+offset_top = 598.0
+offset_right = 1122.0
+offset_bottom = 621.0

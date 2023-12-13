@@ -1,16 +1,18 @@
 
-# Godot RL Agents
+# Vehicle Example
 
-This repository contains the Godot 4 asset / plugin for the Godot RL Agents library, you can find out more about the library on its Github page [here](https://github.com/edbeeching/godot_rl_agents).
+This project is aimed at creating 'sandbox' game to test the following Godot 4 3D Game features
 
-The Godot RL Agents is a fully Open Source package that allows video game creators, AI researchers and hobbyists the opportunity to learn complex behaviors for their Non Player Characters or agents. 
-This libary provided this following functionaly:
-* An interface between games created in the [Godot Engine](https://godotengine.org/) and Machine Learning algorithms running in Python
-* Wrappers for three well known rl frameworks: StableBaselines3, Sample Factory and [Ray RLLib](https://docs.ray.io/en/latest/rllib-algorithms.html)
-* Support for memory-based agents, with LSTM or attention based interfaces
-* Support for 2D and 3D games
-* A suite of AI sensors to augment your agent's capacity to observe the game world
-* Godot and Godot RL Agents are completely free and open source under the very permissive MIT license. No strings attached, no royalties, nothing. 
+This demo/sandbox is inspired by old PS1 "Twisted Metal" game, as well as some techniques used in Half-Life 1 and Couter-Strike 1.6
 
-You can find out more about Godot RL agents in our AAAI-2022 Workshop [paper](https://arxiv.org/abs/2112.03636).
+* Basic Car Physics using VehicleBody3D
+* Car auto-driving - bsic, later - maybe using some Neural Network architectures
+* Main Menu and HUD creation, game pausing and restarting
+* Using Paths for creating track
+* Using 3D Terrain plugin
+* Creating Weapns - HitScan and Particle ones
+* Using Godot Particles, Sprites and Decals for creating different effects - explosions, bullet holes, water etc.
+* Models importing - planning to make this using Free/OpenSource Software, like awesome Blender and Krita
+* Physics
 
+Some art being used is downloaded from free art sites like opengameart.org or https://open3dmodel.com , some is created by me in Blender and Krita
