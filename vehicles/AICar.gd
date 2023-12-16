@@ -41,10 +41,13 @@ func _physics_process(delta):
 	set_interest()
 	set_danger()
 	choose_direction()
-	var desired_velocity = chosen_dir.rotated(Vector3.UP, rotation) * max_speed
-	velocity = velocity.linear_interpolate(desired_velocity, steer_force)
-	rotation = velocity.angle()
-	move_and_collide(velocity * delta)
+	
+	var desired_velocity = chosen_dir 
+	if chosen_dir != Vector3.FORWARD:
+		print("Boo")
+	velocity = velocity.lerp(desired_velocity, steer_force)
+#	rotation = velocity.angle()
+#	move_and_collide(velocity * delta)
 	
 	current_speed_mps = linear_velocity.length()
 	
@@ -73,17 +76,19 @@ func set_interest():
 func set_default_interest():
 	# Default to moving forward
 	for i in num_rays:
-		var d = ray_directions[i].rotated(Vector3.UP, rotation).dot(transform.x)
+		var d = (ray_directions[i] * global_transform).dot(global_transform.basis.z)
 		interest[i] = max(0, d)
 
 func set_danger():
 	# Cast rays to find danger directions
 	var space_state = get_world_3d().direct_space_state
 	for i in num_rays:
-			var result = space_state.intersect_ray(position,
-				position + ray_directions[i].rotated(Vector3.UP, rotation) * look_ahead,
-				[self])
-			danger[i] = 1.0 if result else 0.0
+		var params := PhysicsRayQueryParameters3D.create(position, position + ray_directions[i] * look_ahead)
+		var result = space_state.intersect_ray(params)
+#			var result = space_state.intersect_ray(position,
+#				position + ray_directions[i].rotated(Vector3.UP, rotation) * look_ahead,
+#				[self])
+		danger[i] = 1.0 if result.has("collider") else 0.0
 			
 func choose_direction():
 	# Eliminate interest in slots with danger
