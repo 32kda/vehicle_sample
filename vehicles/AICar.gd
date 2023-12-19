@@ -1,7 +1,7 @@
 extends VehicleBody3D
 
 @export var steer_force = 0.1
-@export var look_ahead = 100
+@export var look_ahead = 20
 @export var num_rays = 8
 
 # context array
@@ -19,7 +19,7 @@ var horse_power = 200
 var accel_speed = 100
 
 var steer_angle = deg_to_rad(30)
-var steer_speed = 2.5
+var steer_speed = 10
 
 var brake_power = 60
 var brake_speed = 60
@@ -43,20 +43,19 @@ func _physics_process(delta):
 	choose_direction()
 	
 	var desired_velocity = chosen_dir 
-	if chosen_dir != Vector3.FORWARD:
-		print("Boo")
 	velocity = velocity.lerp(desired_velocity, steer_force)
 #	rotation = velocity.angle()
 #	move_and_collide(velocity * delta)
 	
 	current_speed_mps = linear_velocity.length()
 	
-	var throt_input = -1.0 #TDOD	
+	var throt_input = -Vector3.FORWARD.dot(chosen_dir)	
 	if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:
 		throt_input = throt_input * LOW_SPEED / current_speed_mps
 	engine_force = lerp(engine_force, throt_input * horse_power, accel_speed * delta)	
 	
-	var steer_input = 0.0 #TODO
+	var steer_input = clamp(Vector3.FORWARD.signed_angle_to(chosen_dir, Vector3.UP), -steer_angle, steer_angle)
+		
 	steering = lerp(steering, steer_input * steer_angle, steer_speed * delta)
 	
 	var brake_input = 0.0 #TODO
@@ -65,7 +64,7 @@ func _physics_process(delta):
 func set_interest():
 	# Set interest in each slot based on world direction
 	if owner and owner.has_method("get_path_direction"):
-		var path_direction = owner.get_path_direction(position)
+		var path_direction = owner.get_path_direction(global_position)
 		for i in num_rays:
 			var d = ray_directions[i].rotated(rotation).dot(path_direction)
 			interest[i] = max(0, d)
@@ -76,27 +75,33 @@ func set_interest():
 func set_default_interest():
 	# Default to moving forward
 	for i in num_rays:
-		var d = (ray_directions[i] * global_transform).dot(global_transform.basis.z)
+		var d = ray_directions[i].dot(Vector3.FORWARD)
 		interest[i] = max(0, d)
 
 func set_danger():
 	# Cast rays to find danger directions
 	var space_state = get_world_3d().direct_space_state
 	for i in num_rays:
-		var params := PhysicsRayQueryParameters3D.create(position, position + ray_directions[i] * look_ahead)
+		var global_target := to_global(ray_directions[i] * look_ahead)
+		var params := PhysicsRayQueryParameters3D.create(global_position, global_target)
 		var result = space_state.intersect_ray(params)
 #			var result = space_state.intersect_ray(position,
 #				position + ray_directions[i].rotated(Vector3.UP, rotation) * look_ahead,
 #				[self])
-		danger[i] = 1.0 if result.has("collider") else 0.0
+		if result.has("collider"):
+			var pos = result["position"]
+			var dist = (pos - global_position).length() / look_ahead
+			danger[i] = 1 - dist
+		else: 
+			danger[i] = 0.0	
 			
 func choose_direction():
 	# Eliminate interest in slots with danger
 	for i in num_rays:
-		if danger[i] > 0.0:
-			interest[i] = 0.0
+		interest[i] *= (1.0 - danger[i])
 	# Choose direction based on remaining interest
 	chosen_dir = Vector3.FORWARD
 	for i in num_rays:
 		chosen_dir += ray_directions[i] * interest[i]
 	chosen_dir = chosen_dir.normalized()
+	print(chosen_dir)

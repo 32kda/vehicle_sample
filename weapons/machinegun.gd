@@ -79,9 +79,7 @@ func hit_scan():
 			hole.rotation_degrees.x = 90
 		elif !Vector3.UP.is_equal_approx(collision_normal):
 			hole.look_at(collision_point - collision_normal, Vector3(0,1,0))			
-		print("Hit!")
 		if collider is RigidBody3D:
 			var body = collider as RigidBody3D
 			body.apply_impulse(bullet_direction * damage * IMPULSE_MULTIPLIER, collision_point)
-	else:
-		print("Miss!") 
+

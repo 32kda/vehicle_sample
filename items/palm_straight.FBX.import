@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cyd7m6bmos635"
-path="res://.godot/imported/palm_straight.FBX-f1bbf14a314a99393bc12b8e47b2fe9a.scn"
+path="res://.godot/imported/palm_straight.fbx-f40d7a52ed2daf2407aed28556559861.scn"
 
 [deps]
 
-source_file="res://items/palm_straight.FBX"
-dest_files=["res://.godot/imported/palm_straight.FBX-f1bbf14a314a99393bc12b8e47b2fe9a.scn"]
+source_file="res://items/palm_straight.fbx"
+dest_files=["res://.godot/imported/palm_straight.fbx-f40d7a52ed2daf2407aed28556559861.scn"]
 
 [params]
 
