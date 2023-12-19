@@ -42,12 +42,14 @@ func _physics_process(delta):
 	set_danger()
 	choose_direction()
 	
-	var desired_velocity = chosen_dir 
-	velocity = velocity.lerp(desired_velocity, steer_force)
+	#var desired_velocity = chosen_dir 
+	#velocity = velocity.lerp(desired_velocity, steer_force)
 #	rotation = velocity.angle()
 #	move_and_collide(velocity * delta)
 	
 	current_speed_mps = linear_velocity.length()
+	
+	$MeshInstance3D.look_at(to_global(chosen_dir))
 	
 	var throt_input = -Vector3.FORWARD.dot(chosen_dir)	
 	if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:

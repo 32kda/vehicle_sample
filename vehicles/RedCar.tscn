@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://hrd2haprnbwa"]
+[gd_scene load_steps=18 format=3 uid="uid://hrd2haprnbwa"]
 
 [ext_resource type="Texture2D" uid="uid://darxlmxyp7bsx" path="res://vehicles/red_car_red_car.png" id="1_dqnin"]
 [ext_resource type="Script" path="res://vehicles/AICar.gd" id="1_x5hej"]
@@ -176,6 +176,13 @@ points = PackedVector3Array(1.10027, 0.308386, -2.04141, 1.10027, -0.371237, -2.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a426v"]
 points = PackedVector3Array(-1.09251, -0.386892, -1.0291, -1.09251, -0.34368, 1.01929, -0.759922, 0.177777, -0.478853, 1.09251, -0.386892, -1.0291, 1.09229, -0.34368, 1.01949, -0.759922, 0.19704, 0.646908, 0.759708, 0.177777, -0.478853, 0.759708, 0.19704, 0.646908)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkvpi"]
+albedo_color = Color(0.733333, 0.203922, 0.117647, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_d7hj6"]
+material = SubResource("StandardMaterial3D_bkvpi")
+size = Vector3(0.5, 2, 0.2)
+
 [node name="RedCar" type="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.208064, -1.19209e-07, -0.510616)
 mass = 200.0
@@ -260,3 +267,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00234966, 1.61541, 0.261209
 shape = SubResource("ConvexPolygonShape3D_a426v")
 
 [node name="RedCar" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.68679, 0)
+mesh = SubResource("PrismMesh_d7hj6")
