@@ -15,7 +15,7 @@ var acceleration = Vector3.FORWARD
 
 const LOW_SPEED = 10
 
-var horse_power = 200
+var horse_power = 50
 var accel_speed = 100
 
 var steer_angle = deg_to_rad(30)
@@ -49,7 +49,9 @@ func _physics_process(delta):
 	
 	current_speed_mps = linear_velocity.length()
 	
-	$MeshInstance3D.look_at(to_global(chosen_dir))
+	var to_look = Vector3(chosen_dir)
+	to_look.y = 0
+	$MeshInstance3D.look_at(to_global(to_look))
 	
 	var throt_input = -Vector3.FORWARD.dot(chosen_dir)	
 	if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:

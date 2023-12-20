@@ -18,9 +18,11 @@ height = 9.88774
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fn4ed"]
 lifetime_randomness = 0.06
+particle_flag_rotate_y = true
 emission_shape = 2
 emission_sphere_radius = 1.0
-particle_flag_rotate_y = true
+angle_min = -95.6
+angle_max = 57.3
 spread = 62.52
 flatness = 0.25
 angular_velocity_min = -152.92
@@ -28,8 +30,6 @@ angular_velocity_max = 89.2
 radial_accel_max = 6.19
 tangential_accel_min = -22.12
 tangential_accel_max = 15.93
-angle_min = -95.6
-angle_max = 57.3
 scale_min = 0.7
 scale_max = 1.2
 collision_mode = 2

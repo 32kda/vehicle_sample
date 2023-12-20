@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dp67cre3b5qil"
-path="res://.godot/imported/palm_dual_bend.fbx-6aeaeccb1c3645ff521b85db56216b78.scn"
+path="res://.godot/imported/palm_dual_bend.FBX-8cb4fc025bdb25f65f01ac5879d0c72b.scn"
 
 [deps]
 
-source_file="res://items/palm_dual_bend.fbx"
-dest_files=["res://.godot/imported/palm_dual_bend.fbx-6aeaeccb1c3645ff521b85db56216b78.scn"]
+source_file="res://items/palm_dual_bend.FBX"
+dest_files=["res://.godot/imported/palm_dual_bend.FBX-8cb4fc025bdb25f65f01ac5879d0c72b.scn"]
 
 [params]
 
@@ -22,6 +22,7 @@ meshes/generate_lods=true
 meshes/create_shadow_meshes=true
 meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
@@ -29,4 +30,5 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={}
+gltf/naming_version=0
 gltf/embedded_image_handling=1

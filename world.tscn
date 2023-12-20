@@ -318,7 +318,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0028, 0, 34.2085)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0157, 1.28082, 33.4045)
 
 [node name="lc80_export" parent="world" instance=ExtResource("26_0t4tm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01852, 0.339188, 3.57805)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01852, 0.339188, -133.066)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="world"]
 transform = Transform3D(0.132408, 0, -1.99561, 0, 2, 0, 1.99561, 0, 0.132408, 12.9082, 0.927783, -1.44202)
@@ -389,7 +389,7 @@ transform = Transform3D(0.0687176, 0.0305971, -0.997167, 0.006064, 0.999498, 0.0
 linear_velocity = Vector3(-8, 0, 0)
 
 [node name="RedCar" parent="world" instance=ExtResource("28_sgcpm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8462, 0.438836, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8462, 0.438836, -155.54)
 
 [node name="MainMenu" parent="." instance=ExtResource("19_b1tgq")]
 process_mode = 3
