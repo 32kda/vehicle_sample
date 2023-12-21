@@ -79,15 +79,16 @@ func set_interest():
 func set_default_interest():
 	# Default to moving forward
 	for i in num_rays:
-		var d = ray_directions[i].dot(Vector3.FORWARD)
-		interest[i] = max(0, d)
+		var d = 0.5 + ray_directions[i].dot(Vector3.FORWARD)
+		interest[i] = clamp(d, 0, 1)
 
 func set_danger():
 	# Cast rays to find danger directions
 	var space_state = get_world_3d().direct_space_state
 	for i in num_rays:
+		var from = global_position
 		var global_target := to_global(ray_directions[i] * look_ahead)
-		var params := PhysicsRayQueryParameters3D.create(global_position, global_target)
+		var params := PhysicsRayQueryParameters3D.create(from, global_target)
 		var result = space_state.intersect_ray(params)
 #			var result = space_state.intersect_ray(position,
 #				position + ray_directions[i].rotated(Vector3.UP, rotation) * look_ahead,
@@ -104,7 +105,7 @@ func choose_direction():
 	for i in num_rays:
 		interest[i] *= (1.0 - danger[i])
 	# Choose direction based on remaining interest
-	chosen_dir = Vector3.FORWARD
+	chosen_dir = Vector3.ZERO
 	for i in num_rays:
 		chosen_dir += ray_directions[i] * interest[i]
 	chosen_dir = chosen_dir.normalized()
