@@ -19,7 +19,7 @@ var horse_power = 50
 var accel_speed = 100
 
 var steer_angle = deg_to_rad(30)
-var steer_speed = 10
+var steer_speed = 40
 
 var brake_power = 60
 var brake_speed = 60
@@ -53,7 +53,7 @@ func _physics_process(delta):
 	to_look.y = 0
 	$MeshInstance3D.look_at(to_global(to_look))
 	
-	var throt_input = -Vector3.FORWARD.dot(chosen_dir)	
+	var throt_input = chosen_dir.z	
 	if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:
 		throt_input = throt_input * LOW_SPEED / current_speed_mps
 	engine_force = lerp(engine_force, throt_input * horse_power, accel_speed * delta)	
@@ -109,4 +109,4 @@ func choose_direction():
 	for i in num_rays:
 		chosen_dir += ray_directions[i] * interest[i]
 	chosen_dir = chosen_dir.normalized()
-	print(chosen_dir)
+	print(chosen_dir.z)
