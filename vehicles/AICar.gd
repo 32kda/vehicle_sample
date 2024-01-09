@@ -3,6 +3,7 @@ extends VehicleBody3D
 @export var steer_force = 0.1
 @export var look_ahead = 20
 @export var num_rays = 8
+@export var controller_height = 0.5
 
 # context array
 var ray_directions = []
@@ -15,7 +16,7 @@ var acceleration = Vector3.FORWARD
 
 const LOW_SPEED = 10
 
-var horse_power = 50
+var horse_power = 250
 var accel_speed = 100
 
 var steer_angle = deg_to_rad(30)
@@ -54,13 +55,18 @@ func _physics_process(delta):
 	$MeshInstance3D.look_at(to_global(to_look))
 	
 	var throt_input = chosen_dir.z	
+	if throt_input > 0:
+		throt_input = 0.5
 	if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:
 		throt_input = throt_input * LOW_SPEED / current_speed_mps
 	engine_force = lerp(engine_force, throt_input * horse_power, accel_speed * delta)	
 	
 	var steer_input = clamp(Vector3.FORWARD.signed_angle_to(chosen_dir, Vector3.UP), -steer_angle, steer_angle)
-		
+	
+	if chosen_dir.z > 0:
+		steer_input = -steer_input
 	steering = lerp(steering, steer_input * steer_angle, steer_speed * delta)
+	
 	
 	var brake_input = 0.0 #TODO
 	brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
@@ -79,15 +85,17 @@ func set_interest():
 func set_default_interest():
 	# Default to moving forward
 	for i in num_rays:
-		var d = 0.5 + ray_directions[i].dot(Vector3.FORWARD)
-		interest[i] = clamp(d, 0, 1)
+		var d = ray_directions[i].dot(Vector3.FORWARD) * 0.3		
+		interest[i] = clamp(d + 0.7, 0, 1)
 
 func set_danger():
 	# Cast rays to find danger directions
 	var space_state = get_world_3d().direct_space_state
 	for i in num_rays:
-		var from = global_position
-		var global_target := to_global(ray_directions[i] * look_ahead)
+		var from = Vector3(global_position.x, global_position.y + controller_height, global_position.z)		
+		var direction = Vector3(ray_directions[i].x * look_ahead, ray_directions[i].y + controller_height, ray_directions[i].z * look_ahead)
+		
+		var global_target := to_global(direction)
 		var params := PhysicsRayQueryParameters3D.create(from, global_target)
 		var result = space_state.intersect_ray(params)
 #			var result = space_state.intersect_ray(position,
@@ -96,8 +104,10 @@ func set_danger():
 		if result.has("collider"):
 			var pos = result["position"]
 			var dist = (pos - global_position).length() / look_ahead
+			DebugDraw3D.draw_line_hit(from,global_target,pos,true,0.5,Color.GREEN,Color.RED)
 			danger[i] = 1 - dist
 		else: 
+			DebugDraw3D.draw_line(from, global_target, Color.GREEN)
 			danger[i] = 0.0	
 			
 func choose_direction():
