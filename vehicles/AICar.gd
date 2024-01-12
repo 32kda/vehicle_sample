@@ -9,6 +9,7 @@ extends VehicleBody3D
 
 # context array
 var ray_directions = []
+var full_speed_ray_directions = []
 var low_speed_ray_directions = []
 var interest = []
 var danger = []
@@ -34,23 +35,29 @@ var current_speed_mps = 0
 func _ready():
 	interest.resize(num_rays)
 	danger.resize(num_rays)
-	ray_directions.resize(num_rays)
+	full_speed_ray_directions.resize(num_rays)
 	for i in num_rays:
 		var angle = i * 2 * PI / num_rays	
-		ray_directions[i] = Vector3.RIGHT.rotated(Vector3.UP, angle)
-	var start_angle_1 = Vector3.FORWARD.rotated(Vector3.UP,deg_to_rad(-(low_speed_angle / 2)))
-	var start_angle_2 = Vector3.BACK.rotated(Vector3.UP,deg_to_rad(-(low_speed_angle / 2)))
-	var delta = low_speed_angle / low_speed_rays
+		full_speed_ray_directions[i] = Vector3.RIGHT.rotated(Vector3.UP, angle)
+	var start_angle_1 := Vector3.FORWARD.rotated(Vector3.UP,deg_to_rad(-(low_speed_angle / 2)))
+	var start_angle_2 := Vector3.BACK.rotated(Vector3.UP,deg_to_rad(-(low_speed_angle / 2)))
+	var delta = deg_to_rad(low_speed_angle / low_speed_rays)
 	low_speed_ray_directions.resize(low_speed_rays * 2)
 	for i in low_speed_rays:
-		low_speed_ray_directions[i] = start_angle_1.rotated(Vector3.UP, delta)
+		low_speed_ray_directions[i] = start_angle_1.rotated(Vector3.UP, delta * i)
 	for i in low_speed_rays:
-		low_speed_ray_directions[low_speed_rays + i] = start_angle_2.rotated(Vector3.UP, delta)
+		low_speed_ray_directions[low_speed_rays + i] = start_angle_2.rotated(Vector3.UP, delta * i)
 		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if current_speed_mps < 3 or chosen_dir.z > 0:
+		ray_directions = low_speed_ray_directions
+		num_rays = low_speed_ray_directions.size()
+	else:
+		ray_directions = full_speed_ray_directions
+		num_rays = full_speed_ray_directions.size()
 	set_interest()
 	set_danger()
 	choose_direction()
