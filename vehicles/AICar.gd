@@ -3,10 +3,13 @@ extends VehicleBody3D
 @export var steer_force = 0.1
 @export var look_ahead = 20
 @export var num_rays = 8
+@export var low_speed_rays = 4
+@export var low_speed_angle = 60
 @export var controller_height = 0.5
 
 # context array
 var ray_directions = []
+var low_speed_ray_directions = []
 var interest = []
 var danger = []
 
@@ -35,6 +38,15 @@ func _ready():
 	for i in num_rays:
 		var angle = i * 2 * PI / num_rays	
 		ray_directions[i] = Vector3.RIGHT.rotated(Vector3.UP, angle)
+	var start_angle_1 = Vector3.FORWARD.rotated(Vector3.UP,deg_to_rad(-(low_speed_angle / 2)))
+	var start_angle_2 = Vector3.BACK.rotated(Vector3.UP,deg_to_rad(-(low_speed_angle / 2)))
+	var delta = low_speed_angle / low_speed_rays
+	low_speed_ray_directions.resize(low_speed_rays * 2)
+	for i in low_speed_rays:
+		low_speed_ray_directions[i] = start_angle_1.rotated(Vector3.UP, delta)
+	for i in low_speed_rays:
+		low_speed_ray_directions[low_speed_rays + i] = start_angle_2.rotated(Vector3.UP, delta)
+		
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
