@@ -31,6 +31,8 @@ var brake_speed = 60
 
 var current_speed_mps = 0
 
+var low_speed_mode := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	interest.resize(num_rays)
@@ -53,9 +55,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if current_speed_mps < 3 or chosen_dir.z > 0:
+		low_speed_mode = true
 		ray_directions = low_speed_ray_directions
 		num_rays = low_speed_ray_directions.size()
 	else:
+		low_speed_mode = false
 		ray_directions = full_speed_ray_directions
 		num_rays = full_speed_ray_directions.size()
 	set_interest()
@@ -102,10 +106,13 @@ func set_interest():
 		set_default_interest()
 
 func set_default_interest():
-	# Default to moving forward
-	for i in num_rays:
-		var d = ray_directions[i].dot(Vector3.FORWARD) * 0.3		
-		interest[i] = clamp(d + 0.7, 0, 1)
+	if low_speed_mode:
+		for i in num_rays:
+			interest[i] = 0.5
+	else: # Default to moving forward		
+		for i in num_rays:
+			var d = ray_directions[i].dot(Vector3.FORWARD) * 0.3		
+			interest[i] = clamp(d + 0.7, 0, 1)
 
 func set_danger():
 	# Cast rays to find danger directions
