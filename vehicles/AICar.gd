@@ -1,11 +1,12 @@
 extends VehicleBody3D
 
 @export var steer_force = 0.1
-@export var look_ahead = 20
-@export var num_rays = 8
+@export var look_ahead = 30
+@export var num_rays = 16
 @export var low_speed_rays = 4
 @export var low_speed_angle = 60
 @export var controller_height = 0.5
+@export var debug_draw:=true
 
 # context array
 var ray_directions = []
@@ -19,14 +20,16 @@ var velocity = Vector3.FORWARD
 var acceleration = Vector3.FORWARD
 
 const ARROW_HEIGHT = 2
-
 const LOW_SPEED = 10
+const HIGH_SPEED_FORWARD_DELTA = 0.7
+const LOW_SPEED_FORWARD_DELTA = 0.9
 
 var horse_power = 250
 var accel_speed = 100
 
+
 var steer_angle = deg_to_rad(30)
-var steer_speed = 40
+var steer_speed = 4
 
 var brake_power = 60
 var brake_speed = 60
@@ -78,7 +81,8 @@ func _physics_process(delta):
 	var to_look = to_global(chosen_dir * 5)
 	to_look.y = ARROW_HEIGHT
 	var from = Vector3(global_position.x, global_position.y + ARROW_HEIGHT, global_position.z)	
-	DebugDraw3D.draw_arrow_line(from, to_look, Color.CRIMSON, 0.3)
+	if debug_draw:
+		DebugDraw3D.draw_arrow_line(from, to_look, Color.CRIMSON, 0.3)
 	
 	var throt_input = chosen_dir.z	
 	if throt_input > 0:
@@ -109,13 +113,15 @@ func set_interest():
 		set_default_interest()
 
 func set_default_interest():
+	var multiplier = 1.0 - HIGH_SPEED_FORWARD_DELTA
+	var to_add = HIGH_SPEED_FORWARD_DELTA
 	if low_speed_mode:
-		for i in num_rays:
-			interest[i] = 0.5
-	else: # Default to moving forward		
-		for i in num_rays:
-			var d = ray_directions[i].dot(Vector3.FORWARD) * 0.3		
-			interest[i] = clamp(d + 0.7, 0, 1)
+		multiplier = 1.0 - LOW_SPEED_FORWARD_DELTA
+		to_add = LOW_SPEED_FORWARD_DELTA
+
+	for i in num_rays:
+		var d = ray_directions[i].dot(Vector3.FORWARD) * multiplier		
+		interest[i] = clamp(d + to_add, 0, 1)
 
 func set_danger():
 	# Cast rays to find danger directions
@@ -133,10 +139,12 @@ func set_danger():
 		if result.has("collider"):
 			var pos = result["position"]
 			var dist = (pos - global_position).length() / look_ahead
-			DebugDraw3D.draw_line_hit(from,global_target,pos,true,0.5,Color.GREEN,Color.RED)
+			if debug_draw:
+				DebugDraw3D.draw_line_hit(from,global_target,pos,true,0.5,Color.GREEN,Color.RED)
 			danger[i] = 1 - dist
 		else: 
-			DebugDraw3D.draw_line(from, global_target, Color.GREEN)
+			if debug_draw:
+				DebugDraw3D.draw_line(from, global_target, Color.GREEN)
 			danger[i] = 0.0	
 			
 func choose_direction():
