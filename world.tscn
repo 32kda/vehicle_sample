@@ -389,7 +389,7 @@ transform = Transform3D(0.0687176, 0.0305971, -0.997167, 0.006064, 0.999498, 0.0
 linear_velocity = Vector3(-8, 0, 0)
 
 [node name="RedCar" parent="world" instance=ExtResource("28_sgcpm")]
-transform = Transform3D(0.945814, 0, 0.32471, 0, 1, 0, -0.32471, 0, 0.945814, -0.549795, 0.438836, -141.469)
+transform = Transform3D(0.880709, 0, 0.473658, 0, 1, 0, -0.473658, 0, 0.880709, -3.12661, 0.438836, -143.23)
 
 [node name="MainMenu" parent="." instance=ExtResource("19_b1tgq")]
 process_mode = 3

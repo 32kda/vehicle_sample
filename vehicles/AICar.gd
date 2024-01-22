@@ -18,6 +18,8 @@ var chosen_dir = Vector3.FORWARD
 var velocity = Vector3.FORWARD
 var acceleration = Vector3.FORWARD
 
+const ARROW_HEIGHT = 2
+
 const LOW_SPEED = 10
 
 var horse_power = 250
@@ -73,9 +75,10 @@ func _physics_process(delta):
 	
 	current_speed_mps = linear_velocity.length()
 	
-	var to_look = Vector3(chosen_dir)
-	to_look.y = 0
-	$MeshInstance3D.look_at(to_global(to_look))
+	var to_look = to_global(chosen_dir * 5)
+	to_look.y = ARROW_HEIGHT
+	var from = Vector3(global_position.x, global_position.y + ARROW_HEIGHT, global_position.z)	
+	DebugDraw3D.draw_arrow_line(from, to_look, Color.CRIMSON, 0.3)
 	
 	var throt_input = chosen_dir.z	
 	if throt_input > 0:
@@ -87,8 +90,8 @@ func _physics_process(delta):
 	var steer_input = clamp(Vector3.FORWARD.signed_angle_to(chosen_dir, Vector3.UP), -steer_angle, steer_angle)
 	
 	if chosen_dir.z > 0:
-		steer_input = -steer_input
-	steering = lerp(steering, steer_input * steer_angle, steer_speed * delta)
+		steer_input = clamp(-Vector3.BACK.signed_angle_to(chosen_dir, Vector3.UP), -steer_angle, steer_angle)
+	steering = lerp(steering, steer_input, steer_speed * delta)
 	
 	
 	var brake_input = 0.0 #TODO
@@ -145,4 +148,3 @@ func choose_direction():
 	for i in num_rays:
 		chosen_dir += ray_directions[i] * interest[i]
 	chosen_dir = chosen_dir.normalized()
-	print(chosen_dir.z)
