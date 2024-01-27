@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d4irnbv2vkfg0"]
+[gd_scene load_steps=27 format=3 uid="uid://v3auj78853ok"]
 
 [ext_resource type="Script" path="res://vehicles/lc80.gd" id="1_oxgl3"]
 [ext_resource type="Script" path="res://SpringArm3D.gd" id="2_xpcjy"]

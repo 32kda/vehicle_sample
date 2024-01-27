@@ -53,7 +53,7 @@ func _process(delta):
 	else: 
 		target = -forward_ray.global_transform.basis.z * 3000
 	machinegun.set_target(target)
-	Events.emit_signal("missle_target", target)	
+	Events.emit_signal("missle_target", target, $WeaponOrigin.global_position)	
 
 func _input(event):
 	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT and event.is_released():
