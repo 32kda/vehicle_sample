@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 @export var speed = 350
+@export var debug_draw := true
 
 #var velocity = Vector3.ZERO
 var acceleration = Vector3.ZERO
@@ -27,6 +28,7 @@ func _integrate_forces(state):
 			destroy()
 			Events.explosion.emit(cpos, target)
 
+#Missle tries to stay in the beam between player and currect target spotted with crosshair
 func retarget(target:Vector3, from: Vector3)->void:
 	var plane = Plane(target, from, global_position)
 	var normal:Vector3 = plane.normal
@@ -36,12 +38,13 @@ func retarget(target:Vector3, from: Vector3)->void:
 	var ray:Vector3
 	if dist_from_launcher > MANEUR_MIN_DIST and to_self.length() * TARGET_POINT_COEF < to_target.length():		
 		ray = from + (to_target.normalized() * dist_from_launcher * TARGET_POINT_COEF) - global_position	
-		if ray.length() < 1:
+		if ray.length() < 1: #if we are too close to beam - just move towards the target to avoid trying to foolow too short vector
 			ray = target - global_position			
 	else: 
 		ray = target - global_position	
-	DebugDraw3D.draw_sphere(from, 0.3, Color.GREEN)
-	DebugDraw3D.draw_sphere(ray + global_position, 0.5, Color.RED)
+	if debug_draw:
+		DebugDraw3D.draw_sphere(from, 0.3, Color.GREEN)
+		DebugDraw3D.draw_sphere(ray + global_position, 0.5, Color.RED)
 	#var angle = to_target.signed_angle_to(to_self, normal)
 	#print("Angle: " + str(rad_to_deg(angle)))
 	
