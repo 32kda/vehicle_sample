@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ocdqokpdj703"]
+
+[ext_resource type="PackedScene" uid="uid://dgea8ao8qscsl" path="res://mobs/enemy_drone.glb" id="1_poocd"]
+
+[node name="EnemyDrone" type="Node3D"]
+
+[node name="enemy_drone" parent="." instance=ExtResource("1_poocd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000753641, -1.19209e-07, 0.0176557)
