@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://ocdqokpdj703"]
+[gd_scene load_steps=12 format=3 uid="uid://ocdqokpdj703"]
 
+[ext_resource type="Script" path="res://mobs/enemy_drone.gd" id="1_10lxd"]
 [ext_resource type="Texture2D" uid="uid://cjcfxqty52eqb" path="res://mobs/enemy_drone_enemy_drone.png" id="1_yfaum"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irioe"]
@@ -63,6 +64,7 @@ radius = 36.4653
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000753641, -1.19209e-07, 0.0176557)
 mass = 20.0
 gravity_scale = 0.0
+script = ExtResource("1_10lxd")
 
 [node name="drone01" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_oth8r")
