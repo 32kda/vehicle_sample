@@ -750,7 +750,7 @@ shadow_mesh = SubResource("ArrayMesh_h3aj1")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_plagw"]
 points = PackedVector3Array(0.552995, 0.0808847, 0.635139, 0.552995, -0.0809006, 0.635139, 0.552995, 0.0808847, -0.635139, -0.552995, 0.0808847, 0.635139, -0.552995, -0.0809006, 0.635139, 0.552995, -0.0809006, -0.635139, -0.552995, 0.0808847, -0.635139, -0.552995, -0.0809006, -0.635139)
 
-[node name="lc80_export" type="VehicleBody3D"]
+[node name="lc80_export" type="VehicleBody3D" groups=["Players"]]
 mass = 300.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, -0.33, 0)

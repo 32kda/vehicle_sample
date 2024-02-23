@@ -186,7 +186,7 @@ points = PackedVector3Array(1.10027, 0.308386, -2.04141, 1.10027, -0.371237, -2.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a426v"]
 points = PackedVector3Array(-1.09251, -0.386892, -1.0291, -1.09251, -0.34368, 1.01929, -0.759922, 0.177777, -0.478853, 1.09251, -0.386892, -1.0291, 1.09229, -0.34368, 1.01949, -0.759922, 0.19704, 0.646908, 0.759708, 0.177777, -0.478853, 0.759708, 0.19704, 0.646908)
 
-[node name="RedCar" type="VehicleBody3D"]
+[node name="RedCar" type="VehicleBody3D" groups=["Players"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.208064, -1.19209e-07, -0.510616)
 mass = 200.0
 center_of_mass_mode = 1

@@ -405,4 +405,6 @@ transform = Transform3D(1, 0, 0, 0, 0.998603, 0.0528414, 0, -0.0528414, 0.998603
 
 [node name="enemy_drone" parent="." instance=ExtResource("31_j2js0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.939, 18.9227, -27.8255)
-health = 100
+health = null
+speed = null
+circle_radius = null

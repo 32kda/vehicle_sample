@@ -1,4 +1,6 @@
 extends VehicleBody3D
+class_name RedCar
+
 
 @export var steer_force = 0.1
 @export var look_ahead = 30

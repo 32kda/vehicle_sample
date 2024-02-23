@@ -60,10 +60,11 @@ points = PackedVector3Array(1.15396, 0.625403, 1.8992, 0.657176, -0.0156958, 1.6
 height = 30.3883
 radius = 36.4653
 
-[node name="enemy_drone" type="RigidBody3D"]
+[node name="enemy_drone" type="RigidBody3D" groups=["Enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000753641, -1.19209e-07, 0.0176557)
 mass = 20.0
 gravity_scale = 0.0
+angular_damp = 3.0
 script = ExtResource("1_10lxd")
 
 [node name="drone01" type="MeshInstance3D" parent="."]
@@ -91,3 +92,15 @@ shape = SubResource("ConvexPolygonShape3D_w2qqj")
 [node name="DetectionShape" type="CollisionShape3D" parent="EnemyDetection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.4023, 0)
 shape = SubResource("CylinderShape3D_3yn6v")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.716602, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129045, 1.10408, -0.37954)
+billboard = 2
+modulate = Color(1, 1, 0.0784314, 1)
+text = "1"
+font_size = 80
+
+[connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]

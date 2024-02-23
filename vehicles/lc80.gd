@@ -1,4 +1,5 @@
 extends VehicleBody3D
+class_name PlayerCar
 
 const LOW_SPEED = 10
 
