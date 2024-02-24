@@ -1,7 +1,8 @@
 extends RigidBody3D
-class_name Enemy
+class_name EnemyDrone01
 
 enum {	
+	TAKEOFF,
 	PATROLING,
 	ATTACKING,
 	SHOT_DOWN	
@@ -12,6 +13,11 @@ const MANEURABILITY = 30
 
 @export var health = 100
 @export var speed = 40
+@export var min_attack_angle = 45
+@export var max_attack_angle = 60
+
+@onready var min_dist_ratio = tan(deg_to_rad(min_attack_angle))
+@onready var max_dist_ratio = tan(deg_to_rad(max_attack_angle))
 
 var state = PATROLING
 
@@ -40,6 +46,11 @@ func _process(delta):
 			new_vec = target + circle_center - global_position
 			#DebugDraw3D.draw_arrow_line(global_position, global_position + new_vec * 5, Color.RED)
 		ATTACKING:
+			var to_target := Vector3(to_attack.global_position.x, global_position.y, to_attack.global_position.z)
+			var dist = to_target.distance_to(global_position)
+			var min_dist = global_position.y / min_dist_ratio
+			var max_dist = global_position.y / max_dist_ratio
+			
 			pass
 		SHOT_DOWN:
 			pass
@@ -61,7 +72,7 @@ func set_state(state):
 	$Label3D.text = str(state)
 
 func _on_enemy_detection_body_entered(body):
-	if body.is_in_group("Players"):
-		set_state(ATTACKING)
+	if state == PATROLING && body.is_in_group("Players"):
 		to_attack = body
+		set_state(ATTACKING)
 	pass # Replace with function body.
