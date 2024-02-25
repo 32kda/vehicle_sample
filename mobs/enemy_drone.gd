@@ -28,6 +28,7 @@ var ccw_direction := true
 var acceleration = Vector3.ZERO
 var new_vec:Vector3 = Vector3.ZERO
 var to_attack:RigidBody3D
+var visible_units := []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -50,20 +51,26 @@ func _process(delta):
 			var dist = to_target.distance_to(global_position)
 			var min_dist = global_position.y / min_dist_ratio
 			var max_dist = global_position.y / max_dist_ratio
-			
+			if dist > ((max_dist - min_dist) / 2):
+				new_vec = (to_target - global_position).normalized() * max_dist
+			else:
+				new_vec = Vector3.ZERO
 			pass
 		SHOT_DOWN:
 			pass
 	pass
 	
 func _physics_process(delta):
+	apply_central_force(acceleration * speed)
+	linear_velocity.limit_length(speed)
+	acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))	
 	match state:
 		PATROLING:
-			apply_central_force(acceleration * speed)
-			linear_velocity.limit_length(speed)
-			acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))	
 			look_at(linear_velocity + global_position, Vector3.UP)
 		ATTACKING:
+			var to_target := Vector3(to_attack.global_position.x, global_position.y, to_attack.global_position.z)
+			if to_target.distance_to(global_position) >= 1:
+				look_at(lerp(global_transform.basis.z, to_target.normalized(), MANEURABILITY), Vector3.UP)
 			pass
 			
 
@@ -72,7 +79,16 @@ func set_state(state):
 	$Label3D.text = str(state)
 
 func _on_enemy_detection_body_entered(body):
+	visible_units.append(body)
 	if state == PATROLING && body.is_in_group("Players"):
 		to_attack = body
 		set_state(ATTACKING)
-	pass # Replace with function body.
+
+func _on_enemy_detection_body_exited(body):	
+	if body.is_in_group("Players"):
+		visible_units.erase(body)
+		if state == ATTACKING && to_attack == body:
+			if visible_units.size() > 0:
+				to_attack = visible_units[0]
+			else:
+				set_state(PATROLING)

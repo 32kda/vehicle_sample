@@ -104,3 +104,4 @@ text = "1"
 font_size = 80
 
 [connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]
+[connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
