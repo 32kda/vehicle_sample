@@ -2,10 +2,14 @@ extends Node3D
 
 enum Mode {SPHERE, RAYS}
 
+<<<<<<< HEAD
 const GOLDEN_ANGLE = PI * (3 - sqrt(5))
 const EXPLOSION_MODE := Mode.SPHERE
 
 @export var physical_strength = 1500
+=======
+@export var physical_strength = 100
+>>>>>>> 9dddd29 (explosion tweak)
 @export var damage = 150
 @export var base_damage_per_ray = 5
 @export var radius := 5.0
@@ -101,6 +105,7 @@ func _get_explosion_ray_data() -> Array:
 
 func _explode():
 	var explosion_rays = _get_explosion_ray_data()
+	var count = 0
 	for ray in explosion_rays:
 		var collider = ray.get_collider()
 		
@@ -109,11 +114,13 @@ func _explode():
 			collider.take_damage(damage)
 	
 		if collider is RigidBody3D:
+			count += 1
 			var body := collider as RigidBody3D
 			var collision_point = ray.get_collision_point()
 			var distance:Vector3 = collision_point - global_transform.origin
 			var impact = 1.0 * physical_strength / (num_points * (distance.length() + 0.1)) #Closer the explosion are - bigger the imapct. 0.1 added to avoid zero division problems
 			collider.apply_impulse(distance.normalized() * impact, collision_point)
+	print("count:" + str(count))
 			
 			
 #	var explosion = explosion_effect.instance()
