@@ -14,7 +14,7 @@ const MANEURABILITY = 30
 @export var health = 100
 @export var speed = 40
 @export var min_attack_angle = 45
-@export var max_attack_angle = 60
+@export var max_attack_angle = 30
 
 @onready var min_dist_ratio = tan(deg_to_rad(min_attack_angle))
 @onready var max_dist_ratio = tan(deg_to_rad(max_attack_angle))
@@ -79,10 +79,11 @@ func set_state(state):
 	$Label3D.text = str(state)
 
 func _on_enemy_detection_body_entered(body):
-	visible_units.append(body)
-	if state == PATROLING && body.is_in_group("Players"):
-		to_attack = body
-		set_state(ATTACKING)
+	if body.is_in_group("Players"):
+		visible_units.append(body)
+		if state == PATROLING:
+			to_attack = body
+			set_state(ATTACKING)
 
 func _on_enemy_detection_body_exited(body):	
 	if body.is_in_group("Players"):

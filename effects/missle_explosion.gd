@@ -2,14 +2,10 @@ extends Node3D
 
 enum Mode {SPHERE, RAYS}
 
-<<<<<<< HEAD
 const GOLDEN_ANGLE = PI * (3 - sqrt(5))
 const EXPLOSION_MODE := Mode.SPHERE
 
 @export var physical_strength = 1500
-=======
-@export var physical_strength = 100
->>>>>>> 9dddd29 (explosion tweak)
 @export var damage = 150
 @export var base_damage_per_ray = 5
 @export var radius := 5.0
