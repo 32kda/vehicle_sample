@@ -9,10 +9,10 @@ enum {
 }
 
 const FORWARD_ANGLE = deg_to_rad(30)
-const MANEURABILITY = 30
+const MANEURABILITY = 15
 
 @export var health = 100
-@export var speed = 40
+@export var speed = 20
 @export var min_attack_angle = 45
 @export var max_attack_angle = 30
 
@@ -66,11 +66,13 @@ func _physics_process(delta):
 	acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))	
 	match state:
 		PATROLING:
-			look_at(linear_velocity + global_position, Vector3.UP)
+			if linear_velocity.length() > 0.1:
+				look_at(linear_velocity + global_position, Vector3.UP)
 		ATTACKING:
 			var to_target := Vector3(to_attack.global_position.x, global_position.y, to_attack.global_position.z)
 			if to_target.distance_to(global_position) >= 1:
-				look_at(lerp(global_transform.basis.z, to_target.normalized(), MANEURABILITY), Vector3.UP)
+				look_at(lerp(global_transform.basis.z, to_target, delta), Vector3.UP)
+		SHOT_DOWN:
 			pass
 			
 
@@ -93,3 +95,15 @@ func _on_enemy_detection_body_exited(body):
 				to_attack = visible_units[0]
 			else:
 				set_state(PATROLING)
+				
+func hit(damage: int):
+	if state != SHOT_DOWN:
+		health = max(0, health - damage)
+		if health == 0:
+			shot_down()
+			
+func shot_down():
+	set_state(SHOT_DOWN)
+	gravity_scale = 1.0 #Make it fall onto the ground
+	#TODO emit some particles, show some fire or play sound
+		

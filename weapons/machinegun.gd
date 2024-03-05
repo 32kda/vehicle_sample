@@ -8,7 +8,7 @@ const IMPULSE_MULTIPLIER = 5
 @export var target_pitch_speed:int = 10
 @export var rate_of_fire:int = 600
 @export var fire_range:int = 1000
-@export var damage:int = 5
+@export var damage:int = 25
 
 @onready var turret:Node3D = $turret
 @onready var gun: Node3D = $turret/gun
@@ -82,4 +82,6 @@ func hit_scan():
 		if collider is RigidBody3D:
 			var body = collider as RigidBody3D
 			body.apply_impulse(bullet_direction * damage * IMPULSE_MULTIPLIER, collision_point)
+		if collider.is_in_group("Enemies"):
+			collider.hit(damage)
 
