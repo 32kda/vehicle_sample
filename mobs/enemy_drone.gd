@@ -64,14 +64,17 @@ func _physics_process(delta):
 	apply_central_force(acceleration * speed)
 	linear_velocity.limit_length(speed)
 	acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))	
+	print("State: " + str(state))
 	match state:
 		PATROLING:
 			if linear_velocity.length() > 0.1:
-				look_at(linear_velocity + global_position, Vector3.UP)
+				look_at(lerp(global_transform.basis.z, linear_velocity + global_position, delta), Vector3.UP)
+				pass
 		ATTACKING:
 			var to_target := Vector3(to_attack.global_position.x, global_position.y, to_attack.global_position.z)
 			if to_target.distance_to(global_position) >= 1:
 				look_at(lerp(global_transform.basis.z, to_target, delta), Vector3.UP)
+				pass
 		SHOT_DOWN:
 			pass
 			
