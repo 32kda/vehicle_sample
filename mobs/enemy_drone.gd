@@ -9,7 +9,7 @@ enum {
 }
 
 const FORWARD_ANGLE = deg_to_rad(30)
-const MANEURABILITY = 15
+const MANEURABILITY = 30
 
 @export var health = 100
 @export var speed = 20
@@ -63,12 +63,12 @@ func _process(delta):
 func _physics_process(delta):
 	apply_central_force(acceleration * speed)
 	linear_velocity.limit_length(speed)
-	acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))	
-	print("State: " + str(state))
+	acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))		
 	match state:
 		PATROLING:
-			if linear_velocity.length() > 0.1:
-				look_at(lerp(global_transform.basis.z, linear_velocity + global_position, delta), Vector3.UP)
+			var normalized_vec = global_position + new_vec
+			if normalized_vec.length() > 0.1:
+				look_at(lerp(global_transform.basis.z, normalized_vec, delta * 5), Vector3.UP)
 				pass
 		ATTACKING:
 			var to_target := Vector3(to_attack.global_position.x, global_position.y, to_attack.global_position.z)
@@ -97,6 +97,7 @@ func _on_enemy_detection_body_exited(body):
 			if visible_units.size() > 0:
 				to_attack = visible_units[0]
 			else:
+				#circle_center = Vector3(global_position)
 				set_state(PATROLING)
 				
 func hit(damage: int):
