@@ -19,14 +19,13 @@ frame = 21
 frame_progress = 0.284874
 speed_scale = 2.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_grd0h")
-autoplay = true
-
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_j705u")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_grd0h")
+autoplay = true
+
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
-[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

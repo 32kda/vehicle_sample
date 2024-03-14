@@ -13,8 +13,8 @@ const MANEURABILITY = 30
 
 @export var health = 100
 @export var speed = 20
-@export var min_attack_angle = 45
-@export var max_attack_angle = 30
+@export var min_attack_angle = 60
+@export var max_attack_angle = 45
 
 @onready var min_dist_ratio = tan(deg_to_rad(min_attack_angle))
 @onready var max_dist_ratio = tan(deg_to_rad(max_attack_angle))
@@ -80,8 +80,7 @@ func _physics_process(delta):
 			
 
 func set_state(state):	
-	self.state = state
-	$Label3D.text = str(state)
+	self.state = state	
 
 func _on_enemy_detection_body_entered(body):
 	if body.is_in_group("Players"):

@@ -22,6 +22,7 @@ const IMPULSE_MULTIPLIER = 5
 var target: Vector3
 
 var can_shoot:bool = true
+var parentBody;
 
 
 func _ready():
@@ -29,6 +30,9 @@ func _ready():
 	
 	rof_timer.wait_time = 60.0 / rate_of_fire	
 	flash_timer.wait_time = FLASH_TIME
+	parentBody = get_parent_node_3d()
+	while (parentBody != null && !(parentBody is RigidBody3D)):
+		parentBody = parentBody.get_parent_node_3d()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -79,7 +83,7 @@ func hit_scan():
 			hole.rotation_degrees.x = 90
 		elif !Vector3.UP.is_equal_approx(collision_normal):
 			hole.look_at(collision_point - collision_normal, Vector3(0,1,0))			
-		if collider is RigidBody3D:
+		if (collider is RigidBody3D) and (collider != parentBody):			#avoid hitting self
 			var body = collider as RigidBody3D
 			body.apply_impulse(bullet_direction * damage * IMPULSE_MULTIPLIER, collision_point)
 		if collider.is_in_group("Enemies"):

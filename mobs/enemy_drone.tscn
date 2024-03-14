@@ -96,13 +96,5 @@ shape = SubResource("CylinderShape3D_3yn6v")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.716602, 0)
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.129045, 1.10408, -0.37954)
-billboard = 2
-fixed_size = true
-modulate = Color(1, 1, 0.0784314, 1)
-text = "1"
-font_size = 80
-
 [connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]
 [connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
