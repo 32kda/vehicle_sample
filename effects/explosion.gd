@@ -10,6 +10,9 @@ const EXPLOSION_MODE := Mode.SPHERE
 @export var base_damage_per_ray = 5
 @export var radius := 5.0
 @export var num_points := 250
+@export var custom_sprite:SpriteFrames
+
+@onready var sprite = $AnimatedSprite3D
 
 var rays := []
 
@@ -30,7 +33,9 @@ func _ready():
 		_create_rays()
 	else:
 		damage_distance = ($Area3D/CollisionShape3D.shape as SphereShape3D).radius 
-	$AnimatedSprite3D.play("default")
+	if custom_sprite != null:
+		sprite.sprite_frames = custom_sprite
+	sprite.play("default")
 
 func _process(delta):
 	pass
@@ -57,7 +62,7 @@ func _on_audio_stream_player_finished():
 	queue_free()
 
 func _on_animated_sprite_3d_animation_finished():
-	$AnimatedSprite3D.visible = false
+	sprite.visible = false
 	
 func _create_rays() -> void:
 	var points = _get_points()
@@ -116,13 +121,6 @@ func _explode():
 			var distance:Vector3 = collision_point - global_transform.origin
 			var impact = 1.0 * physical_strength / (num_points * (distance.length() + 0.1)) #Closer the explosion are - bigger the imapct. 0.1 added to avoid zero division problems
 			collider.apply_impulse(distance.normalized() * impact, collision_point)
-	print("count:" + str(count))
-			
-			
-#	var explosion = explosion_effect.instance()
-#	get_parent().add_child(explosion)
-#	explosion.global_transform.origin = global_transform.origin
-
 
 func _calculate_damage(collision_point: Vector3) -> float:
 	var distance = global_transform.origin.distance_to(collision_point)

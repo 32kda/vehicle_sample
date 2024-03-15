@@ -1,20 +1,20 @@
 [gd_scene load_steps=5 format=3 uid="uid://eq33d2c1or61"]
 
-[ext_resource type="Script" path="res://effects/missle_explosion.gd" id="1_m603i"]
-[ext_resource type="SpriteFrames" uid="uid://8mlvwlkelhjd" path="res://effects/particles_fireball_wind/fireball.tres" id="1_qwl4p"]
-[ext_resource type="AudioStream" uid="uid://75pq10oaqlkv" path="res://effects/explodemini.wav" id="2_grd0h"]
+[ext_resource type="Script" path="res://effects/explosion.gd" id="1_qdopg"]
+[ext_resource type="SpriteFrames" uid="uid://8mlvwlkelhjd" path="res://effects/particles_fireball_wind/fireball.tres" id="2_ukfyb"]
+[ext_resource type="AudioStream" uid="uid://75pq10oaqlkv" path="res://effects/explodemini.wav" id="3_pmhvt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_j705u"]
 radius = 5.0
 
-[node name="missle_explosion" type="Node3D"]
-script = ExtResource("1_m603i")
+[node name="explosion" type="Node3D"]
+script = ExtResource("1_qdopg")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.36948, 0)
 pixel_size = 0.05
 billboard = 1
-sprite_frames = ExtResource("1_qwl4p")
+sprite_frames = ExtResource("2_ukfyb")
 frame = 21
 frame_progress = 0.284874
 speed_scale = 2.0
@@ -25,7 +25,7 @@ speed_scale = 2.0
 shape = SubResource("SphereShape3D_j705u")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_grd0h")
+stream = ExtResource("3_pmhvt")
 autoplay = true
 
 [connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]

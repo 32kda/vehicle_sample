@@ -1,6 +1,9 @@
 extends Node3D
 
-var explosion_proto = preload("res://effects/missle_explosion.tscn")
+var explosion_proto = preload("res://effects/explosion.tscn")
+var explosion_proto01 = preload("res://effects/explosion01.tscn")
+var explosion_proto02 = preload("res://effects/explosion02.tscn")
+
 var blast_proto = preload("res://effects/blast.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,7 +16,7 @@ func _process(delta):
 	pass
 	
 func _fire_explosion(position:Vector3, target:Node3D):
-	var explosion = explosion_proto.instantiate()
+	var explosion = explosion_proto02.instantiate()
 	add_child(explosion)
 	explosion.init(position)
 	var blast = blast_proto.instantiate()

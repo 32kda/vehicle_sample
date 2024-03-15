@@ -388,6 +388,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5378, 3.73082, -25.438)
 transform = Transform3D(0.994692, 0, -0.102897, 0, 1, 0, 0.102897, 0, 0.994692, -4.62435, 0.438836, 30.3753)
 debug_draw = false
 
+[node name="track2" type="Node3D" parent="world"]
+
 [node name="MainMenu" parent="." instance=ExtResource("19_b1tgq")]
 process_mode = 3
 
@@ -399,4 +401,4 @@ process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 0.998603, 0.0528414, 0, -0.0528414, 0.998603, 21.3845, 0.058325, -22.3913)
 
 [node name="enemy_drone" parent="." instance=ExtResource("31_j2js0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.939, 18.9227, -27.8255)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.939, 13.8555, -27.8255)

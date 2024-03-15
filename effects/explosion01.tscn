@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://0r7ba176amii"]
+
+[ext_resource type="PackedScene" uid="uid://eq33d2c1or61" path="res://effects/explosion.tscn" id="1_6mvnx"]
+[ext_resource type="SpriteFrames" uid="uid://c4no7ckwtogwu" path="res://effects/fire01/fire01.tres" id="2_5cjr1"]
+
+[node name="explosion" instance=ExtResource("1_6mvnx")]
+custom_sprite = ExtResource("2_5cjr1")
