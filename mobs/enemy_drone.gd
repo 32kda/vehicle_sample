@@ -108,5 +108,23 @@ func hit(damage: int):
 func shot_down():
 	set_state(SHOT_DOWN)
 	gravity_scale = 1.0 #Make it fall onto the ground
+	$Smoke.emitting = true
 	#TODO emit some particles, show some fire or play sound
 		
+
+func _integrate_forces(state):
+	if self.state == SHOT_DOWN:
+		for i in state.get_contact_count():
+			var cpos = state.get_contact_collider_position(i)
+			var target = state.get_contact_collider_object(i)
+			var normal = state.get_contact_local_normal(i)
+			destroy()
+			Events.explosion.emit(cpos, target)
+	
+
+func destroy():
+	var particles = $Smoke
+	remove_child(particles)
+	get_parent().add_child(particles)
+	particles.emitting = false
+	queue_free()

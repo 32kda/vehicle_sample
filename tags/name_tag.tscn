@@ -53,7 +53,7 @@ color = Color(0.988235, 0, 0.152941, 1)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(71, 34)
+size = Vector2i(71, 31)
 script = SubResource("GDScript_178a0")
 
 [node name="Label" type="Label" parent="SubViewport"]

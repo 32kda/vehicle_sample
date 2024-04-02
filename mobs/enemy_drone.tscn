@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://ocdqokpdj703"]
+[gd_scene load_steps=16 format=3 uid="uid://ocdqokpdj703"]
 
 [ext_resource type="Script" path="res://mobs/enemy_drone.gd" id="1_10lxd"]
 [ext_resource type="Texture2D" uid="uid://cjcfxqty52eqb" path="res://mobs/enemy_drone_enemy_drone.png" id="1_yfaum"]
+[ext_resource type="Texture2D" uid="uid://h1ifkqgxei46" path="res://effects/smoke/smoke_04.png" id="3_t6wq7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_irioe"]
 resource_name = "Material"
@@ -60,10 +61,40 @@ points = PackedVector3Array(1.15396, 0.625403, 1.8992, 0.657176, -0.0156958, 1.6
 height = 30.3883
 radius = 36.4653
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2gvqj"]
+lifetime_randomness = 0.15
+emission_shape = 1
+emission_sphere_radius = 0.4
+angle_max = 137.5
+direction = Vector3(0, 1, 0)
+spread = 44.181
+initial_velocity_max = 0.4
+gravity = Vector3(0, -3, 0)
+scale_min = 0.0
+scale_max = 0.0
+hue_variation_min = -0.15
+hue_variation_max = 0.14
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kk72r"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.65098, 0.556863, 0.521569, 0.768627)
+albedo_texture = ExtResource("3_t6wq7")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_e5jp2"]
+material = SubResource("StandardMaterial3D_kk72r")
+size = Vector2(2, 2)
+
 [node name="enemy_drone" type="RigidBody3D" groups=["Enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000753641, -1.19209e-07, 0.0176557)
 mass = 20.0
 gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
 angular_damp = 3.0
 script = ExtResource("1_10lxd")
 
@@ -93,8 +124,14 @@ shape = SubResource("ConvexPolygonShape3D_w2qqj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.4023, 0)
 shape = SubResource("CylinderShape3D_3yn6v")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.716602, 0)
+[node name="Smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.719171, 0)
+emitting = false
+amount = 10
+lifetime = 3.13
+process_material = SubResource("ParticleProcessMaterial_2gvqj")
+draw_pass_1 = SubResource("QuadMesh_e5jp2")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]
 [connection signal="body_exited" from="EnemyDetection" to="." method="_on_enemy_detection_body_exited"]
