@@ -58,7 +58,11 @@ func _physics_process(_delta):
 			if body.has_method("hit"):
 				body.hit(damage)					
 
-func _on_audio_stream_player_finished():
+func _on_audio_stream_player_3d_finished():
+	var smoke = $Smoke
+	smoke.emitting = false
+	remove_child(smoke)
+	get_parent().add_child(smoke)	
 	queue_free()
 
 func _on_animated_sprite_3d_animation_finished():
@@ -127,3 +131,7 @@ func _calculate_damage(collision_point: Vector3) -> float:
 	var damage = base_damage_per_ray * (radius - distance)
 	
 	return damage if damage > 0 else 0
+
+
+func _on_smoke_finished():
+	print("finish")
