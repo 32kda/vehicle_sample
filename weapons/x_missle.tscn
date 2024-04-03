@@ -1,12 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctjox7ag7w7to"]
+[gd_scene load_steps=9 format=3 uid="uid://ctjox7ag7w7to"]
 
 [ext_resource type="Script" path="res://weapons/x_missle.gd" id="1_0ba5c"]
 [ext_resource type="PackedScene" uid="uid://dsi4rbcddxkje" path="res://weapons/x_missle.glb" id="1_be6ad"]
 [ext_resource type="PackedScene" uid="uid://ip7mkcx6846" path="res://effects/smoke/missle_smoke.tscn" id="3_f5jap"]
+[ext_resource type="Texture2D" uid="uid://bmdyc2yusj412" path="res://effects/smoke/whitePuff00.png" id="4_k7hmk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rsuiv"]
 height = 1.59
 radius = 0.1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xsco3"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -0.91
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_353k5"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.858824, 0.831373, 0.8, 0.376471)
+albedo_texture = ExtResource("4_k7hmk")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_0tnli"]
+material = SubResource("StandardMaterial3D_353k5")
 
 [node name="x_missle" type="RigidBody3D"]
 mass = 7.0
@@ -25,6 +45,14 @@ shape = SubResource("CylinderShape3D_rsuiv")
 wait_time = 15.0
 autostart = true
 
-[node name="SmokeParticles" parent="." instance=ExtResource("3_f5jap")]
+[node name="_SmokeParticles" parent="." instance=ExtResource("3_f5jap")]
+emitting = false
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.822197)
+amount = 25
+lifetime = 3.1
+process_material = SubResource("ParticleProcessMaterial_xsco3")
+draw_pass_1 = SubResource("QuadMesh_0tnli")
 
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]

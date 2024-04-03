@@ -70,7 +70,7 @@ func destroy():
 	var particles = $SmokeParticles
 	remove_child(particles)
 	get_parent().add_child(particles)
-	particles.stop_emitting()
+	particles.emitting = false
 	queue_free()
 	
 
