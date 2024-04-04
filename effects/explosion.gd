@@ -13,6 +13,7 @@ const EXPLOSION_MODE := Mode.SPHERE
 @export var custom_sprite:SpriteFrames
 
 @onready var sprite = $AnimatedSprite3D
+@onready var smoke = $Smoke
 
 var rays := []
 
@@ -36,6 +37,7 @@ func _ready():
 	if custom_sprite != null:
 		sprite.sprite_frames = custom_sprite
 	sprite.play("default")
+	smoke.emitting = true
 
 func _process(delta):
 	pass
@@ -58,12 +60,8 @@ func _physics_process(_delta):
 			if body.has_method("hit"):
 				body.hit(damage)					
 
-func _on_audio_stream_player_3d_finished():
-	var smoke = $Smoke
-	smoke.emitting = false
-	remove_child(smoke)
-	get_parent().add_child(smoke)	
-	queue_free()
+func _on_audio_stream_player_3d_finished():			
+	pass
 
 func _on_animated_sprite_3d_animation_finished():
 	sprite.visible = false
@@ -134,4 +132,4 @@ func _calculate_damage(collision_point: Vector3) -> float:
 
 
 func _on_smoke_finished():
-	print("finish")
+	queue_free()
