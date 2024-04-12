@@ -104,11 +104,17 @@ func _physics_process(delta):
 	brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
 	
 func set_interest():
-	# Set interest in each slot based on world direction
-	if owner and owner.has_method("get_path_direction"):
-		var path_direction = owner.get_path_direction(global_position)
+	# Set interest in each slot based on world direction	
+	if owner:
+		var curve:Curve3D = owner.get_target_curve(self)
+		var length = curve.get_baked_length()
+		var offset =  curve.get_closest_offset(global_position)
+		var target_point = curve.sample_baked(fmod((offset + look_ahead),length))
+		DebugDraw3D.draw_sphere(target_point, 0.5, Color.RED)
+		var path_direction = target_point - global_position		
+		path_direction = path_direction.normalized()
 		for i in num_rays:
-			var d = ray_directions[i].rotated(rotation).dot(path_direction)
+			var d = ray_directions[i].dot(path_direction)
 			interest[i] = max(0, d)
 	# If no world path, use default interest
 	else:

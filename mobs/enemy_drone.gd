@@ -32,7 +32,7 @@ var visible_units := []
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	if circle_center == Vector3.ZERO:
 		circle_center = Vector3(global_position.x + circle_radius, global_position.y, global_position.z)
 
@@ -127,4 +127,5 @@ func destroy():
 	remove_child(particles)
 	get_parent().add_child(particles)
 	particles.emitting = false
+	Events.drone_destroyed.emit()
 	queue_free()
