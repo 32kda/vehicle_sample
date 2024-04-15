@@ -4,7 +4,7 @@ var gameState = GameState.READY
 var started = false
 
 @onready var world = $world
-var drone00_proto = preload("res://mobs/enemy_drone.tscn")
+var drone00_proto := preload("res://mobs/enemy_drone.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,5 +42,6 @@ func get_target_curve(vehicle:Node3D):
 func drone_destroyed():
 	var drone = drone00_proto.instantiate()
 	drone.global_position = Vector3(0,10,0)
+	drone.look_at(drone.global_position + Vector3(0,0,-1), Vector3.UP, true)
 	world.add_child(drone)
 	pass

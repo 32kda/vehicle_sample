@@ -110,8 +110,9 @@ func set_interest():
 		var length = curve.get_baked_length()
 		var offset =  curve.get_closest_offset(global_position)
 		var target_point = curve.sample_baked(fmod((offset + look_ahead),length))
-		DebugDraw3D.draw_sphere(target_point, 0.5, Color.RED)
-		var path_direction = target_point - global_position		
+		if debug_draw:
+			DebugDraw3D.draw_sphere(target_point, 0.5, Color.RED)
+		var path_direction = to_local(target_point)		
 		path_direction = path_direction.normalized()
 		for i in num_rays:
 			var d = ray_directions[i].dot(path_direction)
