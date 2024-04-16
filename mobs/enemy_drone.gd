@@ -44,7 +44,7 @@ func _process(delta):
 			#DebugDraw3D.draw_arrow_line(global_position, circle_center, Color.GREEN)
 			var to_rotate = to_center.normalized() * circle_radius
 			var target = to_rotate.rotated(Vector3.UP, delta * (-FORWARD_ANGLE if ccw_direction else FORWARD_ANGLE))
-			new_vec = target + circle_center - global_position
+			new_vec = target + circle_center - global_position			
 			#DebugDraw3D.draw_arrow_line(global_position, global_position + new_vec * 5, Color.RED)
 		ATTACKING:
 			var to_target := Vector3(to_attack.global_position.x, global_position.y, to_attack.global_position.z)
@@ -67,8 +67,9 @@ func _physics_process(delta):
 	match state:
 		PATROLING:
 			var normalized_vec = global_position + new_vec
-			if normalized_vec.length() > 0.1:
-				look_at(lerp(global_transform.basis.z, normalized_vec, delta * 5), Vector3.UP)
+			if new_vec.length() > 0.1:
+				var to_look = lerp(global_transform.basis.z, normalized_vec, delta * 5);
+				look_at(to_look, Vector3.UP)
 				pass
 		ATTACKING:
 			var to_target := Vector3(to_attack.global_position.x, global_position.y, to_attack.global_position.z)
