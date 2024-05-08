@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=47 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://6ycu5244t7j3" path="res://items/targets/popper_big.tscn" id="28_noo6l"]
 [ext_resource type="PackedScene" uid="uid://hrd2haprnbwa" path="res://vehicles/RedCar.tscn" id="28_sgcpm"]
 [ext_resource type="PackedScene" uid="uid://ocdqokpdj703" path="res://mobs/enemy_drone.tscn" id="31_j2js0"]
+[ext_resource type="PackedScene" uid="uid://c6vp8lkwpfaoe" path="res://buildings/garage01.tscn" id="31_t7v14"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f2krl"]
 panorama = ExtResource("1_bksr2")
@@ -401,3 +402,6 @@ transform = Transform3D(1, 0, 0, 0, 0.998603, 0.0528414, 0, -0.0528414, 0.998603
 
 [node name="enemy_drone" parent="." instance=ExtResource("31_j2js0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.939, 13.8555, -27.8255)
+
+[node name="Garage01" parent="." instance=ExtResource("31_t7v14")]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -52.7887, 0.0689058, 9.14573)

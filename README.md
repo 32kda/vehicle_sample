@@ -15,4 +15,4 @@ This demo/sandbox is inspired by old PS1 "Twisted Metal" game, as well as some t
 * Models importing - planning to make this using Free/OpenSource Software, like awesome Blender and Krita
 * Physics
 
-Some art being used is downloaded from free art sites like opengameart.org or https://open3dmodel.com , some is created by me in Blender and Krita
+Some art being used is downloaded from free art sites like opengameart.org or https://open3dmodel.com , some is created by me using Blender, Krita and StableDiffusion
