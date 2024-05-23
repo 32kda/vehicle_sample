@@ -1,12 +1,14 @@
 class_name CarController
-extends Node
 
-@export var look_ahead = 30
-@export var num_rays = 16
-@export var low_speed_rays = 4
-@export var low_speed_angle = 60
-@export var controller_height = 0.5
-@export var debug_draw:=true
+const HIGH_SPEED_FORWARD_DELTA = 0.7
+const LOW_SPEED_FORWARD_DELTA = 0.9
+
+var look_ahead = 30
+var num_rays = 16
+var low_speed_rays = 4
+var low_speed_angle = 60
+var controller_height = 0.5
+var debug_draw:=true
 
 # context array
 var ray_directions = []
@@ -20,12 +22,15 @@ var velocity = Vector3.FORWARD
 var acceleration = Vector3.FORWARD
 var car:VehicleBody3D
 
+var low_speed_mode := false
+
+var owner:Node3D
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	if car == null && get_parent() is VehicleBody3D:
-		car = get_parent()
+func _init(car:Node3D, owner:Node3D):
+	self.car = car
+	self.owner = owner
 	interest.resize(num_rays)
 	danger.resize(num_rays)
 	full_speed_ray_directions.resize(num_rays)
@@ -73,12 +78,13 @@ func set_default_interest():
 
 func set_danger():
 	# Cast rays to find danger directions
-	var space_state = get_world_3d().direct_space_state
+	var global_position = car.global_position;
+	var space_state = car.get_world_3d().direct_space_state
 	for i in num_rays:
 		var from = Vector3(global_position.x, global_position.y + controller_height, global_position.z)		
 		var direction = Vector3(ray_directions[i].x * look_ahead, ray_directions[i].y + controller_height, ray_directions[i].z * look_ahead)
 		
-		var global_target := to_global(direction)
+		var global_target := car.to_global(direction)
 		var params := PhysicsRayQueryParameters3D.create(from, global_target)
 		var result = space_state.intersect_ray(params)
 #			var result = space_state.intersect_ray(position,
@@ -104,6 +110,3 @@ func choose_direction():
 	for i in num_rays:
 		chosen_dir += ray_directions[i] * interest[i]
 	chosen_dir = chosen_dir.normalized()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
