@@ -26,6 +26,20 @@ var low_speed_mode := false
 
 var owner:Node3D
 
+func calculate_direction():
+	set_interest()
+	set_danger()
+	choose_direction()
+
+func set_mode_by_speed(speed_mps:int): 
+	if speed_mps < 3 or chosen_dir.z > 0:
+		low_speed_mode = true
+		ray_directions = low_speed_ray_directions
+		num_rays = low_speed_ray_directions.size()
+	else:
+		low_speed_mode = false
+		ray_directions = full_speed_ray_directions
+		num_rays = full_speed_ray_directions.size()
 
 # Called when the node enters the scene tree for the first time.
 func _init(car:Node3D, owner:Node3D):
