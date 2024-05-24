@@ -319,6 +319,8 @@ shadow_mesh = SubResource("ArrayMesh_ei7em")
 [node name="wheeled_drone" type="VehicleBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000494123, 2.38419e-07, -0.0015294)
 mass = 200.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.2, 0)
 script = ExtResource("1_ff5db")
 
 [node name="drone_body" type="MeshInstance3D" parent="."]
@@ -413,6 +415,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.715611, 0)
 shape = SubResource("ConvexPolygonShape3D_6we70")
 
 [node name="turret" type="RigidBody3D" parent="."]
+mass = 100.0
 
 [node name="drone_turret" type="MeshInstance3D" parent="turret"]
 transform = Transform3D(-1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 2.77292, -0.0697742)

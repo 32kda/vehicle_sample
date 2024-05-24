@@ -11,11 +11,6 @@ class_name RedCar
 @export var debug_draw:=true
 
 # context array
-var ray_directions = []
-var full_speed_ray_directions = []
-var low_speed_ray_directions = []
-var interest = []
-var danger = []
 
 var chosen_dir = Vector3.FORWARD
 var velocity = Vector3.FORWARD
@@ -28,7 +23,6 @@ const LOW_SPEED_FORWARD_DELTA = 0.9
 
 var horse_power = 250
 var accel_speed = 100
-
 
 var steer_angle = deg_to_rad(30)
 var steer_speed = 4

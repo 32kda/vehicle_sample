@@ -64,7 +64,7 @@ func _init(car:Node3D, owner:Node3D):
 func set_interest():
 	# Set interest in each slot based on world direction	
 	if owner:
-		var curve:Curve3D = owner.get_target_curve(self)
+		var curve:Curve3D = owner.get_target_curve(car)
 		var length = curve.get_baked_length()
 		var offset =  curve.get_closest_offset(car.global_position)
 		var target_point = curve.sample_baked(fmod((offset + look_ahead),length))
