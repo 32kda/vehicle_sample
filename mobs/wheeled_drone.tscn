@@ -414,8 +414,7 @@ shape = SubResource("ConvexPolygonShape3D_asrlj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.715611, 0)
 shape = SubResource("ConvexPolygonShape3D_6we70")
 
-[node name="turret" type="RigidBody3D" parent="."]
-mass = 100.0
+[node name="turret" type="StaticBody3D" parent="."]
 
 [node name="drone_turret" type="MeshInstance3D" parent="turret"]
 transform = Transform3D(-1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 2.77292, -0.0697742)
