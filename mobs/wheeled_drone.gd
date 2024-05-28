@@ -4,8 +4,8 @@ const LOW_SPEED = 10
 const HIGH_SPEED_FORWARD_DELTA = 0.7
 const LOW_SPEED_FORWARD_DELTA = 0.9
 
-var horse_power = 250
-var accel_speed = 100
+var horse_power = 150
+var accel_speed = 30
 
 var steer_angle = deg_to_rad(30)
 var steer_speed = 4

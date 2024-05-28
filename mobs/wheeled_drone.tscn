@@ -329,7 +329,7 @@ mesh = SubResource("ArrayMesh_57wxd")
 skeleton = NodePath("")
 
 [node name="RF" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, -5.80153e-07, 8.74228e-08, -5.80153e-07, 1, 0, -8.74228e-08, -5.07186e-14, -1, 1.00879, 0.51576, -0.598284)
+transform = Transform3D(1, 5.80153e-07, -2.13163e-14, -5.80153e-07, 1, 0, 2.13163e-14, 1.35525e-20, 1, 1.00879, 0.51576, -0.598284)
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.52
@@ -340,12 +340,12 @@ damping_compression = 0.4
 damping_relaxation = 0.6
 
 [node name="RF2" type="MeshInstance3D" parent="RF"]
-transform = Transform3D(-1.1166e-06, 1, -8.74228e-08, 1, 1.1166e-06, -5.07186e-14, 4.68972e-14, -8.74228e-08, -1, -0.406429, -2.38419e-07, 2.98023e-08)
+transform = Transform3D(-4.37061e-08, -1, 2.13163e-14, 1, -4.37061e-08, 1.23667e-20, 4.78658e-19, 2.13163e-14, 1, 0.406429, 2.38419e-07, 0)
 mesh = SubResource("ArrayMesh_4x0rm")
 skeleton = NodePath("")
 
 [node name="LF" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 2.22525e-07, 8.74228e-08, 2.22525e-07, 1, 0, -8.74228e-08, 1.94538e-14, -1, -0.989602, 0.51576, -0.598284)
+transform = Transform3D(1, -2.22525e-07, -2.13163e-14, 2.22525e-07, 1, 0, 2.13163e-14, -4.74338e-20, 1, -0.989602, 0.51576, -0.598284)
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.52
@@ -356,12 +356,12 @@ damping_compression = 0.4
 damping_relaxation = 0.6
 
 [node name="LF2" type="MeshInstance3D" parent="LF"]
-transform = Transform3D(-4.01339e-07, -1, -8.74228e-08, -1, 4.01339e-07, 1.94538e-14, 1.56324e-14, 8.74228e-08, -1, 0.421749, -5.96046e-08, -2.98023e-08)
+transform = Transform3D(-4.3711e-08, 1, 2.13163e-14, -1, -4.3711e-08, 3.76082e-20, -6.85249e-20, -2.13163e-14, 1, -0.421749, 1.19209e-07, -5.96046e-08)
 mesh = SubResource("ArrayMesh_tfbrh")
 skeleton = NodePath("")
 
 [node name="LB" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, 2.22525e-07, 8.74228e-08, 2.22525e-07, 1, 0, -8.74228e-08, 1.94538e-14, -1, -0.989602, 0.51576, 0.630595)
+transform = Transform3D(1, -2.22525e-07, -1.74846e-07, 2.22525e-07, 1, 0, 1.74846e-07, -3.89076e-14, 1, -0.989602, 0.51576, 0.630595)
 use_as_traction = true
 wheel_radius = 0.52
 wheel_friction_slip = 7.8
@@ -371,12 +371,12 @@ damping_compression = 0.4
 damping_relaxation = 0.6
 
 [node name="LB2" type="MeshInstance3D" parent="LB"]
-transform = Transform3D(-4.01339e-07, -1, -8.74228e-08, -1, 4.01339e-07, 1.94538e-14, 1.56324e-14, 8.74228e-08, -1, 0.421749, 0, -5.96046e-08)
+transform = Transform3D(-4.3711e-08, 1, 1.74846e-07, -1, -4.3711e-08, -3.89075e-14, -3.12649e-14, -1.74846e-07, 1, -0.421749, 1.78814e-07, 5.96046e-08)
 mesh = SubResource("ArrayMesh_fjiva")
 skeleton = NodePath("")
 
 [node name="RB" type="VehicleWheel3D" parent="."]
-transform = Transform3D(-1, -5.80153e-07, 8.74228e-08, -5.80153e-07, 1, 0, -8.74228e-08, -5.07186e-14, -1, 1.00879, 0.51576, 0.630636)
+transform = Transform3D(1, 5.80153e-07, -2.13163e-14, -5.80153e-07, 1, 0, 2.13163e-14, 1.35525e-20, 1, 1.00879, 0.51576, 0.630636)
 use_as_traction = true
 wheel_radius = 0.52
 wheel_friction_slip = 7.8
@@ -386,7 +386,7 @@ damping_compression = 0.4
 damping_relaxation = 0.6
 
 [node name="RB2" type="MeshInstance3D" parent="RB"]
-transform = Transform3D(-1.1166e-06, 1, -8.74228e-08, 1, 1.1166e-06, -5.07186e-14, 4.68972e-14, -8.74228e-08, -1, -0.406429, -2.38419e-07, 0)
+transform = Transform3D(-4.37061e-08, -1, 2.13163e-14, 1, -4.37061e-08, 1.23667e-20, 4.78658e-19, 2.13163e-14, 1, 0.406429, 2.38419e-07, 5.96046e-08)
 mesh = SubResource("ArrayMesh_wk8p8")
 skeleton = NodePath("")
 

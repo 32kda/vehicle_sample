@@ -387,7 +387,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5677, 4.97725, -24.7802)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.5378, 3.73082, -25.438)
 
 [node name="RedCar" parent="world" instance=ExtResource("28_sgcpm")]
-transform = Transform3D(0.994692, 0, -0.102897, 0, 1, 0, 0.102897, 0, 0.994692, -4.62435, 0.438836, 30.3753)
+transform = Transform3D(0.994692, 0, -0.102897, 0, 1, 0, 0.102897, 0, 0.994692, -0.965359, 0.438836, 30.3753)
 
 [node name="track2" type="Node3D" parent="world"]
 
@@ -408,4 +408,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.939, 13.8555, -27.8255)
 transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -52.7887, 0.0689058, 9.14573)
 
 [node name="WheeledDrone" parent="." instance=ExtResource("32_tnslp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33014, 0.256229, 35.8944)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.93318, 0.256229, 35.8944)
