@@ -3,6 +3,9 @@ class_name CarController
 const HIGH_SPEED_FORWARD_DELTA = 0.7
 const LOW_SPEED_FORWARD_DELTA = 0.9
 
+const prev_points := 4
+const prev_points_dist = 3
+
 var look_ahead = 30
 var num_rays = 16
 var low_speed_rays = 4
@@ -16,6 +19,8 @@ var full_speed_ray_directions = []
 var low_speed_ray_directions = []
 var interest = []
 var danger = []
+var prev_points_buf = []
+var prev_point_idx := 0
 
 var chosen_dir = Vector3.FORWARD
 var velocity = Vector3.FORWARD
@@ -27,6 +32,7 @@ var low_speed_mode := false
 var owner:Node3D
 
 func calculate_direction():
+	store_prev_point()
 	set_interest()
 	set_danger()
 	choose_direction()
@@ -47,6 +53,7 @@ func _init(car:Node3D, owner:Node3D):
 	self.owner = owner
 	interest.resize(num_rays)
 	danger.resize(num_rays)
+	prev_points_buf.resize(prev_points)
 	full_speed_ray_directions.resize(num_rays)
 	for i in num_rays:
 		var angle = i * 2 * PI / num_rays	
@@ -60,6 +67,19 @@ func _init(car:Node3D, owner:Node3D):
 	for i in low_speed_rays:
 		low_speed_ray_directions[low_speed_rays + i] = start_angle_2.rotated(Vector3.UP, delta * i)
 	pass # Replace with function body.
+
+func store_prev_point():
+	if not prev_points_buf[prev_point_idx]:
+		prev_points_buf[prev_point_idx] = car.global_position
+	else:
+		var distance := car.global_position.distance_to(prev_points_buf[prev_point_idx])
+		if distance >= prev_points_dist:
+			prev_point_idx = (prev_point_idx + 1) % prev_points
+			prev_points_buf[prev_point_idx] = car.global_position	
+		if debug_draw:
+			for my_point in prev_points_buf:
+				if my_point != null:
+					DebugDraw3D.draw_sphere(my_point,0.4,Color.DARK_GREEN)	
 
 func set_interest():
 	# Set interest in each slot based on world direction	
