@@ -36,7 +36,7 @@ var low_speed_mode := false
 var car_controller:CarController
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	car_controller = CarController.new(self, self.owner)
 	car_controller.look_ahead = look_ahead
 	car_controller.num_rays = num_rays
@@ -47,7 +47,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	car_controller.set_mode_by_speed(current_speed_mps)
+	#car_controller.set_mode_by_speed(current_speed_mps)
+	car_controller.set_speed(current_speed_mps)
 	car_controller.calculate_direction()
 		
 	current_speed_mps = linear_velocity.length()
@@ -59,7 +60,7 @@ func _physics_process(delta):
 	if debug_draw:
 		DebugDraw3D.draw_arrow_line(from, to_look, Color.CRIMSON, 0.3)
 	
-	var throt_input = chosen_dir.z	
+	var throt_input = chosen_dir.z		
 	if throt_input > 0:
 		throt_input = 0.5
 	if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:

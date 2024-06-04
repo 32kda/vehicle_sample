@@ -1,22 +1,22 @@
 class_name CarController
 
+enum State {
+	FORWARD,
+	BACK
+}
+
 const HIGH_SPEED_FORWARD_DELTA = 0.7
-const LOW_SPEED_FORWARD_DELTA = 0.9
 
 const prev_points := 4
 const prev_points_dist = 3
 
 var look_ahead = 30
 var num_rays = 16
-var low_speed_rays = 4
-var low_speed_angle = 60
 var controller_height = 0.5
 var debug_draw:=true
 
 # context array
 var ray_directions = []
-var full_speed_ray_directions = []
-var low_speed_ray_directions = []
 var interest = []
 var danger = []
 var prev_points_buf = []
@@ -27,46 +27,56 @@ var velocity = Vector3.FORWARD
 var acceleration = Vector3.FORWARD
 var car:VehicleBody3D
 
-var low_speed_mode := false
-
 var owner:Node3D
+
+const go_back_msecs := 4000
+var state := State.FORWARD
+var speed_mps := 0
+var back_direction:Vector3
+var go_back_timestamp := 0
+
+var colliders := []
 
 func calculate_direction():
 	store_prev_point()
+	check_set_state()
+	if state == State.BACK:
+		chosen_dir = back_direction
+		return	
 	set_interest()
 	set_danger()
 	choose_direction()
+	
+func check_set_state():
+	if state == State.FORWARD and speed_mps < 3 and not colliders.is_empty():
+		state = State.BACK
+		if chosen_dir.x < 0:
+			back_direction = Vector3(1,0,1)
+		else: 
+			back_direction = Vector3(-1,0,1)
+		go_back_timestamp = Time.get_ticks_msec()
+	elif state == State.BACK and Time.get_ticks_msec() - go_back_timestamp > go_back_msecs:
+		state = State.FORWARD
+		go_back_timestamp = 0	
 
-func set_mode_by_speed(speed_mps:int): 
-	if speed_mps < 3 or chosen_dir.z > 0:
-		low_speed_mode = true
-		ray_directions = low_speed_ray_directions
-		num_rays = low_speed_ray_directions.size()
-	else:
-		low_speed_mode = false
-		ray_directions = full_speed_ray_directions
-		num_rays = full_speed_ray_directions.size()
+func set_speed(speed_mps:int): 
+	self.speed_mps = speed_mps
 
 # Called when the node enters the scene tree for the first time.
-func _init(car:Node3D, owner:Node3D):
+func _init(car:RigidBody3D, owner:Node3D):
 	self.car = car
 	self.owner = owner
+	car.contact_monitor = true
+	car.max_contacts_reported = 3
+	car.body_entered.connect(_body_entered)
+	car.body_exited.connect(_body_exited)
 	interest.resize(num_rays)
 	danger.resize(num_rays)
 	prev_points_buf.resize(prev_points)
-	full_speed_ray_directions.resize(num_rays)
+	ray_directions.resize(num_rays)
 	for i in num_rays:
 		var angle = i * 2 * PI / num_rays	
-		full_speed_ray_directions[i] = Vector3.RIGHT.rotated(Vector3.UP, angle)
-	var start_angle_1 := Vector3.FORWARD.rotated(Vector3.UP,deg_to_rad(-(low_speed_angle / 2)))
-	var start_angle_2 := Vector3.BACK.rotated(Vector3.UP,deg_to_rad(-(low_speed_angle / 2)))
-	var delta = deg_to_rad(low_speed_angle / low_speed_rays)
-	low_speed_ray_directions.resize(low_speed_rays * 2)
-	for i in low_speed_rays:
-		low_speed_ray_directions[i] = start_angle_1.rotated(Vector3.UP, delta * i)
-	for i in low_speed_rays:
-		low_speed_ray_directions[low_speed_rays + i] = start_angle_2.rotated(Vector3.UP, delta * i)
-	pass # Replace with function body.
+		ray_directions[i] = Vector3.RIGHT.rotated(Vector3.UP, angle)	
 
 func store_prev_point():
 	if not prev_points_buf[prev_point_idx]:
@@ -102,9 +112,6 @@ func set_interest():
 func set_default_interest():
 	var multiplier = 1.0 - HIGH_SPEED_FORWARD_DELTA
 	var to_add = HIGH_SPEED_FORWARD_DELTA
-	if low_speed_mode:
-		multiplier = 1.0 - LOW_SPEED_FORWARD_DELTA
-		to_add = LOW_SPEED_FORWARD_DELTA
 
 	for i in num_rays:
 		var d = ray_directions[i].dot(Vector3.FORWARD) * multiplier		
@@ -143,4 +150,14 @@ func choose_direction():
 	chosen_dir = Vector3.ZERO
 	for i in num_rays:
 		chosen_dir += ray_directions[i] * interest[i]
-	chosen_dir = chosen_dir.normalized()
+	chosen_dir.z = min(-0.5,chosen_dir.z)
+	chosen_dir = chosen_dir.normalized()	
+	
+func _body_entered(body:Node):
+	if body is StaticBody3D or body is CSGPolygon3D:
+		colliders.append(body)
+		
+func _body_exited(body:Node):
+	if body is StaticBody3D or body is CSGPolygon3D:
+		colliders.erase(body)
+		
