@@ -62,7 +62,9 @@ func check_set_state():
 func set_speed(speed_mps:int): 
 	self.speed_mps = speed_mps
 
-# Called when the node enters the scene tree for the first time.
+# car should be RigidBody3D (tested with VehicleBody3D, but should work with RigidBody based cars also)
+# owner should be some node having get_target_curve(car) method responsible for providing a curve, currecntly car should follow
+# E.g. this could be a curve defining a racing track
 func _init(car:RigidBody3D, owner:Node3D):
 	self.car = car
 	self.owner = owner

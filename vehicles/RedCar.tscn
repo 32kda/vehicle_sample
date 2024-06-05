@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://hrd2haprnbwa"]
+[gd_scene load_steps=18 format=3 uid="uid://hrd2haprnbwa"]
 
 [ext_resource type="Texture2D" uid="uid://darxlmxyp7bsx" path="res://vehicles/red_car_red_car.png" id="1_dqnin"]
 [ext_resource type="Script" path="res://vehicles/AICar.gd" id="1_x5hej"]
+[ext_resource type="PackedScene" uid="uid://d12augy08ck24" path="res://weapons/machinegun.tscn" id="3_usmxa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xa7g4"]
 resource_name = "Material"
@@ -186,6 +187,10 @@ points = PackedVector3Array(1.10027, 0.308386, -2.04141, 1.10027, -0.371237, -2.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a426v"]
 points = PackedVector3Array(-1.09251, -0.386892, -1.0291, -1.09251, -0.34368, 1.01929, -0.759922, 0.177777, -0.478853, 1.09251, -0.386892, -1.0291, 1.09229, -0.34368, 1.01949, -0.759922, 0.19704, 0.646908, 0.759708, 0.177777, -0.478853, 0.759708, 0.19704, 0.646908)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_iqjtu"]
+height = 22.601
+radius = 28.268
+
 [node name="RedCar" type="VehicleBody3D" groups=["Players"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.208064, -1.19209e-07, -0.510616)
 mass = 200.0
@@ -272,3 +277,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00234966, 1.61541, 0.261209
 shape = SubResource("ConvexPolygonShape3D_a426v")
 
 [node name="RedCar" type="Node3D" parent="."]
+
+[node name="machinegun" parent="." instance=ExtResource("3_usmxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0343663, 1.82452, 0.627445)
+damage = 15
+
+[node name="EnemyDetection" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0343663, 1.80261, 0.627445)
+
+[node name="DetectionShape" type="CollisionShape3D" parent="EnemyDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.84786, 0)
+shape = SubResource("CylinderShape3D_iqjtu")
+
+[connection signal="body_entered" from="EnemyDetection" to="." method="_on_enemy_detection_body_entered"]

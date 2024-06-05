@@ -40,14 +40,11 @@ func _ready():
 	car_controller = CarController.new(self, self.owner)
 	car_controller.look_ahead = look_ahead
 	car_controller.num_rays = num_rays
-	car_controller.low_speed_rays = low_speed_rays
-	car_controller.low_speed_angle = low_speed_angle
 	car_controller.controller_height = 0.5
 	car_controller.debug_draw = debug_draw
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	#car_controller.set_mode_by_speed(current_speed_mps)
+func _physics_process(delta):	
 	car_controller.set_speed(current_speed_mps)
 	car_controller.calculate_direction()
 		
@@ -78,3 +75,8 @@ func _physics_process(delta):
 	brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
 	
 
+
+
+func _on_enemy_detection_body_entered(body:Node3D):
+	if body.is_in_group("Enemies") or body.is_in_group("Players"):
+		$machinegun.set_target(body.global_position)	
