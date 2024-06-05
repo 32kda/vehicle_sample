@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://npcurv1j2nww"]
+
+[ext_resource type="Script" path="res://areas/enemy_detection.gd" id="1_rldwe"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_iqjtu"]
+height = 30.0
+radius = 40.0
+
+[node name="EnemyDetection" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0343663, 1.80261, 0.627445)
+script = ExtResource("1_rldwe")
+radius = 25
+height = 30
+
+[node name="DetectionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.84786, 0)
+shape = SubResource("CylinderShape3D_iqjtu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

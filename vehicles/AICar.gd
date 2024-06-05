@@ -42,6 +42,7 @@ func _ready():
 	car_controller.num_rays = num_rays
 	car_controller.controller_height = 0.5
 	car_controller.debug_draw = debug_draw
+	$EnemyDetection.set_enemy_groups(["Players", "Enemies"])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):	

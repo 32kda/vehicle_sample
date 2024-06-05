@@ -45,8 +45,8 @@ func _process(delta):
 	var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
 	$turret/gun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
 	
-func set_target(target: Vector3):
-	self.target = target
+func set_target(target: Vector3, weight: float = 1.0):
+	self.target = lerp(self.target, target, weight)
 	
 func hold_trigger():
 	if can_shoot:
