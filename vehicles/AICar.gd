@@ -20,6 +20,7 @@ const ARROW_HEIGHT = 2
 const LOW_SPEED = 10
 const HIGH_SPEED_FORWARD_DELTA = 0.7
 const LOW_SPEED_FORWARD_DELTA = 0.9
+const MAX_SHOOT_DIST = 3 #If there're 3m or less to the target center, we canstart shooting
 
 var horse_power = 250
 var accel_speed = 100
@@ -34,6 +35,8 @@ var current_speed_mps = 0
 
 var low_speed_mode := false
 var car_controller:CarController
+@onready var detection_area := $EnemyDetection
+@onready var machinegun:Machinegun = $machinegun
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -42,7 +45,8 @@ func _ready():
 	car_controller.num_rays = num_rays
 	car_controller.controller_height = 0.5
 	car_controller.debug_draw = debug_draw
-	$EnemyDetection.set_enemy_groups(["Players", "Enemies"])
+	detection_area.set_enemy_groups(["Players", "Enemies"])
+	machinegun.set_hit_groups(["Players", "Enemies", "Objects"])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):	
@@ -70,14 +74,20 @@ func _physics_process(delta):
 	if chosen_dir.z > 0:
 		steer_input = clamp(-Vector3.BACK.signed_angle_to(chosen_dir, Vector3.UP), -steer_angle, steer_angle)
 	steering = lerp(steering, steer_input, steer_speed * delta)
-	
-	
+		
 	var brake_input = 0.0 #TODO
 	brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
 	
 
-
-
-func _on_enemy_detection_body_entered(body:Node3D):
-	if body.is_in_group("Enemies") or body.is_in_group("Players"):
-		$machinegun.set_target(body.global_position)	
+func _process(delta):
+	var target = detection_area.get_target()
+	if target != null:
+		machinegun.set_target(target.global_position, 10 * delta)
+		var angle = machinegun.angle_to(target.global_position)
+		var distance = global_position.distance_to(target.global_position)
+		var max_angle = atan(MAX_SHOOT_DIST * 1.0 / distance)
+		if angle < max_angle:
+			machinegun.hold_trigger()
+		
+func hit(damage:int):
+	pass

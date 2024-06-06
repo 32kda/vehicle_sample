@@ -64,6 +64,7 @@ func _input(event):
 		var forward_vector = -global_transform.basis.z		
 		missle.start(missle_transform, forward_vector, linear_velocity)
 		
-		
+func hit(damage:int):
+	pass		
 		
 		
