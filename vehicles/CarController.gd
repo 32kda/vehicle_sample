@@ -10,6 +10,9 @@ const HIGH_SPEED_FORWARD_DELTA = 0.7
 const prev_points := 4
 const prev_points_dist = 3
 
+const go_back_msecs := 2500
+const go_forward_msecs := 2500
+
 var look_ahead = 30
 var num_rays = 16
 var controller_height = 0.5
@@ -29,11 +32,11 @@ var car:VehicleBody3D
 
 var owner:Node3D
 
-const go_back_msecs := 4000
 var state := State.FORWARD
 var speed_mps := 0
 var back_direction:Vector3
 var go_back_timestamp := 0
+var go_forward_timestamp := 0
 
 var colliders := []
 
@@ -48,15 +51,20 @@ func calculate_direction():
 	choose_direction()
 	
 func check_set_state():
-	if state == State.FORWARD and speed_mps < 3 and not colliders.is_empty():
+	if state == State.FORWARD \
+		and speed_mps < 3 \
+		and not colliders.is_empty() \
+		and Time.get_ticks_msec() - go_forward_timestamp > go_forward_msecs:
 		state = State.BACK
 		if chosen_dir.x < 0:
 			back_direction = Vector3(1,0,1)
 		else: 
 			back_direction = Vector3(-1,0,1)
 		go_back_timestamp = Time.get_ticks_msec()
+		go_forward_timestamp = 0
 	elif state == State.BACK and Time.get_ticks_msec() - go_back_timestamp > go_back_msecs:
 		state = State.FORWARD
+		go_forward_timestamp = Time.get_ticks_msec()		
 		go_back_timestamp = 0	
 
 func set_speed(speed_mps:int): 

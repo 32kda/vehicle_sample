@@ -23,7 +23,7 @@ func _ready():
 	car_controller = CarController.new(self, self.owner)
 
 func _physics_process(delta):
-	car_controller.set_mode_by_speed(current_speed_mps)
+	car_controller.set_speed(current_speed_mps)
 	car_controller.calculate_direction()
 		
 	current_speed_mps = linear_velocity.length()
@@ -47,3 +47,6 @@ func _physics_process(delta):
 	if chosen_dir.z > 0:
 		steer_input = clamp(-Vector3.BACK.signed_angle_to(chosen_dir, Vector3.UP), -steer_angle, steer_angle)
 	steering = lerp(steering, steer_input, steer_speed * delta)
+	
+func hit(damage:int):
+	pass

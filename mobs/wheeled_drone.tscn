@@ -316,7 +316,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ei7em")
 
-[node name="wheeled_drone" type="VehicleBody3D"]
+[node name="wheeled_drone" type="VehicleBody3D" groups=["Enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000494123, 2.38419e-07, -0.0015294)
 mass = 700.0
 center_of_mass_mode = 1

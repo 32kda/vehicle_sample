@@ -31,9 +31,7 @@ func _process(delta):
 
 func _on_body_entered(body:Node3D):
 	if body == get_parent():
-		return
-	if not is_in_fov(body):
-		return
+		return	
 	if enemy_groups.is_empty():
 		push_warning("Enemy detection for " + get_parent().get_name() + " did nothing, since no enemy groups are set" )
 	for grp in enemy_groups:
@@ -43,6 +41,8 @@ func _on_body_entered(body:Node3D):
 				to_attack = body
 
 func is_in_fov(body:Node3D) -> bool:
+	if body == null:
+		return false
 	var max = deg_to_rad(fov_angle / 2)
 	var local = to_local(body.global_position)
 	local.y = 0
@@ -59,4 +59,10 @@ func _on_body_exited(body):
 			to_attack = null
 			
 func get_target():
+	if not is_in_fov(to_attack):
+		var new_target = null
+		for body in visible_units:
+			if body != to_attack and is_in_fov(body):
+				to_attack = body
+				break		
 	return to_attack
