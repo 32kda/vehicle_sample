@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://hrd2haprnbwa"]
+[gd_scene load_steps=19 format=3 uid="uid://hrd2haprnbwa"]
 
 [ext_resource type="Texture2D" uid="uid://darxlmxyp7bsx" path="res://vehicles/red_car_red_car.png" id="1_dqnin"]
 [ext_resource type="Script" path="res://vehicles/AICar.gd" id="1_x5hej"]
 [ext_resource type="PackedScene" uid="uid://d12augy08ck24" path="res://weapons/machinegun.tscn" id="3_usmxa"]
 [ext_resource type="PackedScene" uid="uid://npcurv1j2nww" path="res://areas/enemy_detection.tscn" id="4_apm21"]
+[ext_resource type="Script" path="res://HealthController.gd" id="5_68h3y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xa7g4"]
 resource_name = "Material"
@@ -281,3 +282,6 @@ damage = 15
 
 [node name="EnemyDetection" parent="." instance=ExtResource("4_apm21")]
 radius = 40
+
+[node name="HealthController" type="Node" parent="."]
+script = ExtResource("5_68h3y")

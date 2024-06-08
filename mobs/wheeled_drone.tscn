@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://dl5qfabxltfdq"]
+[gd_scene load_steps=32 format=3 uid="uid://dl5qfabxltfdq"]
 
 [ext_resource type="Script" path="res://mobs/wheeled_drone.gd" id="1_ff5db"]
 [ext_resource type="Texture2D" uid="uid://bw1e8otkkr7bs" path="res://mobs/wheeled_drone_drone_wheel.png" id="1_fnrra"]
 [ext_resource type="Texture2D" uid="uid://dvit3bd1k3sq8" path="res://mobs/wheeled_drone_drone_turret.png" id="2_uvk54"]
 [ext_resource type="Texture2D" uid="uid://bbnnwo5b60np7" path="res://mobs/wheeled_drone_drone_body.png" id="3_i3p2x"]
+[ext_resource type="Script" path="res://HealthController.gd" id="5_rmoi2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7muh"]
 resource_name = "drone_body"
@@ -432,3 +433,6 @@ skeleton = NodePath("")
 transform = Transform3D(-0.102352, 0, 0, 0, -0.102352, 0, 0, 0, -0.102352, 0.669344, -0.33593, 0.831397)
 mesh = SubResource("ArrayMesh_223t5")
 skeleton = NodePath("")
+
+[node name="HealthController" type="Node" parent="."]
+script = ExtResource("5_rmoi2")

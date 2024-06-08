@@ -92,7 +92,7 @@ func hit_scan():
 			hole.look_at(collision_point - collision_normal, Vector3(0,1,0))			
 		if (collider is RigidBody3D) and (collider != parentBody):			#avoid hitting self
 			var body = collider as RigidBody3D
-			body.apply_impulse(bullet_direction * damage * IMPULSE_MULTIPLIER, collision_point)
+			body.apply_impulse(bullet_direction * IMPULSE_MULTIPLIER, collision_point)
 		
 		for grp in hit_groups:
 			if collider.is_in_group(grp) and (collider != parentBody):
