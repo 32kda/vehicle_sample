@@ -85,6 +85,8 @@ func _physics_process(delta):
 			
 		var brake_input = 0.0 #TODO
 		brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
+	elif state == State.DESTROYED:
+		engine_force = lerp(engine_force,0.0,delta * accel_speed)
 
 func _process(delta):
 	if state == State.ALIVE and health_controller.is_destroyed():
