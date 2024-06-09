@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dl5qfabxltfdq"]
+[gd_scene load_steps=40 format=3 uid="uid://dl5qfabxltfdq"]
 
 [ext_resource type="Script" path="res://mobs/wheeled_drone.gd" id="1_ff5db"]
 [ext_resource type="Texture2D" uid="uid://bw1e8otkkr7bs" path="res://mobs/wheeled_drone_drone_wheel.png" id="1_fnrra"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bbnnwo5b60np7" path="res://mobs/wheeled_drone_drone_body.png" id="3_i3p2x"]
 [ext_resource type="Texture2D" uid="uid://dirvbyh7sboui" path="res://effects/smoke/smoke_02.png" id="5_ny8g2"]
 [ext_resource type="Script" path="res://HealthController.gd" id="5_rmoi2"]
+[ext_resource type="Texture2D" uid="uid://h1ifkqgxei46" path="res://effects/smoke/smoke_04.png" id="6_3rj88"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7muh"]
 resource_name = "drone_body"
@@ -336,6 +337,30 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_spob0"]
 material = SubResource("StandardMaterial3D_kirbd")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5tlu2"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+spread = 5.663
+initial_velocity_max = 0.5
+gravity = Vector3(0, 5, 0)
+radial_accel_min = -3.97
+radial_accel_max = -3.97
+tangential_accel_min = -3.98
+tangential_accel_max = 1.32
+hue_variation_max = 0.08
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srphr"]
+transparency = 1
+albedo_color = Color(0.239216, 0.176471, 0.101961, 1)
+albedo_texture = ExtResource("6_3rj88")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ees24"]
+material = SubResource("StandardMaterial3D_srphr")
+
 [node name="wheeled_drone" type="VehicleBody3D" groups=["Enemies"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000494123, 2.38419e-07, -0.0015294)
 mass = 700.0
@@ -453,15 +478,22 @@ transform = Transform3D(-0.102352, 0, 0, 0, -0.102352, 0, 0, 0, -0.102352, 0.669
 mesh = SubResource("ArrayMesh_223t5")
 skeleton = NodePath("")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="turret"]
+[node name="PipeParticles01" type="GPUParticles3D" parent="turret"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.659367, 0.914665, 0.966719)
 process_material = SubResource("ParticleProcessMaterial_xfft7")
 draw_pass_1 = SubResource("QuadMesh_spob0")
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="turret"]
+[node name="PipeParticles02" type="GPUParticles3D" parent="turret"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.657597, 0.914665, 0.966719)
 process_material = SubResource("ParticleProcessMaterial_xfft7")
 draw_pass_1 = SubResource("QuadMesh_spob0")
+
+[node name="FireParticles" type="GPUParticles3D" parent="turret"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.120453, 0.989493)
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_5tlu2")
+draw_pass_1 = SubResource("QuadMesh_ees24")
 
 [node name="HealthController" type="Node" parent="."]
 script = ExtResource("5_rmoi2")

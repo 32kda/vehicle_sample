@@ -60,3 +60,7 @@ func physics_process_alive(delta):
 func physics_process_destroyed(delta):
 	engine_force = lerp(engine_force,0.0,delta * accel_speed)
 
+func on_destroyed():
+	$turret/PipeParticles01.emitting = false
+	$turret/PipeParticles02.emitting = false
+	$turret/FireParticles.emitting = true
