@@ -74,7 +74,13 @@ func hide_flash():
 	flash.visible = false	
 	
 func hit_scan():
+	var angle = randf_range(0, PI)
+	var deviation = randfn(0,0.03)
+	var target := Vector3.FORWARD + Vector3(deviation,0,0).rotated(Vector3.FORWARD,angle)
+	
 	var bullet_direction = -bullet_ray.global_transform.basis.z.normalized()
+	#var bullet_direction = bullet_ray.to_global(target)
+	bullet_direction = bullet_direction + Vector3(deviation,0,0).rotated(Vector3.FORWARD,angle) #Todo adding this way does not seem correct	
 	var origin = bullet_ray.global_transform.origin
 	var intersection = PhysicsRayQueryParameters3D.create(origin, origin + bullet_direction * fire_range)
 	var bullet_collision = get_world_3d().direct_space_state.intersect_ray(intersection)
