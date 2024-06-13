@@ -9,8 +9,8 @@ var accel_speed = 100
 var steer_angle = deg_to_rad(30)
 var steer_speed = 2.5
 
-var brake_power = 60
-var brake_speed = 60
+var brake_power = 160
+var brake_speed = 16000
 
 var current_speed_mps = 0
 
@@ -37,7 +37,8 @@ func _physics_process(delta):
 	steering = lerp(steering, steer_input * steer_angle, steer_speed * delta)
 	
 	var brake_input = Input.get_action_strength("SPACE")
-	brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
+	if brake_input != 0:
+		brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
 	
 	if Input.is_action_pressed("FIRE"):
 		machinegun.hold_trigger()

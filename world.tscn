@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=51 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -170,6 +170,16 @@ albedo_texture = ExtResource("4_gnkfn")
 [sub_resource type="BoxMesh" id="BoxMesh_107k1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8783"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_17tmm"]
+albedo_texture = ExtResource("4_gnkfn")
+
+[sub_resource type="BoxMesh" id="BoxMesh_4j4ri"]
+material = SubResource("StandardMaterial3D_17tmm")
+size = Vector3(2, 4, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a2xvk"]
+data = PackedVector3Array(-1, 2, 1, 1, 2, 1, -1, -2, 1, 1, 2, 1, 1, -2, 1, -1, -2, 1, 1, 2, -1, -1, 2, -1, 1, -2, -1, -1, 2, -1, -1, -2, -1, 1, -2, -1, 1, 2, 1, 1, 2, -1, 1, -2, 1, 1, 2, -1, 1, -2, -1, 1, -2, 1, -1, 2, -1, -1, 2, 1, -1, -2, -1, -1, 2, 1, -1, -2, 1, -1, -2, -1, 1, 2, 1, -1, 2, 1, 1, 2, -1, -1, 2, 1, -1, 2, -1, 1, 2, -1, -1, -2, 1, 1, -2, 1, -1, -2, -1, 1, -2, 1, 1, -2, -1, -1, -2, -1)
 
 [node name="game" type="Node3D"]
 process_mode = 1
@@ -393,6 +403,29 @@ debug_draw = false
 
 [node name="track2" type="Node3D" parent="world"]
 
+[node name="StaticBody3D3" type="StaticBody3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4231, 0.30127, 9.434)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.98291, 0.492697)
+mesh = SubResource("BoxMesh_4j4ri")
+skeleton = NodePath("../../StaticBody3D3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.98291, 0.492697)
+shape = SubResource("ConcavePolygonShape3D_a2xvk")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6987, 0.150635, 1.37976)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="world/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.98291, 0.492697)
+mesh = SubResource("BoxMesh_4j4ri")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="world/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.98291, 0.492697)
+shape = SubResource("ConcavePolygonShape3D_a2xvk")
+
 [node name="MainMenu" parent="." instance=ExtResource("19_b1tgq")]
 process_mode = 3
 
@@ -410,4 +443,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.939, 13.8555, -27.8255)
 transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -52.7887, 0.0689058, 9.14573)
 
 [node name="WheeledDrone" parent="." instance=ExtResource("32_tnslp")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.93318, 0.256229, 35.8944)
