@@ -16,7 +16,7 @@ const go_forward_msecs := 2500
 var look_ahead = 30
 var num_rays = 16
 var controller_height = 0.5
-var debug_draw:=true
+var debug_draw:=false
 
 # context array
 var ray_directions = []

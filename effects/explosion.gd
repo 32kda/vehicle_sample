@@ -113,8 +113,8 @@ func _explode():
 		var collider = ray.get_collider()
 		
 		if collider.has_method("take_damage"):
-			var damage = _calculate_damage(ray.get_collision_point())
-			collider.take_damage(damage)
+			var res_damage = _calculate_damage(ray.get_collision_point())
+			collider.take_damage(res_damage)
 	
 		if collider is RigidBody3D:
 			count += 1
@@ -126,9 +126,9 @@ func _explode():
 
 func _calculate_damage(collision_point: Vector3) -> float:
 	var distance = global_transform.origin.distance_to(collision_point)
-	var damage = base_damage_per_ray * (radius - distance)
+	var result_damage = base_damage_per_ray * (radius - distance)
 	
-	return damage if damage > 0 else 0
+	return result_damage if result_damage > 0 else 0
 
 
 func _on_smoke_finished():

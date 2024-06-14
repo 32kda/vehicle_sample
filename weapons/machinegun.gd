@@ -100,10 +100,14 @@ func hit_scan():
 			var body = collider as RigidBody3D
 			body.apply_impulse(bullet_direction * IMPULSE_MULTIPLIER, collision_point)
 		
-		for grp in hit_groups:
-			if collider.is_in_group(grp) and (collider != parentBody):
-				collider.hit(damage)
-				break
+		var found = false
+		while not found and collider is RigidBody3D:
+			for grp in hit_groups:
+				if collider.is_in_group(grp) and (collider != parentBody):
+					collider.hit(damage)
+					found = true
+					break
+			collider = collider.get_parent_node_3d()
 
 func set_hit_groups(groups:Array):
 	hit_groups = groups
