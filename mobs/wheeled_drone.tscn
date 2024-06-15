@@ -462,44 +462,40 @@ shape = SubResource("ConvexPolygonShape3D_6we70")
 [node name="HealthController" type="Node" parent="."]
 script = ExtResource("5_rmoi2")
 
-[node name="turret_joint" type="Generic6DOFJoint3D" parent="."]
-node_a = NodePath("..")
-node_b = NodePath("../turret_body")
-
-[node name="turret_body" type="RigidBody3D" parent="."]
-
-[node name="turret" type="CollisionShape3D" parent="turret_body"]
+[node name="turret" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47103, 0)
 shape = SubResource("ConvexPolygonShape3D_ygnkb")
 
-[node name="drone_turret" type="MeshInstance3D" parent="turret_body/turret"]
+[node name="drone_turret" type="MeshInstance3D" parent="turret"]
 transform = Transform3D(-1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 0.30189, -0.0697742)
 mesh = SubResource("ArrayMesh_mfxrt")
 skeleton = NodePath("")
 
-[node name="pipe_001" type="MeshInstance3D" parent="turret_body/turret"]
+[node name="pipe_001" type="MeshInstance3D" parent="turret"]
 transform = Transform3D(-0.102352, 0, 0, 0, -0.102352, 0, 0, 0, -0.102352, -0.671753, -0.33593, 0.831397)
 mesh = SubResource("ArrayMesh_w3rpn")
 skeleton = NodePath("")
 
-[node name="pipe_002" type="MeshInstance3D" parent="turret_body/turret"]
+[node name="pipe_002" type="MeshInstance3D" parent="turret"]
 transform = Transform3D(-0.102352, 0, 0, 0, -0.102352, 0, 0, 0, -0.102352, 0.669344, -0.33593, 0.831397)
 mesh = SubResource("ArrayMesh_223t5")
 skeleton = NodePath("")
 
-[node name="PipeParticles01" type="GPUParticles3D" parent="turret_body/turret"]
+[node name="PipeParticles01" type="GPUParticles3D" parent="turret"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.659367, 0.914665, 0.966719)
 process_material = SubResource("ParticleProcessMaterial_xfft7")
 draw_pass_1 = SubResource("QuadMesh_spob0")
 
-[node name="PipeParticles02" type="GPUParticles3D" parent="turret_body/turret"]
+[node name="PipeParticles02" type="GPUParticles3D" parent="turret"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.657597, 0.914665, 0.966719)
 process_material = SubResource("ParticleProcessMaterial_xfft7")
 draw_pass_1 = SubResource("QuadMesh_spob0")
 
-[node name="FireParticles" type="GPUParticles3D" parent="turret_body/turret"]
+[node name="FireParticles" type="GPUParticles3D" parent="turret"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.120453, 0.989493)
 emitting = false
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_5tlu2")
 draw_pass_1 = SubResource("QuadMesh_ees24")
+
+[node name="turret_body" type="RigidBody3D" parent="."]
