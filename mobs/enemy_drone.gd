@@ -61,13 +61,17 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):
-	apply_central_force(acceleration.normalized() * speed)
+	apply_central_force(acceleration.normalized() * speed * 5)
 	linear_velocity.limit_length(speed)
 	acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))		
 	match state:
 		PATROLING:
 			var normalized_vec = to_global(new_vec)
 			if new_vec.length() > 0.1:
+				var to_center = circle_center - global_position
+				to_center.y = 0				
+				var to_look = to_center.rotated(Vector3.UP, PI / 2).normalized() * 3 + global_position
+				look_at(to_look, Vector3.UP)
 				#var to_look = lerp(global_transform.basis.z, normalized_vec, delta * 100);
 				#look_at(normalized_vec, Vector3.UP)
 				pass
