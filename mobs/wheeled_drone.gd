@@ -20,10 +20,10 @@ var car_controller:CarController
 
 var health_controller:HealthController
 
-@onready var pipe1 = $turret/PipeParticles01
-@onready var pipe2 = $turret/PipeParticles02
-@onready var fire_particles = $turret/FireParticles
-#@onready var joint = $turret_joint
+@onready var pipe1 = $turret_body/turret/PipeParticles01
+@onready var pipe2 = $turret_body/turret/PipeParticles02
+@onready var fire_particles = $turret_body/turret/FireParticles
+@onready var joint = $joint
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,7 +70,7 @@ func on_destroyed():
 	pipe1.emitting = false
 	pipe2.emitting = false
 	fire_particles.emitting = true
-	#joint.queue_free()
-	#$turret_body.mass = 100
-	#$turret_body.lock_rotation = false
+	joint.queue_free()
+	$turret_body.mass = 100
+	$turret_body.lock_rotation = false
 	
