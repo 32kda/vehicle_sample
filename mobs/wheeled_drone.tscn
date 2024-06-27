@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dl5qfabxltfdq"]
+[gd_scene load_steps=41 format=3 uid="uid://dl5qfabxltfdq"]
 
 [ext_resource type="Script" path="res://mobs/wheeled_drone.gd" id="1_ff5db"]
 [ext_resource type="Texture2D" uid="uid://bw1e8otkkr7bs" path="res://mobs/wheeled_drone_drone_wheel.png" id="1_fnrra"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dirvbyh7sboui" path="res://effects/smoke/smoke_02.png" id="5_ny8g2"]
 [ext_resource type="Script" path="res://HealthController.gd" id="5_rmoi2"]
 [ext_resource type="Texture2D" uid="uid://h1ifkqgxei46" path="res://effects/smoke/smoke_04.png" id="6_3rj88"]
+[ext_resource type="PackedScene" uid="uid://ccmkpe3uj67jp" path="res://weapons/minigun.tscn" id="8_3wp0p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7muh"]
 resource_name = "drone_body"
@@ -499,6 +500,12 @@ emitting = false
 amount = 12
 process_material = SubResource("ParticleProcessMaterial_5tlu2")
 draw_pass_1 = SubResource("QuadMesh_ees24")
+
+[node name="minigun" parent="turret_body" instance=ExtResource("8_3wp0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953097, 2.22117, 0.164894)
+
+[node name="minigun2" parent="turret_body" instance=ExtResource("8_3wp0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.954334, 2.24713, 0.329788)
 
 [node name="joint" type="HingeJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.00865054, 1.71496, 0.00861258)
