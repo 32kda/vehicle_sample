@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccmkpe3uj67jp"]
+
+[ext_resource type="PackedScene" uid="uid://dh6d7irqxgmpy" path="res://weapons/minigun.glb" id="1_0q63c"]
+
+[node name="Minigun" type="Node3D"]
+
+[node name="minigun" parent="." instance=ExtResource("1_0q63c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0405521, 0, -0.330517)
