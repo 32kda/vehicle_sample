@@ -501,11 +501,29 @@ amount = 12
 process_material = SubResource("ParticleProcessMaterial_5tlu2")
 draw_pass_1 = SubResource("QuadMesh_ees24")
 
-[node name="minigun" parent="turret_body" instance=ExtResource("8_3wp0p")]
+[node name="LMinigun" parent="turret_body" instance=ExtResource("8_3wp0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953097, 2.22117, 0.164894)
 
-[node name="minigun2" parent="turret_body" instance=ExtResource("8_3wp0p")]
+[node name="RMinigun" parent="turret_body" instance=ExtResource("8_3wp0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.954334, 2.24713, 0.329788)
+
+[node name="RGunJoint" type="HingeJoint3D" parent="turret_body"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.80111, 2.4478, 0.421202)
+node_a = NodePath("..")
+node_b = NodePath("../RMinigun")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+angular_limit/softness = 6.0
+
+[node name="LGunJoint" type="HingeJoint3D" parent="turret_body"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.802097, 2.43124, -0.379908)
+node_a = NodePath("..")
+node_b = NodePath("../LMinigun")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 0.0
+angular_limit/softness = 6.0
 
 [node name="joint" type="HingeJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.00865054, 1.71496, 0.00861258)
