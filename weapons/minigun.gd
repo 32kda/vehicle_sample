@@ -36,3 +36,5 @@ func _process(delta):
 func fire_round():
 	hit_scan.make_shot()
 	
+func set_hit_groups(groups:Array):
+	hit_scan.set_hit_groups(groups)

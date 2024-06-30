@@ -24,11 +24,13 @@ var health_controller:HealthController
 @onready var pipe2 = $turret_body/turret/PipeParticles02
 @onready var fire_particles = $turret_body/turret/FireParticles
 @onready var joint = $joint
+@onready var detection_area := $turret_body/turret/EnemyDetection
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	car_controller = CarController.new(self, self.owner)
 	health_controller = $HealthController
+	detection_area.set_enemy_groups(["Players", "Enemies"])
 	#$turret_body.lock_rotation = true
 
 func _process(delta):
