@@ -34,8 +34,27 @@ func _ready():
 	#$turret_body.lock_rotation = true
 
 func _process(delta):
-	if state == State.ALIVE and health_controller.is_destroyed():
-		state = State.DESTROYED
+	if state == State.ALIVE:
+		if health_controller.is_destroyed():
+			state = State.DESTROYED
+		else:			
+			var target = detection_area.get_target()
+			if target != null:
+				var local_target = $turret_body.to_local(target)
+				local_target.y = 0
+				var angle = Vector3.FORWARD.signed_angle_to(local_target, Vector3.UP)
+				#$turret_body.rotation.y += angle * clamp(delta * target_yaw_speed, 0, 1)
+				#var gun_local = $turret/gun.to_local(target) #TODO
+				#gun_local.x = 0
+				#var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
+				#$turret/gun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
+				#machinegun.set_target(target.global_position, 10 * delta)
+				#var angle = machinegun.angle_to(target.global_position)
+				#var distance = global_position.distance_to(target.global_position)
+				#var max_angle = atan(MAX_SHOOT_DIST * 1.0 / distance)
+				#if angle < max_angle:
+				#	machinegun.hold_trigger() 
+		
 		
 
 func physics_process_alive(delta):
