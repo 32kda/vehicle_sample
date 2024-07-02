@@ -15,12 +15,14 @@ func _ready():
 	pass # Replace with function body.
 
 func fire():
-	firing = true
-	axis.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, true)
+	if not firing:
+		firing = true
+		axis.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, true)
 	
 func stop_fire():
-	firing = false
-	axis.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, false)
+	if firing:
+		firing = false
+		axis.set_flag(HingeJoint3D.FLAG_ENABLE_MOTOR, false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

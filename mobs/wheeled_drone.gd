@@ -4,14 +4,17 @@ const LOW_SPEED = 10
 const HIGH_SPEED_FORWARD_DELTA = 0.7
 const LOW_SPEED_FORWARD_DELTA = 0.9
 
-var horse_power = 150
-var accel_speed = 30
+@export var horse_power = 150
+@export var accel_speed = 30
+@export var target_yaw_speed:int = 5
+@export var target_pitch_speed:int = 5
 
-var steer_angle = deg_to_rad(30)
-var steer_speed = 4
+@export var steer_angle = deg_to_rad(30)
+@export var steer_speed = 4
 
-var brake_power = 60
-var brake_speed = 60
+@export var brake_power = 60
+@export var brake_speed = 60
+@export var max_fire_angle = 5
 
 var current_speed_mps = 0
 
@@ -20,6 +23,9 @@ var car_controller:CarController
 
 var health_controller:HealthController
 
+@onready var turret = $turret_body
+@onready var l_minigun = $turret_body/LMinigun
+@onready var r_minigun = $turret_body/RMinigun
 @onready var pipe1 = $turret_body/turret/PipeParticles01
 @onready var pipe2 = $turret_body/turret/PipeParticles02
 @onready var fire_particles = $turret_body/turret/FireParticles
@@ -34,27 +40,35 @@ func _ready():
 	#$turret_body.lock_rotation = true
 
 func _process(delta):
+	var firing = false
 	if state == State.ALIVE:
 		if health_controller.is_destroyed():
 			state = State.DESTROYED
 		else:			
 			var target = detection_area.get_target()
 			if target != null:
-				var local_target = $turret_body.to_local(target)
+				var local_target = turret.to_local(target.global_position)
 				local_target.y = 0
 				var angle = Vector3.FORWARD.signed_angle_to(local_target, Vector3.UP)
-				#$turret_body.rotation.y += angle * clamp(delta * target_yaw_speed, 0, 1)
-				#var gun_local = $turret/gun.to_local(target) #TODO
-				#gun_local.x = 0
-				#var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
-				#$turret/gun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
+				turret.rotation.y += angle * clamp(delta * target_yaw_speed, 0, 1)
+				var gun_local = l_minigun.to_local(target.global_position)
+				gun_local.x = 0
+				var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
+				l_minigun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
+				r_minigun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
 				#machinegun.set_target(target.global_position, 10 * delta)
-				#var angle = machinegun.angle_to(target.global_position)
+				var full_angle = l_minigun.angle_to(target.global_position)
+				if full_angle <= max_fire_angle:
+					firing = true
+					l_minigun.fire()
+					r_minigun.fire()
 				#var distance = global_position.distance_to(target.global_position)
 				#var max_angle = atan(MAX_SHOOT_DIST * 1.0 / distance)
-				#if angle < max_angle:
+				#if full_angle < max_angle:
 				#	machinegun.hold_trigger() 
-		
+	if not firing:
+		l_minigun.stop_fire()
+		r_minigun.stop_fire()	
 		
 
 func physics_process_alive(delta):
