@@ -40,3 +40,6 @@ func fire_round():
 	
 func set_hit_groups(groups:Array):
 	hit_scan.set_hit_groups(groups)
+	
+func angle_to(point: Vector3)	 -> float:
+	return Vector3.FORWARD.angle_to(to_local(point))

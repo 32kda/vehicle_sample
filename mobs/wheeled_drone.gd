@@ -50,7 +50,7 @@ func _process(delta):
 				var local_target = turret.to_local(target.global_position)
 				local_target.y = 0
 				var angle = Vector3.FORWARD.signed_angle_to(local_target, Vector3.UP)
-				turret.rotation.y += angle * clamp(delta * target_yaw_speed, 0, 1)
+				#turret.rotation.y += angle * clamp(delta * target_yaw_speed, 0, 1)
 				var gun_local = l_minigun.to_local(target.global_position)
 				gun_local.x = 0
 				var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
