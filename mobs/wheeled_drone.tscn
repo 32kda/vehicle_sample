@@ -464,7 +464,8 @@ shape = SubResource("ConvexPolygonShape3D_6we70")
 [node name="HealthController" type="Node" parent="."]
 script = ExtResource("5_rmoi2")
 
-[node name="turret_body" type="RigidBody3D" parent="."]
+[node name="turret_body" type="CharacterBody3D" parent="."]
+motion_mode = 1
 
 [node name="turret" type="CollisionShape3D" parent="turret_body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47103, 0)
@@ -511,30 +512,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953097, 2.22117, 0.164894)
 
 [node name="RMinigun" parent="turret_body" instance=ExtResource("8_3wp0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.954334, 2.24713, 0.329788)
-
-[node name="RGunJoint" type="HingeJoint3D" parent="turret_body"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.80111, 2.4478, 0.421202)
-node_a = NodePath("..")
-node_b = NodePath("../RMinigun")
-angular_limit/enable = true
-angular_limit/upper = 0.0
-angular_limit/lower = 0.0
-angular_limit/softness = 6.0
-
-[node name="LGunJoint" type="HingeJoint3D" parent="turret_body"]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -0.802097, 2.43124, -0.379908)
-node_a = NodePath("..")
-node_b = NodePath("../LMinigun")
-angular_limit/enable = true
-angular_limit/upper = 0.0
-angular_limit/lower = 0.0
-angular_limit/softness = 6.0
-
-[node name="joint" type="HingeJoint3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.00865054, 1.71496, 0.00861258)
-node_a = NodePath("..")
-node_b = NodePath("../turret_body")
-angular_limit/enable = true
-angular_limit/upper = 0.0
-angular_limit/lower = 0.0
-angular_limit/softness = 6.0

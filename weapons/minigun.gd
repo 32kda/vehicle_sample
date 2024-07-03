@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends CharacterBody3D
 
 const barrels_angle = PI / 3 #Or 360 / 6 = 60 degrees
 

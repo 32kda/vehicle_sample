@@ -29,7 +29,7 @@ var health_controller:HealthController
 @onready var pipe1 = $turret_body/turret/PipeParticles01
 @onready var pipe2 = $turret_body/turret/PipeParticles02
 @onready var fire_particles = $turret_body/turret/FireParticles
-@onready var joint = $joint
+#@onready var joint = $joint
 @onready var detection_area := $turret_body/turret/EnemyDetection
 
 # Called when the node enters the scene tree for the first time.
@@ -54,8 +54,8 @@ func _process(delta):
 				var gun_local = l_minigun.to_local(target.global_position)
 				gun_local.x = 0
 				var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
-				l_minigun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
-				r_minigun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
+				#l_minigun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
+				#r_minigun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
 				#machinegun.set_target(target.global_position, 10 * delta)
 				var full_angle = l_minigun.angle_to(target.global_position)
 				if full_angle <= max_fire_angle:
@@ -105,7 +105,7 @@ func on_destroyed():
 	pipe1.emitting = false
 	pipe2.emitting = false
 	fire_particles.emitting = true
-	joint.queue_free()
-	$turret_body.mass = 100
-	$turret_body.lock_rotation = false
+	#joint.queue_free()
+	#$turret_body.mass = 100
+	#$turret_body.lock_rotation = false
 	

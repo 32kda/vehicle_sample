@@ -46,7 +46,7 @@ func make_shot():
 				body.apply_impulse(bullet_direction * impulse_multiplier, collision_point)
 			
 			var found = false
-			while not found and collider is RigidBody3D:
+			while not found and ((collider is RigidBody3D) or (collider is CharacterBody3D)):
 				for grp in hit_groups:
 					if collider.is_in_group(grp) and (collider != parent_body):
 						collider.hit(damage)

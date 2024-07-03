@@ -51,9 +51,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ej4c6")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a6gpe"]
-points = PackedVector3Array(0, 1.00152, 0.135263, 0.0676317, 1.00152, 0.117124, -0.0676317, 1.00152, 0.117124, -0.0676317, -1.00004, 0.117124, 0, -1.00004, 0.135237, 0.0676317, -1.00004, 0.117124, 0.117124, 1.00152, 0.0676317, -0.117151, 1.00152, 0.0676317, -0.117151, -1.00004, 0.0676052, 0.117124, -1.00004, 0.0676052, 0.135263, 1.00152, 0, -0.135263, 1.00152, 0, -0.135263, -1.00004, -2.64794e-05, 0.135263, -1.00004, -2.64794e-05, 0.117124, 1.00152, -0.0676317, -0.117151, 1.00152, -0.0676317, -0.117151, -1.00004, -0.0676582, 0.117124, -1.00004, -0.0676582, 0.0676317, 1.00152, -0.117151, -0.0676317, 1.00152, -0.117151, -0.0676317, -1.00004, -0.117151, 0.0676317, -1.00004, -0.117151, 0, 1.00152, -0.135263, 0, -1.00004, -0.135263)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_k7jbn"]
 _surfaces = [{
 "aabb": AABB(-0.120039, -0.133725, -1, 0.240078, 0.26745, 2.00001),
@@ -88,6 +85,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k7jbn")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a6gpe"]
+points = PackedVector3Array(0, 1.00152, 0.135263, 0.0676317, 1.00152, 0.117124, -0.0676317, 1.00152, 0.117124, -0.0676317, -1.00004, 0.117124, 0, -1.00004, 0.135237, 0.0676317, -1.00004, 0.117124, 0.117124, 1.00152, 0.0676317, -0.117151, 1.00152, 0.0676317, -0.117151, -1.00004, 0.0676052, 0.117124, -1.00004, 0.0676052, 0.135263, 1.00152, 0, -0.135263, 1.00152, 0, -0.135263, -1.00004, -2.64794e-05, 0.135263, -1.00004, -2.64794e-05, 0.117124, 1.00152, -0.0676317, -0.117151, 1.00152, -0.0676317, -0.117151, -1.00004, -0.0676582, 0.117124, -1.00004, -0.0676582, 0.0676317, 1.00152, -0.117151, -0.0676317, 1.00152, -0.117151, -0.0676317, -1.00004, -0.117151, 0.0676317, -1.00004, -0.117151, 0, 1.00152, -0.135263, 0, -1.00004, -0.135263)
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ag0mh"]
 angle_min = -162.2
 angle_max = 162.1
@@ -107,7 +107,8 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_v8xu2"]
 material = SubResource("StandardMaterial3D_jm8gn")
 
-[node name="body" type="RigidBody3D"]
+[node name="body" type="CharacterBody3D"]
+motion_mode = 1
 script = ExtResource("1_d5pl5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -123,16 +124,17 @@ transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.2
 mesh = SubResource("ArrayMesh_u4r7a")
 skeleton = NodePath("")
 
-[node name="barrels" type="RigidBody3D" parent="."]
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="barrels"]
-transform = Transform3D(-1, 7.54981e-08, -7.54979e-08, -7.54979e-08, 0, 1, 7.54981e-08, 1, -1.86347e-20, 0, 0.22081, -1.00388)
-shape = SubResource("ConvexPolygonShape3D_a6gpe")
+[node name="barrels" type="CharacterBody3D" parent="."]
+motion_mode = 1
 
 [node name="minigun_barrels" type="MeshInstance3D" parent="barrels"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.22081, -1.00388)
 mesh = SubResource("ArrayMesh_iuqx2")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="barrels"]
+transform = Transform3D(-1, 7.54981e-08, -7.54979e-08, -7.54979e-08, 0, 1, 7.54981e-08, 1, -1.86347e-20, 0, 0.22081, -1.00388)
+shape = SubResource("ConvexPolygonShape3D_a6gpe")
 
 [node name="BarrelAxis" type="HingeJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.219945, 0)

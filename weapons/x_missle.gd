@@ -24,14 +24,11 @@ func _integrate_forces(state):
 		for i in state.get_contact_count():
 			var cpos = state.get_contact_collider_position(i)
 			var target = state.get_contact_collider_object(i)
-			var normal = state.get_contact_local_normal(i)
 			destroy()
 			Events.explosion.emit(cpos, target)
 
 #Missle tries to stay in the beam between player and currect target spotted with crosshair
 func retarget(target:Vector3, from: Vector3)->void:
-	var plane = Plane(target, from, global_position)
-	var normal:Vector3 = plane.normal
 	var to_target:Vector3 = target - from
 	var to_self:Vector3 = global_position - from
 	dist_from_launcher = to_self.length()
