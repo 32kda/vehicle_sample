@@ -9,9 +9,18 @@ var enemy_groups := []
 
 var to_attack:RigidBody3D
 var visible_units := []
+var parent_unit
 
 func set_enemy_groups(enemy_groups:Array):
 	self.enemy_groups = enemy_groups
+	var cur_parent = get_parent_node_3d()
+	while parent_unit == null and cur_parent != null:
+		for grp in enemy_groups:
+			if cur_parent.is_in_group(grp):
+				parent_unit = cur_parent
+		cur_parent = cur_parent.get_parent_node_3d()
+	if parent_unit == null:
+		parent_unit = get_parent_node_3d()
 	
 
 func _ready():
@@ -19,6 +28,7 @@ func _ready():
 		return
 	detection.shape.radius = radius
 	detection.shape.height = height
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -28,9 +38,8 @@ func _process(delta):
 	else: #TODO 
 		pass
 
-
 func _on_body_entered(body:Node3D):
-	if body == get_parent():
+	if body == parent_unit:
 		return	
 	if enemy_groups.is_empty():
 		push_warning("Enemy detection for " + get_parent().get_name() + " did nothing, since no enemy groups are set" )
@@ -49,7 +58,7 @@ func is_in_fov(body:Node3D) -> bool:
 	return local.angle_to(Vector3.FORWARD) <= max
 
 func _on_body_exited(body):
-	if body == get_parent():
+	if body == parent_unit:
 		return
 	visible_units.erase(body)
 	if to_attack == body:

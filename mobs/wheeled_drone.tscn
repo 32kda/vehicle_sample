@@ -465,10 +465,11 @@ shape = SubResource("ConvexPolygonShape3D_6we70")
 script = ExtResource("5_rmoi2")
 
 [node name="turret_body" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72668, 0)
 motion_mode = 1
 
 [node name="turret" type="CollisionShape3D" parent="turret_body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47103, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.759613, 0)
 shape = SubResource("ConvexPolygonShape3D_ygnkb")
 
 [node name="drone_turret" type="MeshInstance3D" parent="turret_body/turret"]
@@ -508,7 +509,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0383634, -1.44125, 0.00946
 radius = 40
 
 [node name="LMinigun" parent="turret_body" instance=ExtResource("8_3wp0p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953097, 2.22117, 0.164894)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953097, 0.482489, 0.327515)
 
 [node name="RMinigun" parent="turret_body" instance=ExtResource("8_3wp0p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.954334, 2.24713, 0.329788)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.954334, 0.484228, 0.329788)

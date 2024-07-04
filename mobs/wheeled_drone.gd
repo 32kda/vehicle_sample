@@ -6,7 +6,7 @@ const LOW_SPEED_FORWARD_DELTA = 0.9
 
 @export var horse_power = 150
 @export var accel_speed = 30
-@export var target_yaw_speed:int = 5
+@export var target_yaw_speed:int = 1
 @export var target_pitch_speed:int = 5
 
 @export var steer_angle = deg_to_rad(30)
@@ -50,12 +50,12 @@ func _process(delta):
 				var local_target = turret.to_local(target.global_position)
 				local_target.y = 0
 				var angle = Vector3.FORWARD.signed_angle_to(local_target, Vector3.UP)
-				#turret.rotation.y += angle * clamp(delta * target_yaw_speed, 0, 1)
+				turret.rotation.y = lerp(turret.rotation.y, turret.rotation.y + angle, delta * target_yaw_speed)
 				var gun_local = l_minigun.to_local(target.global_position)
 				gun_local.x = 0
 				var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
-				#l_minigun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
-				#r_minigun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
+				l_minigun.rotation.x = lerp(turret.rotation.x, turret.rotation.x + pitch_angle, delta * target_pitch_speed)  
+				r_minigun.rotation.x = r_minigun.rotation.x
 				#machinegun.set_target(target.global_position, 10 * delta)
 				var full_angle = l_minigun.angle_to(target.global_position)
 				if full_angle <= max_fire_angle:
@@ -66,6 +66,8 @@ func _process(delta):
 				#var max_angle = atan(MAX_SHOOT_DIST * 1.0 / distance)
 				#if full_angle < max_angle:
 				#	machinegun.hold_trigger() 
+			else:
+				turret.rotation.y = lerp(turret.rotation.y, 0.0, delta * target_yaw_speed)
 	if not firing:
 		l_minigun.stop_fire()
 		r_minigun.stop_fire()	
