@@ -125,21 +125,23 @@ mesh = SubResource("ArrayMesh_u4r7a")
 skeleton = NodePath("")
 
 [node name="barrels" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.220372, 0)
 motion_mode = 1
 
 [node name="minigun_barrels" type="MeshInstance3D" parent="barrels"]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.22081, -1.00388)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -0.000131547, -1.00388)
 mesh = SubResource("ArrayMesh_iuqx2")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="barrels"]
-transform = Transform3D(-1, 7.54981e-08, -7.54979e-08, -7.54979e-08, 0, 1, 7.54981e-08, 1, -1.86347e-20, 0, 0.22081, -1.00388)
+transform = Transform3D(-1, 7.54981e-08, -7.54979e-08, -7.54979e-08, 0, 1, 7.54981e-08, 1, -1.86347e-20, 0, -0.000131547, -1.00388)
 shape = SubResource("ConvexPolygonShape3D_a6gpe")
 
 [node name="BarrelAxis" type="HingeJoint3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.219945, 0)
 node_a = NodePath("..")
 node_b = NodePath("../barrels")
+motor/enable = true
 motor/target_velocity = 17.4533
 motor/max_impulse = 5.05
 
