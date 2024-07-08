@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccmkpe3uj67jp"]
+[gd_scene load_steps=17 format=3 uid="uid://ccmkpe3uj67jp"]
 
 [ext_resource type="Texture2D" uid="uid://c1ph5xe5ebjn" path="res://weapons/minigun.png" id="1_7vl15"]
 [ext_resource type="Script" path="res://weapons/minigun.gd" id="1_d5pl5"]
 [ext_resource type="PackedScene" uid="uid://cq31oa4tm56yy" path="res://weapons/HitScan.tscn" id="2_pbjt5"]
 [ext_resource type="Texture2D" uid="uid://bojctwyiciro" path="res://effects/muzzleflash01.png" id="4_0qji8"]
+[ext_resource type="AudioStream" uid="uid://chwwx45vcmwdi" path="res://sound/shot01.ogg" id="5_o77qt"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0n51x"]
 points = PackedVector3Array(-0.14789, -0.151864, -1.7052, -0.14789, 0.0739289, -1.7052, 0.14789, -0.151864, -1.7052, -0.14789, -0.151864, -1.00066, -0.14789, 0.0739289, -1.00066, -0.0682703, 0.153255, -1.65927, 0.14789, 0.0739289, -1.7052, 0.14789, -0.151864, -1.00066, -0.0682703, 0.153255, -1.00066, 0.0682414, 0.153255, -1.65927, 0.14789, 0.0739289, -1.00066, 0.0682414, 0.153255, -1.00066)
@@ -157,3 +158,6 @@ one_shot = true
 visibility_aabb = AABB(-4, -4, -6.80823, 8, 8, 8)
 process_material = SubResource("ParticleProcessMaterial_ag0mh")
 draw_pass_1 = SubResource("QuadMesh_v8xu2")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_o77qt")

@@ -52,7 +52,7 @@ func _process(delta):
 				var angle = Vector3.FORWARD.signed_angle_to(local_target, Vector3.UP)
 				turret.rotation.y = lerp(turret.rotation.y, turret.rotation.y + angle, delta * target_yaw_speed)
 				var gun_local = l_minigun.to_local(target.global_position)
-				gun_local.x = 0
+				gun_local.x = 0				
 				var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
 				l_minigun.rotation.x = lerp(turret.rotation.x, turret.rotation.x + pitch_angle, delta * target_pitch_speed)  
 				r_minigun.rotation.x = r_minigun.rotation.x
