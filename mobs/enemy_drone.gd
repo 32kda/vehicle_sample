@@ -111,6 +111,9 @@ func hit(damage: int):
 		if health == 0:
 			shot_down()
 			
+func is_destroyed():
+	return health == 0
+			
 func shot_down():
 	set_state(SHOT_DOWN)
 	gravity_scale = 1.0 #Make it fall onto the ground

@@ -44,7 +44,7 @@ func _on_body_entered(body:Node3D):
 	if enemy_groups.is_empty():
 		push_warning("Enemy detection for " + get_parent().get_name() + " did nothing, since no enemy groups are set" )
 	for grp in enemy_groups:
-		if body.is_in_group(grp):
+		if body.is_in_group(grp) and not body.is_destroyed():
 			visible_units.append(body)
 			if to_attack == null:
 				to_attack = body

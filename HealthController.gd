@@ -12,6 +12,9 @@ func hit(damage:int):
 
 func is_destroyed():
 	return health == 0
+	
+func get_health()->int:
+	return health
 
 func _process(delta):
 	pass

@@ -30,7 +30,18 @@ position = Vector2(21, 21)
 texture = ExtResource("2_k6tgo")
 
 [node name="FPS" type="Label" parent="."]
-offset_left = 966.0
-offset_top = 598.0
-offset_right = 1122.0
-offset_bottom = 621.0
+offset_left = 977.0
+offset_top = 15.0
+offset_right = 1133.0
+offset_bottom = 38.0
+
+[node name="Health" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.937
+anchor_top = 0.914
+anchor_right = 0.973
+anchor_bottom = 0.94
+offset_left = -1037.42
+offset_top = 603.728
+offset_right = -1038.9
+offset_bottom = 609.88

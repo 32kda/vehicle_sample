@@ -1,8 +1,9 @@
-[gd_scene load_steps=34 format=3 uid="uid://kp734ul5q55b"]
+[gd_scene load_steps=35 format=3 uid="uid://kp734ul5q55b"]
 
 [ext_resource type="Script" path="res://vehicles/lc80.gd" id="1_d8eyv"]
 [ext_resource type="Script" path="res://SpringArm3D.gd" id="2_d8lk2"]
 [ext_resource type="AudioStream" uid="uid://cf185t85fkuua" path="res://sound/enginesound_slow.mp3" id="3_wmdd1"]
+[ext_resource type="Script" path="res://HealthController.gd" id="5_c41o7"]
 [ext_resource type="PackedScene" uid="uid://d12augy08ck24" path="res://weapons/machinegun.tscn" id="5_j3fkd"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7nn1t"]
@@ -885,3 +886,6 @@ billboard = 1
 modulate = Color(0.945098, 0.552941, 0.215686, 1)
 text = "XLADO3ABP"
 font_size = 40
+
+[node name="HealthController" type="Node" parent="."]
+script = ExtResource("5_c41o7")

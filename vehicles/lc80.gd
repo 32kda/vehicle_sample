@@ -24,6 +24,8 @@ const TARGET_PITCH_SPEED = 200;
 @onready var forward_ray = $SpringArm3D/RayCast3D
 @onready var engine_sound = $SpringArm3D/EngineSound
 
+@onready var health_controller := $HealthController
+
 
 func _physics_process(delta):
 	current_speed_mps = linear_velocity.length()
@@ -49,6 +51,7 @@ func _process(delta):
 	var kmh = current_speed_mps * 3.6
 	engine_sound.pitch_scale = 1 + kmh / 20
 	Events.emit_signal("player_speed", kmh)
+	Events.emit_signal("player_health", health_controller.get_health())
 	var target
 	if forward_ray.is_colliding():
 		target = forward_ray.get_collision_point()	
@@ -66,6 +69,8 @@ func _input(event):
 		missle.start(missle_transform, forward_vector, linear_velocity)
 		
 func hit(damage:int):
-	pass		
+	health_controller.hit(damage)		
 		
+func is_destroyed():
+	return health_controller.is_destroyed()
 		

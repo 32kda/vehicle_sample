@@ -2,6 +2,8 @@ extends Node
 
 signal player_speed(kmh)
 
+signal player_health(health)
+
 signal set_game_state(state:GameState)
 
 signal explosion(position:Vector3, target: Node3D)
