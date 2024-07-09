@@ -10,6 +10,7 @@ enum State {
 @export var health = 100
 
 var state:=State.ALIVE
+var current_speed_mps := 0
 
 func hit(damage:int):
 	var prev_health = health
@@ -30,6 +31,7 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):	
+	current_speed_mps = linear_velocity.length()
 	if state == State.ALIVE:
 		physics_process_alive(delta)
 	elif state == State.DESTROYED:

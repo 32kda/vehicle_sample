@@ -16,8 +16,6 @@ const LOW_SPEED_FORWARD_DELTA = 0.9
 @export var brake_speed = 60
 @export var max_fire_angle = 5
 
-var current_speed_mps = 0
-
 var low_speed_mode := false
 var car_controller:CarController
 
@@ -31,6 +29,7 @@ var health_controller:HealthController
 @onready var fire_particles = $turret_body/turret/FireParticles
 #@onready var joint = $joint
 @onready var detection_area := $turret_body/turret/EnemyDetection
+@onready var engine_sound = $turret_body/EngineSound
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -54,8 +53,8 @@ func _process(delta):
 				var gun_local = l_minigun.to_local(target.global_position)
 				gun_local.x = 0				
 				var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
-				l_minigun.rotation.x = lerp(turret.rotation.x, turret.rotation.x + pitch_angle, delta * target_pitch_speed)  
-				r_minigun.rotation.x = r_minigun.rotation.x
+				l_minigun.rotation.x = lerp(l_minigun.rotation.x, l_minigun.rotation.x + pitch_angle, delta * target_pitch_speed)  
+				r_minigun.rotation.x = l_minigun.rotation.x
 				#machinegun.set_target(target.global_position, 10 * delta)
 				var full_angle = l_minigun.angle_to(target.global_position)
 				if full_angle <= max_fire_angle:
@@ -79,6 +78,8 @@ func physics_process_alive(delta):
 	car_controller.calculate_direction()
 		
 	current_speed_mps = linear_velocity.length()
+	var kmh = current_speed_mps * 3.6
+	engine_sound.pitch_scale = 1 + kmh / 20
 	var chosen_dir = car_controller.chosen_dir
 	
 	var to_look = to_global(chosen_dir * 5)
