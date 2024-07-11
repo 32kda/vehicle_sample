@@ -8,8 +8,8 @@ const barrels_angle = PI / 3 #Or 360 / 6 = 60 degrees
 @onready var muzzle_flash := $MuzzleFlash
 @onready var sound := $AudioStreamPlayer3D
 
-@export var rotation_speed = 0.1
-@export var rotation_accel = 1.0
+@export var rotation_speed = 7.0
+@export var rotation_accel = 2.0
 
 var current_rotation_speed = 0.0;
 
@@ -33,7 +33,7 @@ func stop_fire():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if current_rotation_speed > 0:
-		barrels.rotate_z(current_rotation_speed)
+		barrels.rotate_z(current_rotation_speed * delta)
 	if firing:		
 		current_rotation_speed = lerp(current_rotation_speed, rotation_speed, rotation_accel * delta)
 		var angle = barrels.transform.basis.y.angle_to(transform.basis.y)
