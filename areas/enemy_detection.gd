@@ -68,7 +68,7 @@ func _on_body_exited(body):
 			to_attack = null
 			
 func get_target():
-	if not is_in_fov(to_attack):
+	if to_attack != null and (to_attack.is_destroyed() or not is_in_fov(to_attack)):
 		var new_target = null
 		for body in visible_units:
 			if body != to_attack and is_in_fov(body):

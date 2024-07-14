@@ -103,4 +103,6 @@ func _process(delta):
 		
 func hit(damage:int):
 	health_controller.hit(damage)
-
+		
+func is_destroyed():
+	return health_controller.is_destroyed()

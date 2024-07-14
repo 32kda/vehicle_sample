@@ -862,9 +862,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01264, 0)
 target_position = Vector3(0, 0, -1000)
 
 [node name="machinegun" parent="." instance=ExtResource("5_j3fkd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.291037, 2.14257, 0.298765)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.291037, 2.15123, 0.298765)
 
-[node name="platform" type="StaticBody3D" parent="."]
+[node name="platform" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.881, 0.113)
 
 [node name="BODY" type="MeshInstance3D" parent="platform"]

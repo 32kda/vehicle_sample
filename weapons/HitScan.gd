@@ -12,7 +12,9 @@ var parents := []
 
 func _on_ready():
 	var current = get_parent_node_3d()
-	while current is RigidBody3D:
+	while not (current is RigidBody3D or current is CharacterBody3D):
+		current = current.get_parent()
+	while current is RigidBody3D or current is CharacterBody3D:
 		parents.append(current)
 		current = current.get_parent_node_3d()
 	

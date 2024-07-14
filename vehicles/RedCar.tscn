@@ -274,8 +274,6 @@ shape = SubResource("ConvexPolygonShape3D_ujcw3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00234966, 1.61541, 0.261209)
 shape = SubResource("ConvexPolygonShape3D_a426v")
 
-[node name="RedCar" type="Node3D" parent="."]
-
 [node name="machinegun" parent="." instance=ExtResource("3_usmxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0343663, 1.82452, 0.627445)
 damage = 15
