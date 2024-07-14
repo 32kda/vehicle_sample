@@ -4,7 +4,7 @@ extends Node3D
 
 @onready var bullet_ray: RayCast3D = $RayCast3D
 @export var fire_range: int = 300
-@export var impulse_multiplier: float = 0
+@export var impulse_multiplier: float = 5
 @export var deviation:float = 0.03
 @export var damage:int = 5
 var hit_groups := []
@@ -41,11 +41,8 @@ func make_shot():
 		elif !Vector3.UP.is_equal_approx(collision_normal):
 			hole.look_at(collision_point - collision_normal, Vector3(0,1,0))	
 		if not collider in parents:		
-			if impulse_multiplier > 0 and (collider is RigidBody3D) and (collider != parent_body):			#avoid hitting self
-				var body = collider as RigidBody3D
-				body.apply_impulse(bullet_direction * impulse_multiplier, collision_point)
-			
 			var found = false
+			var initial_collider = collider
 			while not found and ((collider is RigidBody3D) or (collider is CharacterBody3D)):
 				for grp in hit_groups:
 					if collider.is_in_group(grp) and (collider != parent_body):
@@ -53,6 +50,11 @@ func make_shot():
 						found = true
 						break
 				collider = collider.get_parent_node_3d()
+			#not found since we don't want to kick players and mobs with it
+			if not found and impulse_multiplier > 0 and (initial_collider is RigidBody3D) and (initial_collider != parent_body):			#avoid hitting self
+				var body = initial_collider as RigidBody3D
+				body.apply_impulse(bullet_direction * impulse_multiplier, collision_point)
+			
 
 func set_hit_groups(groups:Array):
 	hit_groups = groups
