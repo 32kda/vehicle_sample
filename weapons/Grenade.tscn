@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8efye4jd0w0g"]
+
+[ext_resource type="Script" path="res://weapons/Grenade.gd" id="1_52jr2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3fwmy"]
+albedo_color = Color(0.113725, 0.113725, 0.113725, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dabpv"]
+material = SubResource("StandardMaterial3D_3fwmy")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+radial_segments = 12
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2hivt"]
+radius = 0.118187
+
+[node name="Grenade" type="RigidBody3D"]
+script = ExtResource("1_52jr2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_dabpv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_2hivt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
