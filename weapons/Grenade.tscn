@@ -16,6 +16,8 @@ radial_segments = 12
 radius = 0.118187
 
 [node name="Grenade" type="RigidBody3D"]
+max_contacts_reported = 2
+contact_monitor = true
 script = ExtResource("1_52jr2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

@@ -19,11 +19,13 @@ func _integrate_forces(state):
 		Events.explosion.emit(cpos, target)
 
 func _on_body_entered(body):
-	pass # Replace with function body.
+	pass
+	#destroy()
+	#Events.explosion.emit(cpos, target)	
 
 func destroy():
-	var particles = $SmokeParticles
-	remove_child(particles)
-	get_parent().add_child(particles)
-	particles.emitting = false
+	#var particles = $SmokeParticles
+	#remove_child(particles)
+	#get_parent().add_child(particles)
+	#particles.emitting = false
 	queue_free()

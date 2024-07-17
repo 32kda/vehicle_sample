@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bkp5hp2psqg4n"]
+[gd_scene load_steps=52 format=3 uid="uid://bkp5hp2psqg4n"]
 
 [ext_resource type="Texture2D" uid="uid://by3m466wxlkcm" path="res://road/industrial_sunset_puresky_2k.hdr" id="1_bksr2"]
 [ext_resource type="Script" path="res://game.gd" id="1_hdbne"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://ocdqokpdj703" path="res://mobs/enemy_drone.tscn" id="31_j2js0"]
 [ext_resource type="PackedScene" uid="uid://c6vp8lkwpfaoe" path="res://buildings/garage01.tscn" id="31_t7v14"]
 [ext_resource type="PackedScene" uid="uid://dl5qfabxltfdq" path="res://mobs/wheeled_drone.tscn" id="32_tnslp"]
+[ext_resource type="PackedScene" uid="uid://bls7b5ggjb74o" path="res://items/barrel.tscn" id="33_unk50"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_f2krl"]
 panorama = ExtResource("1_bksr2")
@@ -444,3 +445,9 @@ transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819
 
 [node name="WheeledDrone" parent="." instance=ExtResource("32_tnslp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.93318, 0.256229, 35.8944)
+
+[node name="Barrel" parent="." instance=ExtResource("33_unk50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.0291, 2.45, -2.12469)
+
+[node name="Barrel2" parent="." instance=ExtResource("33_unk50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.65232, 1.6607, -7.7725)
