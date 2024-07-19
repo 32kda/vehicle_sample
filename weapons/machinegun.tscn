@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://d12augy08ck24"]
+[gd_scene load_steps=11 format=3 uid="uid://d12augy08ck24"]
 
 [ext_resource type="Script" path="res://weapons/machinegun.gd" id="1_tfy0w"]
 [ext_resource type="PackedScene" uid="uid://b20gybtqowaee" path="res://weapons/effects/flash.tscn" id="2_bikbb"]
 [ext_resource type="AudioStream" uid="uid://c0gdu1xpta0gx" path="res://weapons/sound/cg1.wav" id="3_5vp7t"]
 [ext_resource type="PackedScene" uid="uid://cq31oa4tm56yy" path="res://weapons/HitScan.tscn" id="3_ndsaf"]
-[ext_resource type="PackedScene" uid="uid://d0j1ebgrka2fo" path="res://weapons/Projectile.tscn" id="4_ycxlb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1mcf2"]
 resource_name = "BLACK BLACK"
@@ -105,9 +104,6 @@ visible = false
 
 [node name="HitScan" parent="turret/gun" instance=ExtResource("3_ndsaf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0145827, -0.989058)
-
-[node name="Projectile" parent="turret/gun" instance=ExtResource("4_ycxlb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.206161, 0.0399348, -0.919844)
 
 [node name="ROF_Timer" type="Timer" parent="."]
 one_shot = true

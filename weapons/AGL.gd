@@ -1,23 +1,18 @@
-class_name Machinegun
-extends Node3D
-
-const FLASH_TIME = 0.05
+extends CharacterBody3D
 
 @export var gun_name:String = "HardRock"
 @export var target_yaw_speed:int = 10
 @export var target_pitch_speed:int = 10
-@export var rate_of_fire:int = 600
+@export var rate_of_fire:int = 300
 @export var fire_range:int = 1000
 @export var damage:int = 8
 @export var hit_groups:=["Players", "Enemies", "Objects", "Breakable"]
 
 @onready var turret:Node3D = $turret
-@onready var gun: Node3D = $turret/gun
+@onready var gun: Node3D = $turret/barrel_body
 @onready var rof_timer:Timer = $ROF_Timer
-@onready var flash_timer: Timer = $Flash_Timer
-@onready var flash: Node3D = $turret/gun/flash
 @onready var sound = $ShootSoundPlayer
-@onready var hit_scan = $turret/gun/HitScan
+@onready var projectile_emitter := $turret/barrel_body/Projectile
 
 var target: Vector3
 
@@ -28,10 +23,9 @@ var can_shoot:bool = true
 
 func _ready():
 	assert(rate_of_fire > 0, "Rate of Fire should be positive number!")
-	hit_scan.set_hit_groups(hit_groups)
-	hit_scan.set_damage(damage)
-	rof_timer.wait_time = 60.0 / rate_of_fire	
-	flash_timer.wait_time = FLASH_TIME
+	projectile_emitter.set_hit_groups(hit_groups)
+	projectile_emitter.set_damage(damage)
+	rof_timer.wait_time = 60.0 / rate_of_fire		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -57,19 +51,15 @@ func hold_trigger():
 		rof_timer.start()
 		
 func shoot():
-	$turret/gun/flash.visible = true
-	flash_timer.start()
-	do_hit_scan()
+	projectile_emitter.make_shot()
 	sound.play()
 		
 func _on_timer_timeout():
 	can_shoot = true
 	
-func hide_flash():
-	flash.visible = false	
 	
-func do_hit_scan():
-	hit_scan.make_shot()
+func do_projectile_emitter():
+	projectile_emitter.make_shot()
 	$turret/gun/Projectile.make_shot() #TODO debug
 
 func set_hit_groups(groups:Array):
