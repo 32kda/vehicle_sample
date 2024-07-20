@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://vehicles/lc80.gd" id="1_d8eyv"]
 [ext_resource type="Script" path="res://SpringArm3D.gd" id="2_d8lk2"]
 [ext_resource type="AudioStream" uid="uid://cf185t85fkuua" path="res://sound/enginesound_slow.mp3" id="3_wmdd1"]
+[ext_resource type="PackedScene" uid="uid://bocho36ljyivp" path="res://weapons/AGL.tscn" id="5_b25gr"]
 [ext_resource type="Script" path="res://HealthController.gd" id="5_c41o7"]
-[ext_resource type="PackedScene" uid="uid://d12augy08ck24" path="res://weapons/machinegun.tscn" id="5_j3fkd"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7nn1t"]
 points = PackedVector3Array(0.885022, 0.431122, 1.69222, 0.67832, 0.999501, 1.46045, -0.885022, 0.431122, 1.69222, 0.885022, 0.431122, -1.46501, -0.678494, 0.999501, 1.46045, 0.67832, 0.999501, -0.820085, -0.885022, 0.431122, -1.46501, 0.383429, 0.431122, -1.52452, 0.293852, 0.999446, -0.879602, -0.678494, 0.999501, -0.820085, -0.294025, 0.999446, -0.879602, -0.383602, 0.431122, -1.52452)
@@ -861,9 +861,6 @@ autoplay = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01264, 0)
 target_position = Vector3(0, 0, -1000)
 
-[node name="machinegun" parent="." instance=ExtResource("5_j3fkd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.291037, 2.15123, 0.298765)
-
 [node name="platform" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.881, 0.113)
 
@@ -889,3 +886,6 @@ font_size = 40
 
 [node name="HealthController" type="Node" parent="."]
 script = ExtResource("5_c41o7")
+
+[node name="machinegun" parent="." instance=ExtResource("5_b25gr")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.30838, 2.14185, 0.416034)

@@ -31,7 +31,7 @@ func _process(delta):
 	pass
 	
 func _physics_process(delta):	
-	current_speed_mps = linear_velocity.length()
+	current_speed_mps = round(linear_velocity.length())
 	if state == State.ALIVE:
 		physics_process_alive(delta)
 	elif state == State.DESTROYED:

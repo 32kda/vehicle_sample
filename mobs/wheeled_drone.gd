@@ -73,7 +73,7 @@ func physics_process_alive(delta):
 	car_controller.set_speed(current_speed_mps)
 	car_controller.calculate_direction()
 		
-	current_speed_mps = linear_velocity.length()
+	current_speed_mps = round(linear_velocity.length())
 	var kmh = current_speed_mps * 3.6
 	engine_sound.pitch_scale = 1 + kmh / 20
 	var chosen_dir = car_controller.chosen_dir
