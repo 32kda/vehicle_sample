@@ -13,9 +13,10 @@ height = 0.2
 radial_segments = 12
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2hivt"]
-radius = 0.118187
+radius = 0.33223
 
 [node name="Grenade" type="RigidBody3D"]
+continuous_cd = true
 max_contacts_reported = 2
 contact_monitor = true
 script = ExtResource("1_52jr2")

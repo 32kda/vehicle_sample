@@ -16,7 +16,9 @@ extends Node3D
 @onready var rof_timer:Timer = $ROF_Timer
 @onready var reload_timer:Timer = $Reload_Timer
 @onready var sound = $ShootSoundPlayer
+@onready var reload_sound := $ReloadSoundPlayer
 @onready var projectile_emitter := $turret_body/barrel_body/Projectile
+@onready var mag := $turret_body/barrel_body/mag
 
 var target: Vector3
 var ammo = mag_capacity
@@ -43,6 +45,7 @@ func _process(delta):
 	var gun_local = gun.to_local(target)
 	gun_local.x = 0
 	var pitch_angle = Vector3.FORWARD.signed_angle_to(gun_local, Vector3.RIGHT)
+	var foo = gun.rotation.x
 	gun.rotation.x += pitch_angle * clamp(delta * target_pitch_speed, 0, 1)
 	
 func set_target(target: Vector3, weight: float = 1.0):	
@@ -61,12 +64,16 @@ func shoot():
 	ammo -= 1
 	projectile_emitter.make_shot()
 	sound.play()
+	if ammo == 0:
+		reload()
 		
 func _on_timer_timeout():
 	can_shoot = ammo > 0
 	
 func reload():
 	ammo = 0 #TODO if ammo is not infinite, push this back to global ammo count of specific type
+	mag.visible = false
+	reload_sound.play()
 	reload_timer.start()	
 	
 func do_projectile_emitter():
@@ -78,4 +85,5 @@ func set_hit_groups(groups:Array):
 
 func _on_reload_timer_timeout():
 	ammo = mag_capacity #TODO take this from player's ammo amount in future
+	mag.visible = true
 	can_shoot = true	

@@ -15,10 +15,12 @@ func _integrate_forces(state):
 	for i in state.get_contact_count():
 		var cpos = state.get_contact_collider_position(i)
 		var target = state.get_contact_collider_object(i)
+		print("contact: " + str(target))
 		destroy()
 		Events.explosion.emit(cpos, target)
 
 func _on_body_entered(body):
+	print(body)
 	pass
 	#destroy()
 	#Events.explosion.emit(cpos, target)	

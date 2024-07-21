@@ -444,6 +444,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.939, 13.8555, -27.8255)
 transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -52.7887, 0.0689058, 9.14573)
 
 [node name="WheeledDrone" parent="." instance=ExtResource("32_tnslp")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.93318, 0.256229, 35.8944)
 
 [node name="Barrel" parent="." instance=ExtResource("33_unk50")]
