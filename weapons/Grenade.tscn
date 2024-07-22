@@ -12,8 +12,9 @@ bottom_radius = 0.05
 height = 0.2
 radial_segments = 12
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_2hivt"]
-radius = 0.33223
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_esmvc"]
+height = 0.741587
+radius = 0.0918168
 
 [node name="Grenade" type="RigidBody3D"]
 continuous_cd = true
@@ -26,6 +27,11 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 mesh = SubResource("CylinderMesh_dabpv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_2hivt")
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_esmvc")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, -0.136003)
+target_position = Vector3(0, -0.7, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

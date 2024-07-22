@@ -151,6 +151,7 @@ transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 5.08222e-21, -7.10543e-15, -3.3
 
 [node name="Projectile" parent="turret_body/barrel_body" instance=ExtResource("2_hoqq4")]
 transform = Transform3D(1, -4.44302e-28, 2.13162e-14, 4.44302e-28, 1, -1.01644e-20, -2.13163e-14, 1.01644e-20, 1, -0.000437507, -0.0104411, -1.20395)
+speed = 40
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="turret_body/barrel_body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00349607, -0.00793067, -0.106797)

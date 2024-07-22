@@ -19,12 +19,13 @@ func _process(delta):
 	pass
 	
 func _fire_explosion(position:Vector3, target:Node3D):
-	var explosion = explosion_proto02.instantiate()
+	var explosion = explosion_proto.instantiate()
 	add_child(explosion)
 	explosion.init(position)
-	var blast = blast_proto.instantiate()
-	target.add_child(blast)
-	blast.init(position)
+	if target is StaticBody3D or target is CSGPolygon3D:
+		var blast = blast_proto.instantiate()
+		target.add_child(blast)
+		blast.init(position)
 	
 #TODO in future we need to support several target curves, maybe using some gates between them
 func get_target_curve(vehicle:Node3D):
