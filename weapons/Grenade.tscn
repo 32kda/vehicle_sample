@@ -14,11 +14,11 @@ radial_segments = 12
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_esmvc"]
 height = 0.741587
-radius = 0.0918168
+radius = 0.321882
 
 [node name="Grenade" type="RigidBody3D"]
 continuous_cd = true
-max_contacts_reported = 2
+max_contacts_reported = 10
 contact_monitor = true
 script = ExtResource("1_52jr2")
 

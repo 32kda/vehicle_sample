@@ -126,6 +126,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00182211, 0, 0.00021328)
 script = ExtResource("1_whu2r")
 
 [node name="ROF_Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="ShootSoundPlayer" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_maanx")
@@ -134,6 +135,7 @@ stream = ExtResource("4_maanx")
 stream = ExtResource("5_v10cn")
 
 [node name="Reload_Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="turret_body" type="CharacterBody3D" parent="."]
 
@@ -151,7 +153,7 @@ transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 5.08222e-21, -7.10543e-15, -3.3
 
 [node name="Projectile" parent="turret_body/barrel_body" instance=ExtResource("2_hoqq4")]
 transform = Transform3D(1, -4.44302e-28, 2.13162e-14, 4.44302e-28, 1, -1.01644e-20, -2.13163e-14, 1.01644e-20, 1, -0.000437507, -0.0104411, -1.20395)
-speed = 40
+speed = 30
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="turret_body/barrel_body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00349607, -0.00793067, -0.106797)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://eq33d2c1or61"]
 
 [ext_resource type="Script" path="res://effects/explosion.gd" id="1_qdopg"]
-[ext_resource type="SpriteFrames" uid="uid://cjsv71xrx3x1" path="res://effects/fire03/fire03.tres" id="2_ygr7c"]
+[ext_resource type="SpriteFrames" uid="uid://reej05xcce11" path="res://effects/fire04/fire04.tres" id="2_n1j4n"]
 [ext_resource type="AudioStream" uid="uid://75pq10oaqlkv" path="res://effects/explodemini.wav" id="3_pmhvt"]
 [ext_resource type="Texture2D" uid="uid://dwsrguo3rrd4b" path="res://effects/smoke/smoke_01.png" id="4_luwtk"]
 
@@ -40,11 +40,11 @@ size = Vector2(5, 5)
 script = ExtResource("1_qdopg")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.11496, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.423905, 0)
 modulate = Color(1, 1, 0.356863, 1)
-pixel_size = 0.05
+pixel_size = 0.1
 billboard = 1
-sprite_frames = ExtResource("2_ygr7c")
+sprite_frames = ExtResource("2_n1j4n")
 speed_scale = 2.0
 
 [node name="Area3D" type="Area3D" parent="."]

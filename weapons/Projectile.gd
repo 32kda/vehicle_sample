@@ -20,7 +20,7 @@ func make_shot():
 	projectile.global_transform = projectile_transform
 	var world = get_tree().current_scene.world
 	world.add_child(projectile)
-	projectile.linear_velocity = bullet_direction * 70
+	projectile.linear_velocity = bullet_direction * speed
 
 func set_hit_groups(groups:Array):
 	hit_groups = groups
