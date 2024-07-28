@@ -879,6 +879,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260279, 2.3182, 0.760765)
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0211957, 2.73248, 0.832613)
+visible = false
 billboard = 1
 modulate = Color(0.945098, 0.552941, 0.215686, 1)
 text = "XLADO3ABP"

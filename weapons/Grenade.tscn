@@ -13,8 +13,8 @@ height = 0.2
 radial_segments = 12
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_esmvc"]
-height = 0.741587
-radius = 0.321882
+height = 0.205171
+radius = 0.0591775
 
 [node name="Grenade" type="RigidBody3D"]
 continuous_cd = true
