@@ -4,6 +4,8 @@ extends RigidBody3D
 @onready var raycast = $RayCast3D
 @onready var col_shape = $CollisionShape3D
 
+var prev_vec: Vector3
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -11,7 +13,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	var vec := linear_velocity
+	if prev_vec != null:
+		var diff = rad_to_deg(prev_vec.angle_to(vec))
+		if diff > 8:
+			print("ricochet!")
+	prev_vec = vec	
 	
 func _physics_process(delta):
 	
@@ -47,3 +54,9 @@ func destroy():
 	#get_parent().add_child(particles)
 	#particles.emitting = false
 	queue_free()
+
+
+func _on_area_3d_body_entered(body):
+	if body != self:
+		print("body entered " + str(body))
+	pass # Replace with function body.

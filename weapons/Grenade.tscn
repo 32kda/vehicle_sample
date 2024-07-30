@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8efye4jd0w0g"]
+[gd_scene load_steps=6 format=3 uid="uid://b8efye4jd0w0g"]
 
 [ext_resource type="Script" path="res://weapons/Grenade.gd" id="1_52jr2"]
 
@@ -15,6 +15,10 @@ radial_segments = 12
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_esmvc"]
 height = 0.205171
 radius = 0.0591775
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2wfjb"]
+height = 0.435439
+radius = 0.175855
 
 [node name="Grenade" type="RigidBody3D"]
 continuous_cd = true
@@ -34,4 +38,11 @@ shape = SubResource("CylinderShape3D_esmvc")
 transform = Transform3D(1, 0, 0, 0, 1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, -0.136003)
 target_position = Vector3(0, -0.7, 0)
 
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="DetectionShape" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_2wfjb")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
