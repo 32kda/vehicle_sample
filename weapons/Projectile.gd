@@ -14,13 +14,15 @@ func make_shot():
 	var cur_deviation = randfn(0,deviation)
 		
 	var bullet_direction = -bullet_ray.global_transform.basis.z
-	var to_add = Vector3(cur_deviation,0,0).rotated(bullet_direction,angle)
+	#var bullet_direction = bullet_ray.to_global(Vector3.FORWARD)
+	#var to_add = Vector3(cur_deviation,0,0).rotated(bullet_direction,angle)
 	var projectile := projectile_proto.instantiate()
 	var projectile_transform = Transform3D(bullet_ray.global_transform.basis, bullet_ray.global_position)
 	projectile.global_transform = projectile_transform
 	var world = get_tree().current_scene.world
 	world.add_child(projectile)
 	projectile.linear_velocity = bullet_direction * speed
+	print("Velocity: " + str(projectile.linear_velocity))
 
 func set_hit_groups(groups:Array):
 	hit_groups = groups

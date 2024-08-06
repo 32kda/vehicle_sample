@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+const MIN_RICOCHET_ANGLE = 8
+
 @onready var collision = $CollisionShape3D
 @onready var raycast = $RayCast3D
 @onready var col_shape = $CollisionShape3D
@@ -16,8 +18,10 @@ func _process(delta):
 	var vec := linear_velocity
 	if prev_vec != null:
 		var diff = rad_to_deg(prev_vec.angle_to(vec))
-		if diff > 8:
-			print("ricochet!")
+		if diff >= MIN_RICOCHET_ANGLE:
+			print("from ricochet")
+			Events.explosion.emit(global_position, null)
+			destroy()			
 	prev_vec = vec	
 	
 func _physics_process(delta):
