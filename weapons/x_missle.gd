@@ -8,7 +8,7 @@ var acceleration = Vector3.ZERO
 var new_vec:Vector3 = Vector3.ZERO
 var dist_from_launcher := 0
 
-const MANEURABILITY = 160
+const MANEURABILITY = 300
 const MANEUR_MIN_SPEED = 10
 const MANEUR_MIN_DIST = 3;
 const TARGET_POINT_COEF = 1.1
@@ -51,12 +51,13 @@ func retarget(target:Vector3, from: Vector3)->void:
 	#print("Angle: " + str(rad_to_deg(angle)))
 	
 	new_vec = ray.normalized() 	
-	DebugDraw3D.draw_arrow_line(from, from + (to_target.normalized() * dist_from_launcher * TARGET_POINT_COEF), arrow_color, 0.4, true)
+	if debug_draw:
+		DebugDraw3D.draw_arrow_line(from, from + (to_target.normalized() * dist_from_launcher * TARGET_POINT_COEF), arrow_color, 0.4, true)
 
 func _physics_process(delta):
 	apply_central_force(acceleration * speed)
-	linear_velocity.limit_length(speed)
-	if linear_velocity.length() > MANEUR_MIN_SPEED && dist_from_launcher > MANEUR_MIN_DIST:
+	linear_velocity = linear_velocity.limit_length(speed)
+	if dist_from_launcher > MANEUR_MIN_DIST:
 		acceleration = lerp(acceleration, new_vec, clamp(MANEURABILITY * delta, 0.0, 1.0))	
 		look_at(linear_velocity + global_position, Vector3.UP, true)
 
@@ -65,9 +66,14 @@ func _on_Lifetime_timeout():
 
 func destroy():
 	var particles = $SmokeParticles
+	particles.set_as_top_level(true)
 	remove_child(particles)
 	get_parent().add_child(particles)
 	particles.emitting = false
 	queue_free()
 	
 
+
+
+func _on_smoke_particles_finished():
+	$SmokeParticles.queue_free()

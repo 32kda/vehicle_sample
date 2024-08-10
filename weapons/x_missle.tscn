@@ -12,13 +12,15 @@ radius = 0.1
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xsco3"]
 emission_shape = 1
 emission_sphere_radius = 0.3
+angle_min = -159.5
+angle_max = 105.5
 gravity = Vector3(0, 0, 0)
 tangential_accel_min = -0.91
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_353k5"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.858824, 0.831373, 0.8, 0.376471)
+albedo_color = Color(0.34902, 0.345098, 0.313726, 0.560784)
 albedo_texture = ExtResource("4_k7hmk")
 billboard_mode = 3
 particles_anim_h_frames = 1
@@ -50,9 +52,11 @@ emitting = false
 
 [node name="SmokeParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.822197)
-amount = 25
+amount = 40
 lifetime = 3.1
 process_material = SubResource("ParticleProcessMaterial_xsco3")
 draw_pass_1 = SubResource("QuadMesh_0tnli")
 
 [connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
+[connection signal="finished" from="_SmokeParticles" to="." method="_on__smoke_particles_finished"]
+[connection signal="finished" from="SmokeParticles" to="." method="_on_smoke_particles_finished"]
