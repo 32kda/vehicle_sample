@@ -7,9 +7,11 @@ const MIN_RICOCHET_ANGLE = 8
 @onready var col_shape = $CollisionShape3D
 
 var prev_vec: Vector3
+var prev_pos: Vector3
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
+	prev_pos = global_position
 	pass # Replace with function body.
 
 
@@ -23,6 +25,8 @@ func _process(delta):
 			Events.explosion.emit(global_position, null)
 			destroy()			
 	prev_vec = vec	
+	print("Delta: " + str((prev_pos - global_position).length()))
+	prev_pos = global_position
 	
 func _physics_process(delta):
 	

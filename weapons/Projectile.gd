@@ -23,7 +23,7 @@ func make_shot():
 	world.add_child(projectile)
 	projectile.set_as_top_level(true)
 	projectile.set_linear_velocity(bullet_direction * speed)
-	print("Velocity: " + str(projectile.linear_velocity))
+	print("Velocity: " + str(projectile.linear_velocity.length()))
 
 func set_hit_groups(groups:Array):
 	hit_groups = groups
