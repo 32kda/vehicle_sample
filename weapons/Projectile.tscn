@@ -5,6 +5,4 @@
 [node name="Projectile" type="Node3D"]
 script = ExtResource("1_n1fvb")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-enabled = false
-target_position = Vector3(0, 0, -1)
+[node name="Marker3D" type="Marker3D" parent="."]
