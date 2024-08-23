@@ -18,7 +18,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var vec := linear_velocity
-	if prev_vec != null:
+	if prev_vec != null and prev_vec != Vector3.ZERO:
 		var diff = rad_to_deg(prev_vec.angle_to(vec))
 		if diff >= MIN_RICOCHET_ANGLE:
 			print("from ricochet")
