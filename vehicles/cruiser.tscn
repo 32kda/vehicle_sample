@@ -1,10 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://kp734ul5q55b"]
+[gd_scene load_steps=39 format=3 uid="uid://kp734ul5q55b"]
 
 [ext_resource type="Script" path="res://vehicles/lc80.gd" id="1_d8eyv"]
 [ext_resource type="Script" path="res://SpringArm3D.gd" id="2_d8lk2"]
 [ext_resource type="AudioStream" uid="uid://cf185t85fkuua" path="res://sound/enginesound_slow.mp3" id="3_wmdd1"]
 [ext_resource type="PackedScene" uid="uid://bocho36ljyivp" path="res://weapons/AGL.tscn" id="5_b25gr"]
 [ext_resource type="Script" path="res://HealthController.gd" id="5_c41o7"]
+[ext_resource type="Texture2D" uid="uid://bmdyc2yusj412" path="res://effects/smoke/whitePuff00.png" id="6_5t1i4"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7nn1t"]
 points = PackedVector3Array(0.885022, 0.431122, 1.69222, 0.67832, 0.999501, 1.46045, -0.885022, 0.431122, 1.69222, 0.885022, 0.431122, -1.46501, -0.678494, 0.999501, 1.46045, 0.67832, 0.999501, -0.820085, -0.885022, 0.431122, -1.46501, 0.383429, 0.431122, -1.52452, 0.293852, 0.999446, -0.879602, -0.678494, 0.999501, -0.820085, -0.294025, 0.999446, -0.879602, -0.383602, 0.431122, -1.52452)
@@ -751,6 +752,26 @@ shadow_mesh = SubResource("ArrayMesh_h3aj1")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_plagw"]
 points = PackedVector3Array(0.552995, 0.0808847, 0.635139, 0.552995, -0.0809006, 0.635139, 0.552995, 0.0808847, -0.635139, -0.552995, 0.0808847, 0.635139, -0.552995, -0.0809006, 0.635139, 0.552995, -0.0809006, -0.635139, -0.552995, 0.0808847, -0.635139, -0.552995, -0.0809006, -0.635139)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4yc4b"]
+lifetime_randomness = 0.45
+angle_min = -124.4
+angle_max = 94.6
+inherit_velocity_ratio = 0.259
+initial_velocity_max = 1.0
+gravity = Vector3(0, 3, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1110e"]
+transparency = 1
+albedo_color = Color(0.235294, 0.235294, 0.235294, 0.596078)
+albedo_texture = ExtResource("6_5t1i4")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_0kbm6"]
+material = SubResource("StandardMaterial3D_1110e")
+
 [node name="lc80_export" type="VehicleBody3D" groups=["Players"]]
 mass = 300.0
 center_of_mass_mode = 1
@@ -889,4 +910,10 @@ font_size = 40
 script = ExtResource("5_c41o7")
 
 [node name="machinegun" parent="." instance=ExtResource("5_b25gr")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.30838, 2.14185, 0.416034)
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -0.30838, 2.14185, 0.416034)
+
+[node name="damage_particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38008, 2.59495)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_4yc4b")
+draw_pass_1 = SubResource("QuadMesh_0kbm6")

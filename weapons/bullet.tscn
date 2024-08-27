@@ -7,10 +7,10 @@ height = 0.419677
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0fj0"]
 resource_name = "yellow"
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.0627451, 0.639216, 0.576471, 1)
+albedo_color = Color(0.878431, 0.341176, 0.45098, 1)
 metallic = 1.0
 emission_enabled = true
-emission = Color(0, 0.960784, 0.960784, 1)
+emission = Color(0.854902, 0.882353, 0.364706, 1)
 emission_energy_multiplier = 1.78
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ly6dy"]
@@ -49,7 +49,6 @@ shadow_mesh = SubResource("ArrayMesh_ly6dy")
 top_level = true
 collision_layer = 16
 collision_mask = 37
-mass = 0.1
 gravity_scale = 0.1
 continuous_cd = true
 max_contacts_reported = 5

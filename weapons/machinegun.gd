@@ -69,8 +69,7 @@ func hide_flash():
 	flash.visible = false	
 	
 func do_hit_scan():
-	hit_scan.make_shot()
-	$turret/gun/Projectile.make_shot() #TODO debug
+	hit_scan.make_shot()	
 
 func set_hit_groups(groups:Array):
 	hit_groups = groups

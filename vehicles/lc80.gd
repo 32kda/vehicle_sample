@@ -28,22 +28,31 @@ const TARGET_PITCH_SPEED = 200;
 
 
 func _physics_process(delta):
-	current_speed_mps = linear_velocity.length()
-	
-	var throt_input = - Input.get_action_strength("W") + Input.get_action_strength("S")	
-	if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:
-		throt_input = throt_input * LOW_SPEED / current_speed_mps
-	engine_force = lerp(engine_force, throt_input * horse_power, accel_speed * delta)	
-	
-	var steer_input = Input.get_action_strength("A") - Input.get_action_strength("D")
-	steering = lerp(steering, steer_input * steer_angle, steer_speed * delta)
-	
-	var brake_input = Input.get_action_strength("SPACE")
-	if brake_input != 0:
-		brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
-	
-	if Input.is_action_pressed("FIRE"):
-		machinegun.hold_trigger()
+	if not is_destroyed():
+		current_speed_mps = linear_velocity.length()
+		
+		var throt_input = - Input.get_action_strength("W") + Input.get_action_strength("S")	
+		if current_speed_mps > 0 and  current_speed_mps < LOW_SPEED:
+			throt_input = throt_input * LOW_SPEED / current_speed_mps
+		engine_force = lerp(engine_force, throt_input * horse_power, accel_speed * delta)	
+		
+		var steer_input = Input.get_action_strength("A") - Input.get_action_strength("D")
+		steering = lerp(steering, steer_input * steer_angle, steer_speed * delta)
+		
+		var brake_input = Input.get_action_strength("SPACE")
+		if brake_input != 0:
+			brake = lerp(brake, brake_power * brake_input, brake_speed * delta)
+		
+		var target
+		if forward_ray.is_colliding():
+			target = forward_ray.get_collision_point()	
+		else: 
+			target = -forward_ray.global_transform.basis.z * 3000
+		machinegun.set_target(target)
+		Events.emit_signal("missle_target", target, $WeaponOrigin.global_position)	
+		
+		if Input.is_action_pressed("FIRE"):
+			machinegun.hold_trigger()
 	
 	last_pos = position	
 	
@@ -52,13 +61,6 @@ func _process(delta):
 	engine_sound.pitch_scale = 1 + kmh / 20
 	Events.emit_signal("player_speed", kmh)
 	Events.emit_signal("player_health", health_controller.get_health())
-	var target
-	if forward_ray.is_colliding():
-		target = forward_ray.get_collision_point()	
-	else: 
-		target = -forward_ray.global_transform.basis.z * 3000
-	machinegun.set_target(target)
-	Events.emit_signal("missle_target", target, $WeaponOrigin.global_position)	
 
 func _input(event):
 	if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT and event.is_released():

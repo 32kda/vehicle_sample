@@ -52,7 +52,6 @@ func launch_rigid_body_projectile(point, proj):
 	proj.set_linear_velocity(direction * projectile_velocity)    
 
 func _on_body_entered(body, proj):
-	print("hit!")
 	proj.queue_free()
 	Events.explosion.emit(proj.global_position, null)	
 	projectiles_spawned.erase(proj)
