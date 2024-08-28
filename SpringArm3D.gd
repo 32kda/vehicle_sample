@@ -13,6 +13,9 @@ var _acceleration = 30
 var _deceleration = -10
 var _vel_multiplier = 4
 
+var constant_angle = false;
+var pitch_override = 0
+
 
 func _input(event):
 	# Receives mouse motion
@@ -27,7 +30,7 @@ func _input(event):
 	
 # Updates mouselook and movement every frame
 func _process(delta):
-	_update_mouselook()
+	_update_mouselook(delta)
 	_update_movement(delta)
 
 # Updates camera movement
@@ -54,17 +57,25 @@ func _update_movement(delta):
 		translate(_velocity * delta * speed_multi)
 
 # Updates mouse look 
-func _update_mouselook():
+func _update_mouselook(delta):
 	# Only rotates mouse if the mouse is captured
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		_mouse_position *= sensitivity
-		var yaw = _mouse_position.x
-		var pitch = _mouse_position.y
-		_mouse_position = Vector2(0, 0)
+	if not constant_angle:
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			_mouse_position *= sensitivity
+			var yaw = _mouse_position.x
+			var pitch = _mouse_position.y
+			_mouse_position = Vector2(0, 0)
+			
+			# Prevents looking up/down too far
+			pitch = clamp(pitch, -90 - _total_pitch, 90 - _total_pitch)
+			_total_pitch += pitch
 		
-		# Prevents looking up/down too far
-		pitch = clamp(pitch, -90 - _total_pitch, 90 - _total_pitch)
-		_total_pitch += pitch
-	
-		rotate_y(deg_to_rad(-yaw))
-		rotate_object_local(Vector3(1,0,0), deg_to_rad(-pitch))
+			rotate_y(deg_to_rad(-yaw))
+			rotate_object_local(Vector3(1,0,0), deg_to_rad(-pitch))
+	else: 
+		var to_look = lerp(global_transform.basis.z, Vector3(global_position.x,0,global_position.z),delta * 100)		#TODO
+		look_at(Vector3(global_position.x,0,global_position.z), Vector3.RIGHT)
+		
+func look_from_top():
+	constant_angle = true
+	pitch_override = 0

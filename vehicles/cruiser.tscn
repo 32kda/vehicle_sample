@@ -914,6 +914,7 @@ transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, -0.30838
 
 [node name="damage_particles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38008, 2.59495)
+emitting = false
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_4yc4b")
 draw_pass_1 = SubResource("QuadMesh_0kbm6")

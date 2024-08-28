@@ -71,8 +71,17 @@ func _input(event):
 		missle.start(missle_transform, forward_vector, linear_velocity)
 		
 func hit(damage:int):
+	var destroyed = health_controller.is_destroyed()
 	health_controller.hit(damage)		
+	if health_controller.is_destroyed() and not destroyed:
+		on_destroyed()
 		
+func on_destroyed():
+	$SpringArm3D.look_from_top()
+	engine_force = 0
+	engine_sound.playing = false
+	$damage_particles.emitting = true
+
 func is_destroyed():
 	return health_controller.is_destroyed()
 		
