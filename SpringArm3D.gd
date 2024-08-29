@@ -1,6 +1,7 @@
 extends SpringArm3D
 
 @export_range(0.0, 1.0) var sensitivity: float = 0.25
+@export var raise_up_speed = 20
 
 # Mouse state
 var _mouse_position = Vector2(0.0, 0.0)
@@ -69,12 +70,19 @@ func _update_mouselook(delta):
 			# Prevents looking up/down too far
 			pitch = clamp(pitch, -90 - _total_pitch, 90 - _total_pitch)
 			_total_pitch += pitch
+			print("pitch: " + str(_total_pitch))
 		
 			rotate_y(deg_to_rad(-yaw))
 			rotate_object_local(Vector3(1,0,0), deg_to_rad(-pitch))
 	else: 
-		var to_look = lerp(global_transform.basis.z, Vector3(global_position.x,0,global_position.z),delta * 100)		#TODO
-		look_at(Vector3(global_position.x,0,global_position.z), Vector3.RIGHT)
+		var vec1 = -global_transform.basis.z		
+		#vec1.signed_angle_to(Vector3.DOWN, to)
+		if _total_pitch < 90:
+			var degs = raise_up_speed * delta
+			_total_pitch += degs
+			rotate_object_local(Vector3(1,0,0), deg_to_rad(-degs))		
+		#var to_look = lerp(vec1, Vector3(global_position.x,0,global_position.z),delta)		#TODO
+		#look_at(to_look, Vector3.FORWARD)
 		
 func look_from_top():
 	constant_angle = true
