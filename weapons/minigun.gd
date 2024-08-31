@@ -18,6 +18,7 @@ var prev_barrel_idx = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	hit_scan.hit_groups = ["Players", "Enemies", "Objects", "Breakable"]
 	pass # Replace with function body.
 
 func fire():

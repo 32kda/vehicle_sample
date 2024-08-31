@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bn1egxa8bk0mx"]
+[gd_scene load_steps=4 format=3 uid="uid://bn1egxa8bk0mx"]
 
 [ext_resource type="Script" path="res://HUD.gd" id="1_tidst"]
 [ext_resource type="Texture2D" uid="uid://cc3gutq2qcc4" path="res://hud_img/crosshair046.png" id="2_k6tgo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_38kwl"]
+font_size = 40
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_tidst")
@@ -12,7 +15,7 @@ offset_top = 598.0
 offset_right = 61.0
 offset_bottom = 621.0
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Crosshair" type="MarginContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -25,7 +28,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Crosshair046" type="Sprite2D" parent="MarginContainer"]
+[node name="Crosshair046" type="Sprite2D" parent="Crosshair"]
 position = Vector2(21, 21)
 texture = ExtResource("2_k6tgo")
 
@@ -48,3 +51,22 @@ offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "100"
+
+[node name="GameOver" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GameOver"]
+layout_mode = 2
+text = "ПОТРАЧЕНО"
+label_settings = SubResource("LabelSettings_38kwl")

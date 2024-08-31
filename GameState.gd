@@ -1,3 +1,3 @@
 class_name GameState
 
-enum {READY, STARTED, PAUSED}
+enum {READY, STARTED, PAUSED, RESTART}
