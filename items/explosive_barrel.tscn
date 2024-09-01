@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b30m6qymyl0wy"]
+
+[ext_resource type="Script" path="res://items/explosive_barrel.gd" id="1_fbsyj"]
+[ext_resource type="PackedScene" uid="uid://dqhumrjorkx3" path="res://items/barrel_closed.glb" id="1_wecao"]
+[ext_resource type="Script" path="res://HealthController.gd" id="3_i532w"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ncl6b"]
+height = 0.87941
+radius = 0.304439
+
+[node name="ExplosiveBarrel" type="RigidBody3D"]
+mass = 80.0
+script = ExtResource("1_fbsyj")
+
+[node name="barrel_closed" parent="." instance=ExtResource("1_wecao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000393985, 0, -0.00110072)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["Objects"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.438258, 0)
+shape = SubResource("CylinderShape3D_ncl6b")
+
+[node name="HealthController" type="Node" parent="."]
+script = ExtResource("3_i532w")
+health = 5
