@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b30m6qymyl0wy"]
+[gd_scene load_steps=16 format=3 uid="uid://b30m6qymyl0wy"]
 
 [ext_resource type="Script" path="res://items/explosive_barrel.gd" id="1_fbsyj"]
 [ext_resource type="Texture2D" uid="uid://dsjsqwcodnxg1" path="res://items/barrel_closed_barrel.png" id="2_lbyr6"]
 [ext_resource type="Script" path="res://HealthController.gd" id="3_i532w"]
 [ext_resource type="Texture2D" uid="uid://b3ombk788df3n" path="res://items/barrel_explosive.png" id="3_jxrvs"]
+[ext_resource type="Texture2D" uid="uid://bmdyc2yusj412" path="res://effects/smoke/whitePuff00.png" id="5_w3xk1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gegn"]
 resource_name = "barrel_Mat"
@@ -52,6 +53,42 @@ albedo_texture = ExtResource("3_jxrvs")
 height = 0.87941
 radius = 0.304439
 
+[sub_resource type="Curve" id="Curve_ymcl4"]
+max_value = 3.0
+_data = [Vector2(0.00968523, 1.32857), 0.0, 0.0, 0, 0, Vector2(0.886199, 0.0525346), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lei5y"]
+curve = SubResource("Curve_ymcl4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5wams"]
+angle_min = -22.5
+angle_max = 25.0
+initial_velocity_min = -0.3
+initial_velocity_max = 0.3
+angular_velocity_min = -1.15
+angular_velocity_max = 1.45
+radial_velocity_min = -1.0
+radial_velocity_max = 1.0
+gravity = Vector3(0, 2, 0)
+scale_over_velocity_curve = SubResource("CurveTexture_lei5y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qifk"]
+transparency = 1
+albedo_color = Color(1, 0.796078, 0.388235, 0.572549)
+albedo_texture = ExtResource("5_w3xk1")
+emission_enabled = true
+emission = Color(0.898039, 0.639216, 0, 1)
+emission_energy_multiplier = 2.15
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_ki1c0"]
+material = SubResource("StandardMaterial3D_4qifk")
+
 [node name="ExplosiveBarrel" type="RigidBody3D"]
 mass = 80.0
 script = ExtResource("1_fbsyj")
@@ -71,4 +108,12 @@ shape = SubResource("CylinderShape3D_ncl6b")
 
 [node name="HealthController" type="Node" parent="."]
 script = ExtResource("3_i532w")
-health = 5
+health = 20
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941265, 0)
+visible = false
+explosiveness = 0.15
+randomness = 0.25
+process_material = SubResource("ParticleProcessMaterial_5wams")
+draw_pass_1 = SubResource("QuadMesh_ki1c0")
