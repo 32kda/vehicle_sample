@@ -110,10 +110,16 @@ shape = SubResource("CylinderShape3D_ncl6b")
 script = ExtResource("3_i532w")
 health = 20
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="FireParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.941265, 0)
 visible = false
 explosiveness = 0.15
 randomness = 0.25
 process_material = SubResource("ParticleProcessMaterial_5wams")
 draw_pass_1 = SubResource("QuadMesh_ki1c0")
+
+[node name="BoomTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="BoomTimer" to="." method="_on_boom_timer_timeout"]
